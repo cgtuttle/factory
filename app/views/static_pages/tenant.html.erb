@@ -1,0 +1,4 @@
+<h2>Welcome to <%= current_tenant.name %></h2>
+<% @users.each do |user| %>
+	<%= user.email %></br>
+<% end %>

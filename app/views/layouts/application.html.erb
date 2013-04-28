@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Factory</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<%= render partial: "layouts/flash_messages", flash: flash %>
+	
+	<ul class="hmenu">
+  <%= render 'devise/menu/registration_items' %>
+  <%= render 'devise/menu/login_items' %>
+  <%= render 'layouts/menu/tenant_items' %>
+	</ul>
+
+	<%= yield %>
+
+</body>
+</html>

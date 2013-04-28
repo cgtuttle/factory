@@ -1,0 +1,12 @@
+<%= form_for @tenant do |f| %>
+	<%= f.label :name %>
+	<%= f.text_field :name %></br>
+	<% @tenant.memberships.each do |membership| %>
+		<%= fields_for :memberships, membership do |ff| %>
+			User: <%= ff.text_field :user_id %>
+			<%= ff.fields_for :user do |user_form| %>
+				Email: <%= user_form.text_field :email %></br>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>

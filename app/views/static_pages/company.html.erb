@@ -1,0 +1,16 @@
+<h1>StaticPages#welcome</h1>
+<p>Logged in</p>
+<p>Unscoped</p>
+Welcome, <%= current_user.email %>
+<% if @select_tenant %>
+	<%= form_tag '/company/update' do  %>
+		<p>Please select a company for your session</p>
+		<%= select_tag "tenant_id", options_from_collection_for_select( @tenants, "id", "name") %></br>
+		<%= submit_tag "Submit" %>
+	<% end %>
+<% elsif @no_tenant %>
+	you need to be a member of an organization...
+<% else %>
+	to <%= @tenant.name %>
+<% end %>
+<p><%= link_to "Add a company", new_tenant_path %></p>

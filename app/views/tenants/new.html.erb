@@ -1,0 +1,10 @@
+<h2>New Company</h2>
+
+<%= form_for(@tenant) do |f| %>
+
+  <div><%= f.label :Company %><br />
+  <%= f.text_field :name, :autofocus => true %></div>
+
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+

@@ -1,0 +1,7 @@
+
+<h1>StaticPages#home</h1>
+<p>May be logged in</p>
+<p>Unscoped</p>
+<% if current_user %>
+	<p>Hi, <%=current_user.email %></p>
+<% end %>

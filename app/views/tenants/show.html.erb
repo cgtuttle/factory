@@ -1,0 +1,12 @@
+<%= @tenant.name %></br>
+<% @memberships.each do |membership| %>
+	<%= membership.user.email %>
+	<%= membership.id %>
+	<%= link_to "Edit", membership %>
+	<%= link_to "Delete", :action => :destroy_membership, :id => membership.id %></br>
+<% end %>
+<%= form_for @tenant do |f| %>
+	Email:
+	<%= text_field_tag 'email' %>
+	<%= f.submit %>
+<% end %>

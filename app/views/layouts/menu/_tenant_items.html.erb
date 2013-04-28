@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+	<% if current_user.tenants.count > 1 %>
+		<li>
+			<%= form_tag '/company/update' do  %>
+				<%= select_tag "tenant_id", options_from_collection_for_select( current_user.tenants, "id", "name"), :prompt => "Switch Company" %>
+				<%= submit_tag "Submit" %>
+			<% end %>
+		</li>
+	<% end %>
+<% end %>

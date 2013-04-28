@@ -1,9 +1,9 @@
 Multitenant::Application.routes.draw do
 
-  match  '/home' => 'static_pages#home'
-  match  '/company' => 'static_pages#company'
-  match  '/tenant' => 'static_pages#tenant'
-  match	 '/company/update' => 'static_pages#update'
+  match  '/home' => 'entry_pages#home'
+  match  '/company' => 'entry_pages#set_tenant'
+  match  '/tenant' => 'entry_pages#home_tenant'
+  match	 '/company/update' => 'entry_pages#update'
   match  '/tenants/:id/destroy_membership' => 'tenants#destroy_membership'
   
   devise_for :users, :skip => [:registrations, :sessions]
@@ -11,7 +11,7 @@ Multitenant::Application.routes.draw do
   as :user do
     get "/login" => "devise/sessions#new", :as => :new_user_session
     post "/login" => "devise/sessions#create", :as => :user_session
-    delete "/logout" => "devise/sessions#destroy", :as => :destroy_user_session
+    get "/logout" => "devise/sessions#destroy", :as => :destroy_user_session
     get "signup" => "devise/registrations#new", :as => :new_user_registration
     put "update-registration" => "devise/registrations#update", :as => :update_user_registration
     delete "delete-registration" => "devise/registrations#destroy", :as => :delete_user_registration
@@ -24,6 +24,6 @@ Multitenant::Application.routes.draw do
   resources :tenants
   resources :memberships
 
-  root :to => 'static_pages#home'
+  root :to => 'entry_pages#home'
   
 end

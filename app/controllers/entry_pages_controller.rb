@@ -1,4 +1,4 @@
-class StaticPagesController < ApplicationController
+class EntryPagesController < ApplicationController
 	
 	before_filter :authenticate_user!, :except => [:home]
 	skip_around_filter :scope_current_tenant, :except => [:tenant]
@@ -6,8 +6,8 @@ class StaticPagesController < ApplicationController
   def home
   end
 
-  def company
-    logger.debug "Running company #{}"
+  def set_tenant
+    logger.debug "Running set_tenant #{}"
     @user = current_user
     @tenants = current_user.tenants
   	if @tenants.count>1
@@ -25,7 +25,7 @@ class StaticPagesController < ApplicationController
     redirect_to "/tenant"
   end  
 
-  def tenant
+  def home_tenant
     logger.debug "current_tenant: #{current_tenant.inspect}"
     @users = current_tenant.users
   end

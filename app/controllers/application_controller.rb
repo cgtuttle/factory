@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
 	end
 
 	def current_tenant
-  	Tenant.find(session[:tenant_id])
+		if current_user.tenants.count > 1
+  		Tenant.find(session[:tenant_id])
+  	else
+  		current_user.tenants.first
+  	end
 	end
 	helper_method :current_tenant
 
@@ -15,7 +19,8 @@ private
 
 	def scope_current_tenant
 		Tenant.current_id = current_tenant.id
-logger.debug "Running scope_current_tenant - Scoping current tenant"
+		logger.debug "Running scope_current_tenant - Scoping current tenant"
+		logger.debug "current_tenant = #{current_tenant.inspect}"
     yield
   ensure
 logger.debug "Running scope_current_tenant - Destroying current tenant"

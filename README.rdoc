@@ -1,3 +1,1 @@
-Multitenant is my attempt to set up a scoped, multitenant framework that uses Devise, Cancan, and Rolify to provide authentication, and role based authorization. The multitenant part should allow a user to be a member of multiple tenants, and should also allow a user to potentially administer several tenants at once, including the user lists of each.
-
-This is not a Gem or specifically meant to be easily integrated into an existing project at this point, but more an exercize on my part to learn ROR better and try to develop something I can draw from in future projects.
+Multitenant is my attempt to set up an example of a scoped, multitenant framework that uses Devise, Cancan, and Rolify to provide authentication, and role based authorization. The multitenant part should allow a user to be a member of multiple tenants, and should also allow a user to potentially administer several tenants at once, including the user attributes of each.

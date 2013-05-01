@@ -1,6 +1,10 @@
 
 <h1>EntryPages#home</h1>
-<p>May be logged in</p>
+<% if current_user %>
+	<p>Logged in</p>
+<% else %>
+	<p>Not logged in</p>
+<% end %>
 <p>Unscoped</p>
 <% if current_user %>
 	<p>Hi, <%=current_user.email %></p>

@@ -1,3 +1,5 @@
-<li>
-	<%= link_to "Data" %>
-</li>
+<% if !@select_tenant %>
+	<li>
+		<%= link_to "Data" %>
+	</li>
+<% end %>

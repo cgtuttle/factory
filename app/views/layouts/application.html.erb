@@ -13,8 +13,8 @@
   </head>
   <body>
     <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container-fluid">
+      <nav class="navbar-inner">      
+        <div class="container<%= @type %>">      
           <ul class="nav">
             <%= render 'devise/menu/registration_items' %>
             <%= render 'devise/menu/login_items' %>
@@ -25,7 +25,7 @@
       </nav>
     </header>
     <div id="main" role="main">
-      <div class="container-fluid">
+      <div class="container<%= @type %>">
         <div class="content">
            <div class="row">
             <div class="span12">

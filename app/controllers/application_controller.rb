@@ -1,12 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :set_style
   around_filter :scope_current_tenant
 
-  def after_sign_in_path_for(resource)  	
+  def after_sign_in_path_for(resource)
+  	@type = "-fluid"  	
  		company_path
 	end
 
 	def current_tenant
+		@type = "-fluid"
 		if user_signed_in?
 			if current_user.tenants.count > 1
 				if session[:tenant_id] 
@@ -27,6 +30,10 @@ class ApplicationController < ActionController::Base
 		!!current_tenant
 	end
 	helper_method :tenant_set?
+
+	def set_style
+		@type = ""
+	end
 
 private
 

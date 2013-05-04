@@ -7,13 +7,26 @@ class ApplicationController < ActionController::Base
 	end
 
 	def current_tenant
-		if current_user.tenants.count > 1
-  		Tenant.find(session[:tenant_id])
-  	else
-  		current_user.tenants.first
-  	end
+		if user_signed_in?
+			if current_user.tenants.count > 1
+				if session[:tenant_id] 
+					if current_user.tenants.exists?(session[:tenant_id])
+	  				Tenant.find(session[:tenant_id])
+	  			else
+	  				flash[:error] = "The session tenant id doesn't exist for this user!"
+	  			end
+	  		end
+	  	else
+	  		current_user.tenants.first
+	  	end
+	  end
 	end
 	helper_method :current_tenant
+
+	def tenant_set?
+		!!current_tenant
+	end
+	helper_method :tenant_set?
 
 private
 
@@ -23,7 +36,7 @@ private
 		logger.debug "current_tenant = #{current_tenant.inspect}"
     yield
   ensure
-logger.debug "Running scope_current_tenant - Destroying current tenant"
+		logger.debug "Running scope_current_tenant - Destroying current tenant"
     Tenant.current_id = nil
 	end
 

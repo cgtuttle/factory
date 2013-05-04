@@ -1,3 +1,5 @@
+<% provide(:title, @tenant.name) %>
+
 <%= @tenant.name %></br>
 <% @memberships.each do |membership| %>
 	<%= membership.user.email %>

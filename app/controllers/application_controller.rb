@@ -14,8 +14,10 @@ class ApplicationController < ActionController::Base
 			if current_user.tenants.count > 1
 				if session[:tenant_id] 
 					if current_user.tenants.exists?(session[:tenant_id])
+						logger.info "tenant_id = #{session[:tenant_id]}"
 	  				Tenant.find(session[:tenant_id])
 	  			else
+	  				logger.info "The session tenant id doesn't exist for this user!"
 	  				flash[:error] = "The session tenant id doesn't exist for this user!"
 	  			end
 	  		end

@@ -2,7 +2,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: factory_04_development
+  database: multitenant_development
   pool: 5
   username: ctuttle
   password: ctuttle
@@ -13,7 +13,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: factory_04_test
+  database: multitenant_test
   pool: 5
   username: ctuttle
   password: ctuttle

@@ -10,7 +10,6 @@ skip_around_filter :scope_current_tenant, :except => [:index, :new_membership, :
 		if @tenant.save
 			@membership = Membership.new(:tenant_id => @tenant.id, :user_id => current_user.id)
 			if @membership.save
-
 				redirect_to tenant_path(@tenant)
 			end
 		end

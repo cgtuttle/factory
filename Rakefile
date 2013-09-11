@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Multitenant::Application.load_tasks
+Factory::Application.load_tasks

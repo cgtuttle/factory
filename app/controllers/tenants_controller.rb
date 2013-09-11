@@ -1,27 +1,41 @@
 class TenantsController < ApplicationController
-skip_around_filter :scope_current_tenant, :except => [:index, :new_membership, :destroy_membership]
+	before_filter :authenticate_user!
+	skip_around_filter :scope_current_tenant
 
-	def new
+  def new
 		@tenant = Tenant.new
 	end
 
-	def create
+  def create
 		@tenant = Tenant.new(params[:tenant])
 		if @tenant.save
 			@membership = Membership.new(:tenant_id => @tenant.id, :user_id => current_user.id)
 			if @membership.save
+				set_current_tenant(@tenant)
 				redirect_to tenant_path(@tenant)
 			end
 		end
 	end
 
 	def show
-		logger.debug "Running show #{}"
-		@tenant = Tenant.find(params[:id])
+		@is_list_table = true
+		@tenant ||= Tenant.find(params[:id])
 		@memberships = @tenant.memberships
+		@roles = Membership::ROLES
 	end
 
 	def index
+		@is_list_table = true
+		@tenants ||= current_user.tenants
+		if @tenants.count == 1
+			@tenant = @tenants.first
+			set_current_tenant(@tenant)
+			if can? :manage, :all
+				redirect_to tenant_path(@current_tenant)
+			else
+				redirect_to display_item_specs_path
+			end
+		end
 	end
 
 	def edit
@@ -29,29 +43,34 @@ skip_around_filter :scope_current_tenant, :except => [:index, :new_membership, :
 	end
 
 	def update
-		if !@user = User.find_by_email(params[:email])
-			@email = params[:email]
-			@user = User.create!(:email => @email, :password => 'password', :password_confirmation => 'password')
+		logger.debug "running Tenants.update: #{params[:id]}"
+		@tenant = Tenant.find(params[:id])
+		@tenant.update_attributes(params[:tenant])	
+		if can? :manage, :all
+			redirect_to tenant_path(@current_tenant)
+		else
+			redirect_to display_item_specs_path
 		end
-		@membership = Membership.new(:tenant_id => params[:id], :user_id => @user.id)
-		@membership.save	
-		redirect_to tenant_path(current_tenant)
 	end
 
 	def destroy
 	end
 
-	def new_membership
-		@tenant = current_tenant
-		@membership = Membership.new(:tenant_id => @tenant.id)
-	end
-
-	def destroy_membership
-		@tenant = current_tenant
-		@membership = Membership.find(params[:id])
-		if @membership.destroy
-			flash[:success] = "Membership deleted"
-			redirect_to tenant_path(@tenant)
+	def set
+	  set_current_tenant(params[:id])
+	  if can? :manage, :all
+			redirect_to tenant_path(@current_tenant)
+		else
+			redirect_to display_item_specs_path
 		end
+  end
+
+private
+
+	def set_current_tenant(id)
+		logger.debug "running set_current_tenant: #{id}"
+		session[:current_tenant_id] = id
+		@current_tenant = Tenant.find_by_id(id)
+		logger.debug "@current_tenant: #{@current_tenant}"
 	end
 end

@@ -1,9 +1,11 @@
-<% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, :method => :get) %>        
-  </li>
+<% if user_signed_in? %>				
+	<li>
+		<%= link_to('Logout', main_app.destroy_user_session_path, :method => :get) %>
+	</li>	  	     
 <% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>  
-  </li>
+	<%= form_for("user", :url => main_app.user_session_path, :html => {:class => "navbar-form pull-right", :style => "margin:0"}) do |f| %>
+		<%= f.text_field :email, :placeholder => "email", :class => "input-medium" %>
+	  <%= f.password_field :password, :placeholder => "password", :class => "input-medium" %>
+	  <%= f.submit 'Sign in' %>
+	<% end %>
 <% end %>

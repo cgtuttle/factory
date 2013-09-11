@@ -1,0 +1,31 @@
+<% content_for :thead do %>
+	<tr>
+		<th>Code</th>
+		<th>Name</th>
+		<th>Display Order</th>
+		<th></th>
+	</tr>
+<% end %>
+
+
+<% content_for :table do %>
+
+	<tr>
+		<%= render 'new' %>
+	</tr>	
+
+	<% @categories.each do |c| %>
+		<tr>
+			<td><%= c.code %></td>
+			<td><%= c.name %></td>
+			<td style="max-width:50px" class="centered"><%= c.display_order %></td>
+			
+			<td class="centered">
+					<%= link_to "Edit", edit_category_path(c) %>
+					<%= link_to "Delete",  c, :method => :delete, :confirm => "Are you sure?" %>
+			</td>
+			
+		</tr>
+	<% end %>	
+		
+<% end %>					

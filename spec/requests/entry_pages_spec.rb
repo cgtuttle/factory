@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe "Entry pages" do
 
-	describe "Home page" do
-		it "should have the content 'EntryPages#home'" do
+	describe "enter page" do
+		it "should have the content 'EntryPages#enter'" do
       visit '/'
-      page.should have_content('EntryPages#home')
+      page.should have_content('EntryPages#enter')
     end
   end
 

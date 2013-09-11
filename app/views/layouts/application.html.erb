@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MultiTenant | <%= content_for?(:title) ? yield(:title) : "" %></title>
+    <title><%= yield :title %></title>
     <meta name="description" content="">
     <meta name="author" content="">
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -11,32 +11,28 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body>
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">      
-        <div class="container<%= @type %>">      
-          <ul class="nav">
-            <%= render 'devise/menu/registration_items' %>
-            <%= render 'devise/menu/login_items' %>
-            <%= render 'layouts/menu/tenant_items' %>
-            <%= render 'layouts/menu/nav_items' %>
-          </ul>
-        </div>
-      </nav>
-    </header>
+  <body class="<%= @display ? "display" : "normal" %>">
+    
+    
+
     <div id="main" role="main">
-      <div class="container<%= @type %>">
-        <div class="content">
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/flash_messages' %>
-              <%= yield %>
-            </div>
-          </div>
+      
+        <div class="<%= @fixed ? "container" : "container-fluid" %>">
+
+          <%= render 'layouts/header_layout' %>          
+          <%= render 'layouts/flash_messages' %>                           
+          <%= render :partial => 'layouts/edit_layout' if @is_edit_form %>
+          <%= render :partial => 'layouts/index_layout', :object => @index, :as => :index if @is_index_table %> 
+          <%= render :partial => 'layouts/list_layout', :object => @list, :as => :list if @is_list_table %>  
+          <%= yield %>
+                    
           <footer>
           </footer>
-        </div>
-      </div> <!--! end of .container -->
+        
+        </div> <!--! end of .container -->
+      
+     
     </div> <!--! end of #main -->
+
   </body>
 </html>

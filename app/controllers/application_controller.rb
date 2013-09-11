@@ -1,53 +1,53 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :set_style
   around_filter :scope_current_tenant
+  before_filter :scope_current_item
 
-  def after_sign_in_path_for(resource)
-  	@type = "-fluid"  	
- 		company_path
-	end
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to tenants_path, :alert => exception.message
+  end
 
-	def current_tenant
-		@type = "-fluid"
-		if user_signed_in?
-			if current_user.tenants.count > 1
-				if session[:tenant_id] 
-					if current_user.tenants.exists?(session[:tenant_id])
-						logger.info "tenant_id = #{session[:tenant_id]}"
-	  				Tenant.find(session[:tenant_id])
-	  			else
-	  				logger.info "The session tenant id doesn't exist for this user!"
-	  				flash[:error] = "The session tenant id doesn't exist for this user!"
-	  			end
-	  		end
-	  	else
-	  		current_user.tenants.first
-	  	end
-	  end
-	end
-	helper_method :current_tenant
+  def tenant_set?
+    logger.debug "Running tenant_set?"
+    @tenant_set = !!current_tenant
+  end
+  helper_method :tenant_set?
 
-	def tenant_set?
-		!!current_tenant
-	end
-	helper_method :tenant_set?
+  def current_tenant
+    @current_tenant ||= session[:current_tenant_id] && Tenant.find_by_id(session[:current_tenant_id])
+  end
+  helper_method :current_tenant
 
-	def set_style
-		@type = ""
-	end
+  def current_item
+    @current_item ||= session[:current_item_id] && Item.find_by_id(session[:current_item_id])
+    @current_item ||= Item.first
+  end
+  helper_method :current_item
+
 
 private
 
-	def scope_current_tenant
-		Tenant.current_id = current_tenant.id
-		logger.debug "Running scope_current_tenant - Scoping current tenant"
-		logger.debug "current_tenant = #{current_tenant.inspect}"
-    yield
-  ensure
-		logger.debug "Running scope_current_tenant - Destroying current tenant"
-    Tenant.current_id = nil
+  def after_sign_in_path_for(resource)
+    tenants_path
 	end
 
-	
+	def scope_current_tenant
+    logger.debug "Running scope_currrent_tenant: current_tenant.id = #{current_tenant.id}"
+    Tenant.current_id = current_tenant.id
+    yield
+  ensure
+    Tenant.current_id = nil
+  end
+
+  def scope_current_item
+    if current_item
+      Item.current_id = current_item.id
+      logger.debug "Item.current_id = #{Item.current_id}"
+    end
+  end
+
+  def current_ability
+    @current_ability || Ability.new(current_user, current_tenant)
+  end
+
 end

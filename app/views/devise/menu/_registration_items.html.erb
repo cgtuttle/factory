@@ -1,9 +1,9 @@
-<% if user_signed_in? %>
+<% if user_signed_in? && !@no_menus %>
   <li>
-  <%= link_to('Edit registration', edit_user_registration_path) %>
+  <%= link_to('Edit Registration', main_app.edit_user_registration_path) %>
   </li>
-<% else %>
+<% elsif !@no_menus %>
   <li>
-  <%= link_to('Register', new_user_registration_path)  %>
+  <%= link_to('Register', main_app.new_user_registration_path)  %>
   </li>
 <% end %>

@@ -1,0 +1,16 @@
+<% provide(:title, 'Welcome') %>
+<div class="row-fluid">
+	<h1>Pages#enter</h1>
+	<% if current_user %>
+		<p>Logged in</p>
+	<% else %>
+		<p>Not logged in</p>
+	<% end %>
+	<p>Unscoped</p>
+	<% if current_user %>
+		<p>Hi, <%=current_user.email %></p>
+	<% end %>
+	<% if user_signed_in? %>
+		<%= link_to "New Tenant", new_tenant_path %>
+	<% end %>
+</div>

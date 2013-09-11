@@ -1,12 +1,8 @@
-Multitenant::Application.routes.draw do
+Factory::Application.routes.draw do
 
-  match  '/home' => 'entry_pages#home'
-  match  '/company' => 'entry_pages#set_tenant'
-  match  '/tenant' => 'entry_pages#home_tenant'
-  match	 '/company/update' => 'entry_pages#update'
-  match  '/tenants/:id/destroy_membership' => 'tenants#destroy_membership'
-  
   devise_for :users, :skip => [:registrations, :sessions]
+  
+  get "pages/enter"
 
   as :user do
     get "/login" => "devise/sessions#new", :as => :new_user_session
@@ -21,9 +17,27 @@ Multitenant::Application.routes.draw do
   end
 	
 	resources :users
-  resources :tenants
+  resources :imports
+  resources :items
+  resources :specs
+  resources :categories
+  resources :analyses
   resources :memberships
 
-  root :to => 'entry_pages#home'
+  resources :item_specs do
+    get 'display', :on => :collection
+  end
+  
+  resources :tenants do
+    get 'count', :on => :collection
+    get 'set', :on => :member
+  end
+
+  match 'item_specs/:id/cancel' => 'item_specs#cancel', :as => :cancel_item_spec
+  match 'item_specs/:id/copy' => 'item_specs#copy', :as => :copy_item_spec
+  match 'item_specs/:id/notes' => 'item_specs#notes', :as => :notes
+  match 'analyses/:id/instructions' => 'analyses#instructions'
+
+  root :to => 'pages#enter'
   
 end

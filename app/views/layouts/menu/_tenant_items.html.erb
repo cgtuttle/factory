@@ -1,9 +1,7 @@
-<% if user_signed_in? %>
-	<% if current_user.tenants.count > 1 && tenant_set? %>
+<ul class="nav">
+	<% if current_user && !@no_menus %>
 		<li>
-			<%= form_tag '/company/update', :style => 'margin:0;' do  %>
-				<%= select_tag "tenant_id", options_from_collection_for_select( current_user.tenants, "id", "name"), {:prompt => "Switch Company", :style => "margin:5px;", :onchange=>'this.form.submit()'} %>
-			<% end %>
+			<%= link_to "Companies", tenants_path %>
 		</li>
 	<% end %>
-<% end %>
+</ul>

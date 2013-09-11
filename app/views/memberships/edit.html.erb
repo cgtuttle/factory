@@ -1,0 +1,13 @@
+<% provide(:title, 'Edit membership') %>
+
+<h2><%= @membership.tenant.name %> - <%= @membership.user.email %></h2>
+
+<%= form_for @membership do |f| %>
+	
+	<p><%= f.label :role %></p>
+	<p><%= f.text_field :role %></p>
+
+
+	<%= f.submit 'Update', :class => 'btn btn-primary' %>
+	
+<% end %>

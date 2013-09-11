@@ -1,14 +1,29 @@
-<% provide(:title, @tenant.name) %>
+<% provide(:title, 'Tenant members') %>
 
-<%= @tenant.name %></br>
-<% @memberships.each do |membership| %>
-	<%= membership.user.email %>
-	<%= membership.id %>
-	<%= link_to "Edit", membership %>
-	<%= link_to "Delete", :action => :destroy_membership, :id => membership.id %></br>
+
+<% content_for :thead do %>
+
+<h2><%= @tenant.name %></h2>
+
+	<tr>
+		<th>User</th>
+		<th>Role</th>
+		<th></th>
+	</tr>
 <% end %>
-<%= form_for @tenant do |f| %>
-	Email:
-	<%= text_field_tag 'email' %>
-	<%= f.submit %>
+
+<% content_for :table do %>
+	
+	<% @memberships.each do |m| %>
+		<tr>
+			<td><%= m.user.email %></td>
+			<td><%= m.role %></td>
+			<td><%= link_to "Change Role", edit_membership_path(m.id) %></td>
+		</tr>
+	<% end %>
+
 <% end %>
+
+<% content_for :footer do %>
+	<%= link_to "Add new", new_membership_path, :class => "btn btn-primary" %>
+<% end %>	

@@ -1,0 +1,10 @@
+<%= form_for @analysis do |f| %>
+	<div>
+		<div>
+			<td><%= f.text_field :code, :class => 'input-medium' %></td>
+			<td><%= f.text_field :name, :class => 'input-medium' %></td>
+			<td><%= f.text_area :instructions, :rows => "1" %></td>
+			<td class="centered"><%= f.submit "Add analysis" %></td>
+		</div>
+	</div>
+<% end %>

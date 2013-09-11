@@ -1,0 +1,42 @@
+
+<% content_for :controls do %>	
+
+		<%= form_tag('item_specs', :method => :get, :class => "form-inline") do %>
+			 
+			<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item_id}, {:onchange => "this.form.submit();" } %>
+
+			<%= label_tag 'hide_pending', :class => "checkbox" do %>
+				<%= check_box_tag "hide_pending", "hide_pending", @hide_pending, :type => "checkbox" %>
+				Hide future
+			<% end %>
+
+			<%= label_tag 'show_history', :class => "checkbox" do %>				
+				<%= check_box_tag "show_history", "show_history", @show_history, :type => "checkbox" %>
+				Show history
+			<% end %>
+				
+			<%= submit_tag "Apply" %>
+		<% end %>
+	
+<% end %>
+
+<% content_for :thead do %>			
+	<th style="width: 6em">Category</th>
+	<th style="width: 10em">Spec</th>
+	<th>Text</th>
+	<th>Multi-Line Text</th>
+	<th style="width: 6em">Value</th>
+	<th style="width: 6em">USL</th>
+	<th style="width: 6em">LSL</th>
+	<th style="width: 4em">UOM</th>	
+	<th style="width: 8em">Analysis</th>
+	<th style="width: 8em">Eff Dt</th>	
+	<th style="width: 6em">Status</th>
+	<th style="width: 10em">Edited By</th>
+	<th style="width: 12em"></th>
+<% end %>
+		
+<% content_for :table do %>
+	<%= render 'new' %>
+	<%= render :partial => 'index', :collection => @item_specs, :as => :item_spec %>
+<% end %>

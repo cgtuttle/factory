@@ -1,14 +1,13 @@
 <% provide(:title, 'Edit company') %>
 
-<%= form_for @tenant do |f| %>
-	<%= f.label :name %>
-	<%= f.text_field :name %></br>
-	<% @tenant.memberships.each do |membership| %>
-		<%= fields_for :memberships, membership do |ff| %>
-			User: <%= ff.text_field :user_id %>
-			<%= ff.fields_for :user do |user_form| %>
-				Email: <%= user_form.text_field :email %></br>
-			<% end %>
-		<% end %>
+<h2>Edit Company</h2>
+	
+	<%= form_for @tenant do |f| %>
+
+		<p><%= f.label :name %></p>
+		<p><%= f.text_field :name %></p>
+
+		<%= f.submit 'Update', :class => 'btn btn-primary' %>
+		<%= link_to 'Cancel', tenant_path(@tenant.id), :class => "btn" %>
+	
 	<% end %>
-<% end %>

@@ -1,0 +1,21 @@
+<% provide(:title, 'Tenant list') %>
+
+<% content_for :thead do %>
+	<tr>
+		<th>Company</th>
+	</tr>
+<% end %>
+
+<% content_for :table do %>
+	
+	<% @tenants.each do |t| %>
+		<tr>
+			<td><%= link_to t.name, :action => :set, :id => t.id %></td>
+		</tr>
+	<% end %>
+
+<% end %>
+
+<% content_for :footer do %>
+	<%= link_to "Add new", new_tenant_path, :class => "btn btn-primary" %>
+<% end %>	

@@ -1,5 +1,15 @@
-<% if tenant_set? %>
-	<li>
-		<%= link_to "Data" %>
-	</li>
+<% if tenant_set? && !@no_menus %>
+	<% if can? :view, :all %>
+		<li>
+			<ul class="nav pull-right">			
+				<li><%= link_to "Floor Display", display_item_specs_path %></li>
+				<li><%= link_to "Items", main_app.items_path %></li>
+				<li><%= link_to "Spec Definitions", main_app.specs_path %></li>
+				<li><%= link_to "Item Specifications", main_app.item_specs_path %></li>
+				<li><%= link_to "Categories", main_app.categories_path %></li>
+				<li><%= link_to "Analyses", main_app.analyses_path %></li>
+				<li><%= link_to "Import Data", main_app.new_import_path %></li>			
+			</ul>	
+		</li>
+	<% end %>
 <% end %>

@@ -5,9 +5,12 @@ gem 'rake', '10.1.0'
 
 gem 'pg'
 
+gem 'rails_12factor'
+
 gem 'devise'
 gem 'cancan'
 
+gem 'jquery-rails'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap-datepicker-rails'
 
@@ -17,8 +20,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.3.2.0'
 end
-
-gem 'jquery-rails'
 
 group :development do
 	gem 'webrick', '~> 1.3.1'

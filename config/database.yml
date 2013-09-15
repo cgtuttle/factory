@@ -1,3 +1,11 @@
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: factory_production
+  pool: 5
+  username: cgtuttle
+  password: cgtuttle
+
 
 development:
   adapter: postgresql

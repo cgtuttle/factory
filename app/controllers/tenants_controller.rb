@@ -9,7 +9,7 @@ class TenantsController < ApplicationController
   def create
 		@tenant = Tenant.new(params[:tenant])
 		if @tenant.save
-			@membership = Membership.new(:tenant_id => @tenant.id, :user_id => current_user.id)
+			@membership = Membership.new(:tenant_id => @tenant.id, :user_id => current_user.id, :role => "owner")
 			if @membership.save
 				set_current_tenant(@tenant)
 				redirect_to tenant_path(@tenant)

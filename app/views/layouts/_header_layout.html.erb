@@ -2,11 +2,11 @@
   <nav class="navbar-inner">    
     <ul class="nav">
       <li style="padding: 5px"><%= image_tag "icons/factory_white.svg", :alt=>"Factory", :size=>"33x30", :id=>"factory" %></li>
-      <li><%= render 'layouts/menu/display' %></li>        
-      <li><%= render 'layouts/menu/tenant_items' %></li>
+      <li><%= render 'layouts/menu/display' %></li>
       <li><%= render 'layouts/menu/nav_items' %></li>
     </ul>      
-    <ul class="nav pull-right">
+    <ul class="nav pull-right">        
+      <li><%= render 'layouts/menu/tenant_items' %></li>
       <li><%= render 'devise/menu/registration_items' %></li>
       <li><%= render 'devise/menu/login_items' %></li>
     </ul>      

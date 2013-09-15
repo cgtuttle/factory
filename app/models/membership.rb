@@ -5,5 +5,6 @@ class Membership < ActiveRecord::Base
   attr_accessible :tenant_id, :user_id, :role
 
   ROLES = %w[root owner admin manager user]
-  
+
+
 end

@@ -1,42 +1,36 @@
-
-
-	<table class="table table-bordered table-striped table-hover">
+	<table class="table table-bordered table-hover display">
 		
-			<thead id="display_header">
+			<thead class="display-header">
 				<tr>
-					<th class="category-name">Category</th>
-					<th>Specification</th>
-					<th>Lower Limit</th>
-					<th class="align_center">Target</th>
-					<th class="align_right">Upper Limit</th>
-					<th class="align_center">Notes</th>
+					<th class="category-name display">Category</th>
+					<th class="display">Specification</th>
+					<th class="display">Lower Limit</th>
+					<th class="align_center display">Target</th>
+					<th class="align_right display">Upper Limit</th>
+					<th class="align_center display">Notes</th>
 				</tr>
 			</thead>
 			<% if @categories %>
-				<% @categories.each do |category, item_specs| %>
-
-					<% r = 0 %>
-					<% for s in item_specs %>	
-						<% r = r + 1 %>
-					<% end %>
-					
+				<% @categories.each do |category, item_specs| %>					
 					<tbody>
 						<% first_row = true %>										
 						<% for s in item_specs %>	
 							<% if s.date_status == "current" %>
-								<tr>
+								<tr class="display-row">
 									<% if first_row %>
 										<% first_row = false %>
-										<td rowspan="<%= r %>" class="category-name">
+										<td class="category-name display">
 											<%= category.name if category %>
 										</td>
+									<% else %>
+										<td class="display"></td>
 									<% end %>
 
-									<td class="spec-name bold"><%= s.spec.name %></td>
+									<td class="spec-name bold display"><%= s.spec.name %></td>
 
-									<td><%= s.lsl ||= nil %></td>
+									<td class="display"><%= s.lsl ||= nil %></td>
 
-									<td class="align_center bold">
+									<td class="align_center bold display">
 										
 										<% if s.numeric_value %>								
 											<%= "#{s.numeric_value} #{s.unit_of_measure}" %>
@@ -52,9 +46,9 @@
 
 									</td>
 
-									<td class="align_right"><%= s.usl ||= nil %></td>								
+									<td class="align_right display"><%= s.usl ||= nil %></td>								
 
-									<td class="right-margin"><%= simple_format(s.notes ||= "") %></td>
+									<td class="right-margin display"><%= simple_format(s.notes ||= "") %></td>
 									
 								</tr>										
 							<% end %>	

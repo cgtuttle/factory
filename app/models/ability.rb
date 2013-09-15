@@ -3,12 +3,11 @@ class Ability
 
   def initialize(user, tenant)    
     role = Membership.where("user_id = ? AND tenant_id = ?", user, tenant).first.role
-
     case role
     when "root"    
       can :manage, :all
     when "owner"
-      can :manage, :all
+      can :manage, :all 
     when "admin"
       can :manage, :all
     when "manager"

@@ -1,13 +1,43 @@
-.display {
-  background-color: #bbb;
+$base-color: #00FF00;
+$base-color: #FF0007;
+$complimentary-color: #333333;
+$background-color: darken($base-color,40);
+$border-color: lighten($background-color,3);
+$row-color: fade-out(lighten($background-color, 15), .3);
+$header-color: fade-out(darken($background-color, 7), .5);
+$font-color: lighten($background-color, 70);
+$header-font-color: lighten($complimentary-color,30);
+
+body.display {
+  background-color: $background-color;
 }
 
-#display_header {
-  background-color: #aaa;
+table.display {
+  border-color: $border-color;
+}
+
+tr.display-row {
+  background-color: $row-color;
+  color: $font-color;
+}
+
+thead.display-header {
+  background-color: $header-color;
+  color: $header-font-color;
+}
+
+th.display{
+  border-color: $border-color;
+}
+
+td.display {
+  border-color: $border-color;
 }
 
 .display .dropdown {
-  background-color: #9CD4D3;
+  background-color: lighten($background-color,5);
+  color: $font-color;
+  border-color: $border-color;
 }
 
 .content {

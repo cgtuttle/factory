@@ -18,7 +18,6 @@ class TenantsController < ApplicationController
 	end
 
 	def show
-		@is_list_table = true
 		@tenant ||= Tenant.find(params[:id])
 		@memberships = @tenant.memberships
 		@roles = Membership::ROLES
@@ -27,15 +26,6 @@ class TenantsController < ApplicationController
 	def index
 		@is_list_table = true
 		@tenants ||= current_user.tenants
-		if @tenants.count == 1
-			@tenant = @tenants.first
-			set_current_tenant(@tenant)
-			if can? :manage, :all
-				redirect_to tenant_path(@current_tenant)
-			else
-				redirect_to display_item_specs_path
-			end
-		end
 	end
 
 	def edit
@@ -58,7 +48,7 @@ class TenantsController < ApplicationController
 
 	def set
 	  set_current_tenant(params[:id])
-	  if can? :manage, :all
+	  if can? :manage, @current_tenant
 			redirect_to tenant_path(@current_tenant)
 		else
 			redirect_to display_item_specs_path

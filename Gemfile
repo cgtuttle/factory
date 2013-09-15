@@ -24,6 +24,7 @@ group :development do
 	gem 'webrick', '~> 1.3.1'
   gem 'rspec-rails', '~> 2.0'
   gem 'hirb'
+  gem 'guard-rspec'
 end
 
 group :test do

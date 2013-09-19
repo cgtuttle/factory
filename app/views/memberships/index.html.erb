@@ -2,14 +2,14 @@
 
 <% content_for :thead do %>
 
-<h2><%= current_tenant.name %> : <%= @role %></h2>
+	<h2><%= current_tenant.name %> : <%= @role %></h2>
 
-	<tr>
-		<th>User</th>
-		<th>Company</th>
-		<th>Role</th>
-		<th></th>
-	</tr>
+		<tr>
+			<th>User</th>
+			<th>Company</th>
+			<th>Role</th>
+			<th></th>
+		</tr>
 <% end %>
 
 <% content_for :table do %>
@@ -26,5 +26,5 @@
 <% end %>
 
 <% content_for :footer do %>
-	<%= link_to "Add new", new_membership_path, :class => "btn btn-primary" %>
+	<%= link_to "Invite new", new_user_invitation_path, :class => "btn btn-primary" %>
 <% end %>	

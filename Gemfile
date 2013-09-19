@@ -4,10 +4,12 @@ gem 'rails', '3.2.13'
 gem 'rake', '10.1.0'
 
 gem 'pg'
+gem 'figaro'
 
 gem 'rails_12factor'
 
 gem 'devise'
+gem 'devise_invitable', '~> 1.1.0'
 gem 'cancan'
 
 gem 'jquery-rails'

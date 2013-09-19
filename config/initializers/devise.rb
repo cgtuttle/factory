@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "mail-to-send@from.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -32,7 +32,7 @@ Devise.setup do |config|
   # The same considerations mentioned for authentication_keys also apply to request_keys.
   # config.request_keys = []
 
-  config.secret_key = 'ecd65ecfbb0bcfd2fc4b83eb5fdcb77ae40860708400bb9b24ff07eca48eaaec440615857c2234fd94604d36206f04e9bb74a8bda4f683d2d99ff2aa33270421'
+  # config.secret_key = 'ecd65ecfbb0bcfd2fc4b83eb5fdcb77ae40860708400bb9b24ff07eca48eaaec440615857c2234fd94604d36206f04e9bb74a8bda4f683d2d99ff2aa33270421'
 
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used

@@ -60,6 +60,10 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    devise_invitable (1.1.8)
+      actionmailer (~> 3.0)
+      devise (>= 2.1.2)
+      railties (~> 3.0)
     diff-lcs (1.2.1)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -71,6 +75,9 @@ GEM
       railties (>= 3.0.0)
     ffi (1.4.0)
     ffi (1.4.0-x86-mingw32)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     formatador (0.2.4)
     guard (1.8.2)
       formatador (>= 0.2.4)
@@ -216,7 +223,9 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 3.2.1)
   devise
+  devise_invitable (~> 1.1.0)
   factory_girl_rails
+  figaro
   guard-rspec
   hirb
   jquery-rails

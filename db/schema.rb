@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(:version => 20131013211031) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.date     "invitaton_created_at"
+    t.date     "invitation_created_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -8,8 +8,8 @@ gem 'figaro'
 
 gem 'rails_12factor'
 
-gem 'devise', '>= 2.0.0'
-gem 'devise_invitable', '~> 1.1.0'
+gem 'devise', '>= 3.0.0'
+gem 'devise_invitable', '~> 1.2.1'
 gem 'cancan'
 
 gem 'jquery-rails'

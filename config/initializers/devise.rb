@@ -32,7 +32,7 @@ Devise.setup do |config|
   # The same considerations mentioned for authentication_keys also apply to request_keys.
   # config.request_keys = []
 
-  config.secret_key='1c517f39b24f6c03deb2b5a08df546e58018a61257ac0436d3cf05ab13dc3e204c307e7abda2ca808ecae56f8696e915146088549fdf7edf358a9f15c029c1ed' if Rails.env == 'production'
+  # config.secret_key='1c517f39b24f6c03deb2b5a08df546e58018a61257ac0436d3cf05ab13dc3e204c307e7abda2ca808ecae56f8696e915146088549fdf7edf358a9f15c029c1ed' if Rails.env == 'production'
 
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used

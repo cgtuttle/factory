@@ -47,6 +47,7 @@ private
   end
 
   def current_ability
+    logger.debug "running current_ability"
     @current_ability || Ability.new(current_user, current_tenant)
   end
 

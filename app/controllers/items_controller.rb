@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 	require 'will_paginate/array'
 	before_filter :find_items
 	before_filter :set_fluid
-#	load_and_authorize_resource 
+	load_and_authorize_resource 
 
   def index
   	logger.debug "running items.index: @current_tenant = #{@current_tenant.inspect}"

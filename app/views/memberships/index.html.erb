@@ -19,7 +19,11 @@
 			<td><%= m.user.email %></td>
 			<td><%= m.tenant.name %></td>
 			<td><%= m.role %></td>
-			<td><%= link_to "Change Role", edit_membership_path(m.id) %></td>
+			<td>
+				<%= link_to "Change role", edit_membership_path(m.id) %>
+				<% if m.role != "owner" %><%= link_to "Disable user", m, :method => "delete", :style => "padding-left:15px", :confirm => "This will remove #{m.user.email} from #{m.tenant.name}" %>
+				<% end %>
+			</td>
 		</tr>
 	<% end %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130916220625) do
+ActiveRecord::Schema.define(:version => 20131006154344) do
 
   create_table "analyses", :force => true do |t|
     t.string   "code",         :limit => 64,                     :null => false
@@ -107,6 +107,8 @@ ActiveRecord::Schema.define(:version => 20130916220625) do
     t.string   "role"
   end
 
+  add_index "memberships", ["user_id", "tenant_id"], :name => "index_memberships_on_user_id_and_tenant_id", :unique => true
+
   create_table "specs", :force => true do |t|
     t.string   "code",          :limit => 64,                     :null => false
     t.string   "name",          :limit => 128
@@ -146,7 +148,6 @@ ActiveRecord::Schema.define(:version => 20130916220625) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.string   "role"
     t.string   "invitation_token",       :limit => 60
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"

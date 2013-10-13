@@ -63,5 +63,8 @@ class ImportsController < ApplicationController
 		end
 		redirect_to new_import_path
 	end
+
+	def help
+	end
 	
 end

@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def title
-    base_title = "ProdSpecs"
+    base_title = "Factory"
     if @title.nil?
       base_title
     else

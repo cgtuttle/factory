@@ -61,6 +61,10 @@ module ImportsHelper
 				@save_row.changed_by = current_user.email
 			end
 
+			if @save_row.has_attribute?(:tenant_id)
+				@save_row.tenant_id = current_tenant.id
+			end
+
 			if @save_row.save
 				@source.each do |c|
 					c.saved_at = Time.now

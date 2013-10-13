@@ -1,4 +1,4 @@
-<% if tenant_set? && !@no_menus %>
+<% if tenant_set? && !@no_menus && current_user %>
 	<% if can? :view, :all %>
 		<li>
 			<ul class="nav pull-right">			

@@ -19,7 +19,7 @@ class MembershipsController < ApplicationController
 		@membership = Membership.where("user_id = ? AND tenant_id = ?", @current_user.id, @current_tenant.id).first
 		@role = @membership.role
 		@tenants = Tenant.where("membership.role = ?", "owner")
-		@memberships = Membership.where(tenant_id: current_tenant.id)
+		@memberships = Membership.where(tenant_id: current_tenant.id).joins(:tenant, :user).order("tenants.name, users.email")
 	end
 
 	def edit
@@ -41,7 +41,16 @@ class MembershipsController < ApplicationController
 		@membership = Membership.find(params[:id])
 		if @membership.destroy
 			flash[:success] = "Membership deleted"
-			redirect_to tenant_path(@tenant)
+			redirect_to :back
+		end
+	end
+
+	def destroy_user
+		@user = User.find(params[:user_id])
+		@email = @user.email
+		if @user.destroy
+			flash[:success] = "#{@email} deleted"
+			redirect_to :back
 		end
 	end
 

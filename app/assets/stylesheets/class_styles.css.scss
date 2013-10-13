@@ -1,5 +1,5 @@
 $base-color: #00FF00;
-$base-color: #FF0007;
+$base-color: #52526F;
 $complimentary-color: #333333;
 $background-color: darken($base-color,40);
 $border-color: lighten($background-color,3);
@@ -35,9 +35,9 @@ td.display {
 }
 
 .display .dropdown {
-  background-color: lighten($background-color,5);
+  background-color: lighten($background-color,20);
   color: $font-color;
-  border-color: $border-color;
+  border-color: lighten($border-color,20);
 }
 
 .content {

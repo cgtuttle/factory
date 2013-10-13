@@ -1,6 +1,7 @@
 class TenantsController < ApplicationController
 	before_filter :authenticate_user!
 	skip_around_filter :scope_current_tenant
+	load_and_authorize_resource :except => [:index, :set]
 
   def new
 		@tenant = Tenant.new
@@ -25,7 +26,7 @@ class TenantsController < ApplicationController
 
 	def index
 		@is_list_table = true
-		@tenants ||= current_user.tenants
+		@tenants ||= current_user.tenants.all(:order => 'name')
 	end
 
 	def edit
@@ -33,7 +34,6 @@ class TenantsController < ApplicationController
 	end
 
 	def update
-		logger.debug "running Tenants.update: #{params[:id]}"
 		@tenant = Tenant.find(params[:id])
 		@tenant.update_attributes(params[:tenant])	
 		if can? :manage, :all
@@ -58,9 +58,7 @@ class TenantsController < ApplicationController
 private
 
 	def set_current_tenant(id)
-		logger.debug "running set_current_tenant: #{id}"
 		session[:current_tenant_id] = id
 		@current_tenant = Tenant.find_by_id(id)
-		logger.debug "@current_tenant: #{@current_tenant}"
 	end
 end

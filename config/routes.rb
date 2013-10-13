@@ -1,6 +1,6 @@
 Factory::Application.routes.draw do
 
-  devise_for :users, :skip => [:registrations, :sessions]
+  devise_for :users, :skip => [:registrations, :sessions], :controllers => {:invitations => 'users/invitations' }
   
   get "pages/enter"
 
@@ -15,6 +15,8 @@ Factory::Application.routes.draw do
     get "cancel-registration" => "devise/registrations#cancel", :as => :cancel_user_registration
     post "create-registration" => "devise/registrations#create", :as => :user_registration
   end
+
+  match 'users/:id' => 'users#destroy', :via => :delete, :as => :delete_user
 	
 	resources :users
   resources :imports
@@ -37,6 +39,7 @@ Factory::Application.routes.draw do
   match 'item_specs/:id/copy' => 'item_specs#copy', :as => :copy_item_spec
   match 'item_specs/:id/notes' => 'item_specs#notes', :as => :notes
   match 'analyses/:id/instructions' => 'analyses#instructions'
+  match 'imports/help' => 'imports#help', :as => :import_help
 
   root :to => 'pages#enter'
   

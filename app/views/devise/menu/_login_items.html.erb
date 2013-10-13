@@ -1,6 +1,6 @@
 <% if user_signed_in? %>				
 	<li>
-		<%= link_to('Logout', main_app.destroy_user_session_path, :method => :get) %>
+		<%= link_to("Logout: #{current_user.email}", main_app.destroy_user_session_path, :method => :get) %>
 	</li>	  	     
 <% else %>
 	<%= form_for("user", :url => main_app.user_session_path, :html => {:class => "navbar-form pull-right", :style => "margin:0"}) do |f| %>

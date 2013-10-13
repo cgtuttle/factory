@@ -1,8 +1,13 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user, tenant)    
-    role = Membership.where("user_id = ? AND tenant_id = ?", user, tenant).first.role
+  def initialize(user, tenant)
+    if tenant          
+      role = Membership.where("user_id = ? AND tenant_id = ?", user, tenant).first.role      
+    else
+      role = "user"
+    end
+    
     case role
     when "root"    
       can :manage, :all
@@ -14,7 +19,10 @@ class Ability
       can :view, :all
       can :manage, [Analysis, Category, Import, Item, ItemSpec, Spec]
     else
-      can :display, ItemSpec
+      can :display, [ItemSpec]
+      can :view, [Tenant]
+      can :set, [Tenant]
     end
+        
   end
 end

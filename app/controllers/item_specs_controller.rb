@@ -10,7 +10,6 @@ class ItemSpecsController < ApplicationController
 		@hide_pending = params[:hide_pending] == "hide_pending"
 		@specs = Spec.order(:display_order)
 		set_scope
-logger.debug "History, Pending = #{@show_history}, #{@hide_pending}"
   	if @item
 	  	@new_item_spec = ItemSpec.new
 			@title = "Specifications for Item"

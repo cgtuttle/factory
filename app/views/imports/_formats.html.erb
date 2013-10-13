@@ -1,0 +1,22 @@
+<% @is_list = true %>
+
+<ul>
+	<li>.CSV or .XLS document</li>
+	<li>Document may have headers</li>
+	<li>Rows should not have spaces between them</li>
+	<li>Specify the first row of actual data as the starting row</li>
+</ul>
+
+
+<% content_for :thead do %>
+
+	
+<% end %>
+
+<% content_for :table do %>
+	
+
+<% end %>
+
+<% content_for :footer do %>
+<% end %>	

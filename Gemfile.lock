@@ -222,7 +222,7 @@ DEPENDENCIES
   cancan
   capybara
   coffee-rails (~> 3.2.1)
-  devise
+  devise (>= 2.0.0)
   devise_invitable (~> 1.1.0)
   factory_girl_rails
   figaro

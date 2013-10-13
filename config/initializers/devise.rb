@@ -32,7 +32,7 @@ Devise.setup do |config|
   # The same considerations mentioned for authentication_keys also apply to request_keys.
   # config.request_keys = []
 
-   config.secret_key = 'ecd65ecfbb0bcfd2fc4b83eb5fdcb77ae40860708400bb9b24ff07eca48eaaec440615857c2234fd94604d36206f04e9bb74a8bda4f683d2d99ff2aa33270421'
+  config.secret_key='1c517f39b24f6c03deb2b5a08df546e58018a61257ac0436d3cf05ab13dc3e204c307e7abda2ca808ecae56f8696e915146088549fdf7edf358a9f15c029c1ed' if Rails.env == 'production'
 
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
@@ -73,6 +73,12 @@ Devise.setup do |config|
   # may want to disable generating routes to Devise's sessions controller by
   # passing :skip => :sessions to `devise_for` in your config/routes.rb
   config.skip_session_storage = [:http_auth]
+
+  # ==> Configuration for :invitable
+  # The period the generated invitation token is valid, after
+  # this period, the invited resource won't be able to accept the invitation.
+  # When invite_for is 0 (the default), the invitation won't expire.
+  # config.invite_for = 2.weeks
 
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
@@ -170,7 +176,7 @@ Devise.setup do |config|
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
   # change their passwords.
-  config.reset_password_within = 6.hours
+  config.reset_password_within = 24.hours
 
   # ==> Configuration for :encryptable
   # Allow you to use another encryption algorithm besides bcrypt (default). You can use

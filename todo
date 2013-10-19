@@ -3,3 +3,5 @@ TODO:	Fix pagination
 TODO: Fix sendgrid 404 error in heroku when invitation is accepted
 TODO: Add application admin user view
 TODO: Switch menus to dropdowns
+TODO: Sort users by role, starting with owner
+TODO: Set focus on send invitation page to email textfield

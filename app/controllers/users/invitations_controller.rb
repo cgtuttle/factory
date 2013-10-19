@@ -48,12 +48,4 @@ class Users::InvitationsController < Devise::InvitationsController
     @current_inviter ||= authenticate_inviter!
   end
 
-  def update_resource_params
-    devise_parameter_sanitizer.sanitize(:accept_invitation)
-  end
-
-  # def after_accept_path_for(resource)
-  	
-  # end
-
 end

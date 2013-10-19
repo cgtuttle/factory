@@ -65,6 +65,7 @@ module Factory
     config.to_prepare do
       Devise::SessionsController.skip_around_filter :scope_current_tenant
       Devise::RegistrationsController.skip_around_filter :scope_current_tenant
+      Devise::PasswordsController.skip_around_filter :scope_current_tenant
     end
     
   end

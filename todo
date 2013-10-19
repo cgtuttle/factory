@@ -1,0 +1,5 @@
+DONE: Add 'forgot password' functionality
+TODO:	Fix pagination
+TODO: Fix sendgrid 404 error in heroku when invitation is accepted
+TODO: Add application admin user view
+TODO: Switch menus to dropdowns

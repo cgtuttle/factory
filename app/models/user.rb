@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :tenants
 
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+  # :token_authenticatable,
+  # :lockable, :timeoutable and :omniauthable, :confirmable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

@@ -20,9 +20,11 @@
 				</tbody>
 			</table>
 
-			<% unless index.blank? %>
-				<%= will_paginate index, :renderer => BootstrapPagination::Rails %>
-			<% end %>
+			<div class="pagination">
+				<% unless index.blank? %>
+					<%= will_paginate index, :renderer => BootstrapPagination::Rails %>
+				<% end %>
+			</div>
 		</div>
 
 	</div>

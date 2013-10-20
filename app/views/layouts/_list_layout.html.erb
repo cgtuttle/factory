@@ -6,9 +6,11 @@
 				<%= yield :controls %>
 			</div>
 			
-			<% unless list.blank? %>
-				<%= will_paginate list, :renderer => BootstrapPagination::Rails %>
-			<% end %>
+			<div class="pagination">
+				<% unless list.blank? %>
+					<%= will_paginate list, :renderer => BootstrapPagination::Rails %>
+				<% end %>
+			</div>
 
 			<table class="table table-striped">
 				<thead>
@@ -19,9 +21,11 @@
 				</tbody>
 			</table>
 
-			<% unless list.blank? %>
-				<%= will_paginate list, :renderer => BootstrapPagination::Rails %>
-			<% end %>
+			<div class="pagination">
+				<% unless list.blank? %>
+					<%= will_paginate list, :renderer => BootstrapPagination::Rails %>
+				<% end %>
+			</div>
 
 		</div>
 

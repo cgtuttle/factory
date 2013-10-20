@@ -5,9 +5,11 @@
 				<%= yield :controls %>
 			</div>
 			
-			<% unless index.blank? %>
-				<%= will_paginate index, :renderer => BootstrapPagination::Rails %>
-			<% end %>
+			<div class="pagination">
+				<% unless index.blank? %>
+					<%= will_paginate index, :renderer => BootstrapPagination::Rails %>
+				<% end %>
+			</div>
 
 			<table class="table table-striped table-bordered table-condensed">
 				<thead>

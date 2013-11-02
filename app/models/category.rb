@@ -2,10 +2,9 @@ class Category < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id}
 	has_many :specs
 
-  attr_accessible :code, :name, :display_order, :deleted_at, :deleted
+  attr_accessible :code, :name, :display_order
 
 	default_scope { where(tenant_id: Tenant.current_id) }
-	scope :active, where(:deleted => false)
 	
 	def reorder(new)
 		old = self.id ? self.display_order : 0

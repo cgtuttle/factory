@@ -8,20 +8,24 @@ class ItemSpec < ActiveRecord::Base
 	attr_accessible :spec_id, :string_value, :text_value, :numeric_value, :usl, :lsl, :unit_of_measure, :analysis_id, :eff_date, :item_id, :version
 
 	before_save :default_values
+
+	scope :active, where(:canceled => false)
 	
 	def self.by_status(item)
 		ItemSpec.includes(:spec => :category).where(:item_id => item).order("categories.display_order, specs.display_order, eff_date DESC, version DESC")
 	end
 	
 	def date_status
-		current_item_spec = ItemSpec
-			.where(["item_id = ? AND spec_id = ? AND eff_date <= ?", self.item_id, self.spec_id, Date.today] )
+		current_item_spec = ItemSpec.active
+			.where(["item_id = ? AND spec_id = ? AND eff_date <= ? ", self.item_id, self.spec_id, Date.today] )
 			.order('eff_date DESC, version DESC').first
 		if current_item_spec		
 			current_date = current_item_spec.eff_date
 			current_version = current_item_spec.version	
-			if self.canceled
+			if self.canceled & (self.eff_date >= Date.today)
 				"canceled"
+			elsif self.canceled & (self.eff_date < Date.today)
+				"unused"
 			elsif (self.eff_date > Date.today)
 				"pending"
 			elsif self.deleted

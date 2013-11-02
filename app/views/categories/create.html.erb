@@ -1,0 +1,17 @@
+<%= form_for @category do |f| %>
+
+	<%= render 'layouts/errors', :index => @category %>
+
+	<div>		
+		<%= f.label :code %>
+		<%= f.text_field :code, :class => "input-small" %>
+		<%= f.label :name %>
+		<%= f.text_field :name, :class => "input-medium" %>
+		<%= f.label :display_order %>
+		<%= f.text_field :display_order, :class => "input-mini" %>
+		<div>
+			<%= f.submit %>
+			<%= f.submit "Cancel" %>
+		</div>
+	</div>
+<% end %>

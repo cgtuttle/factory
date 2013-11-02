@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 	
 	def index
 		@title = 'Categories'
-		@categories = Category.where(:deleted => false).order('display_order').paginate(:page => params[:page], :per_page => 30)
+		@categories = Category.order('display_order').paginate(:page => params[:page], :per_page => 30)
 		@index = @categories
 		@category = Category.new
 		@span = 6
@@ -17,16 +17,14 @@ class CategoriesController < ApplicationController
 			@category.reorder(order)
 			if @category.save
 				flash[:success] = "Category added"
-			else
-				flash[:error] = "Category could not be added"
-#TODO Add more descriptive error messages
+				redirect_to categories_path
 			end
+		else
+			redirect_to categories_path
 		end
-		redirect_to categories_path
 	end
 
   def edit
-#		@category = Category.find(params[:id])
 		@title = "Edit Category: #{@category.name}"
 		@is_edit_form = true
 	end
@@ -46,12 +44,10 @@ class CategoriesController < ApplicationController
 	end
 
 	def destroy
-#		@category = Category.find(params[:id])
-		now = Time.now
-		if @category.update_attributes(:deleted => 'true', :deleted_at => now )
+		if Category.find(params[:id]).destroy		
 			flash[:success] = 'Category deleted'
+			redirect_to categories_path
 		end
-		redirect_to categories_path
 	end
 
 end

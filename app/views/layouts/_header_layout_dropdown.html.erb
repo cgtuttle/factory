@@ -1,0 +1,25 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <nav class="navbar-inner">    
+    <ul class="nav">
+      <li><%= link_to(image_tag("icons/factory_white.svg", :alt=>"Factory", :size=>"33x30", :alt => "Main", :id => "factory"), "/", :style => "padding:5px") %></li>
+      <li><%= render 'layouts/menu/display' %></li>
+      <li><%= render 'layouts/menu/nav_items' %></li>
+    </ul>
+
+           
+    <ul class="nav pull-right">
+      <li>    
+        <%= link_to 'Admin <b class="caret"></b>'.html_safe, root_path, :id => 'dLabel', :'data-toggle' => 'dropdown', :class => 'dropdown-toggle' %>        
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">        
+          <li><%= render 'layouts/menu/tenant_items' %></li>
+          <li><%= render 'devise/menu/registration_items' %></li>        
+        </ul>
+      </li>
+    </ul>
+    
+    
+    <ul class="nav pull-right">
+      <li><%= render 'devise/menu/login_items' %></li>
+    </ul>      
+  </nav>
+</header>

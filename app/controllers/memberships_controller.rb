@@ -19,7 +19,7 @@ class MembershipsController < ApplicationController
 		@membership = Membership.where("user_id = ? AND tenant_id = ?", @current_user.id, @current_tenant.id).first
 		@role = @membership.role
 		@tenants = Tenant.where("membership.role = ?", "owner")
-		@memberships = Membership.where(tenant_id: current_tenant.id).joins(:tenant, :user).order("tenants.name, users.email")
+		@memberships = Membership.where(tenant_id: current_tenant.id).joins(:tenant, :user).order("role, tenants.name, users.email")
 	end
 
 	def edit

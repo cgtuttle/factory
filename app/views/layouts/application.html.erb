@@ -19,7 +19,7 @@
       
         <div class="<%= @fixed ? "container" : "container-fluid" %>">
 
-          <%= render 'layouts/header_layout' %>          
+          <%= render 'layouts/header_layout_dropdown' %>          
           <%= render 'layouts/flash_messages' %>                           
           <%= render :partial => 'layouts/edit_layout' if @is_edit_form %>
           <%= render :partial => 'layouts/index_layout', :object => @index, :as => :index if @is_index_table %> 
@@ -34,6 +34,8 @@
       
      
     </div> <!--! end of #main -->
+
+    
 
   </body>
 </html>

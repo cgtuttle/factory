@@ -1,6 +1,7 @@
 class SpecsController < ApplicationController
 	load_and_authorize_resource
 	before_filter :find_specs
+	before_filter :find_categories
 	
   def index
   	@layout_type = "fluid"
@@ -57,6 +58,10 @@ class SpecsController < ApplicationController
 	def find_specs
 		@specs = Spec.where(:deleted => false).order("display_order").paginate(:page => params[:page], :per_page => 20)
 		@index = @specs
+	end
+
+	def find_categories
+		@categories = Category.order(:display_order)
 	end
 
 end

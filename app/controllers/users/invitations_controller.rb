@@ -13,7 +13,8 @@ class Users::InvitationsController < Devise::InvitationsController
 
     if @user.errors.empty?
       set_flash_message :notice, :send_instructions, :email => @user.email if @user.invitation_sent_at
-      respond_with @user, :location => after_invite_path_for(@user)
+      redirect_to memberships_path #replaced below to redirect back to membership index
+#      respond_with @user, :location => after_invite_path_for(@user)
     else
       respond_with_navigational(@user) { render :new }
     end
@@ -46,6 +47,10 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def current_inviter
     @current_inviter ||= authenticate_inviter!
+  end
+
+  def after_invite_path_for(user)
+    memberships_path
   end
 
 end

@@ -1,8 +1,10 @@
-DONE: Add 'forgot password' functionality
-TODO:	Fix pagination
-DONE: Fix sendgrid 404 error in heroku when invitation is accepted
-TODO: Add application admin user view
-TODO: Switch menus to dropdowns
-TODO: Sort users by role, starting with owner
-TODO: Set focus on send invitation page to email textfield
-TODO: Re-do invitations/create.html.erb
+General:
+ ☐ Add application admin user view
+ ☐ Sort users by role, starting with owner ***
+ ☐ Add list .pdf output to models
+ ☐ Change color of blue arrow on Admin dropdown
+ ✔ Add 'forgot password' functionality @done (13-11-02 15:09)
+Cleanup:
+ ☐ pages/enter.html.erb
+ ☐ tenants/show.html.erb
+ ☐ tenants/index.html.erb

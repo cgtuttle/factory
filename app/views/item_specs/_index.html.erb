@@ -1,7 +1,8 @@
 
 
 <% if ((item_spec.date_status == 'past' || 
-	item_spec.date_status == 'deleted') && @show_history) || 
+	item_spec.date_status == 'deleted' ||
+	item_spec.date_status == 'unused') && @show_history) || 
 	(item_spec.date_status == 'pending' && !@hide_pending) ||
 	(item_spec.date_status == 'canceled' && !@hide_pending) ||
 	item_spec.date_status == 'current' %>

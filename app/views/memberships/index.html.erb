@@ -2,7 +2,7 @@
 
 <% content_for :thead do %>
 
-	<h2><%= current_tenant.name %> : <%= @role %></h2>
+	<h2><%= current_tenant.name %> : <%= @role.role_name %></h2>
 
 		<tr>
 			<th>User</th>
@@ -18,10 +18,10 @@
 		<tr>
 			<td><%= m.user.email %></td>
 			<td><%= m.tenant.name %></td>
-			<td><%= m.role %></td>
+			<td><%= m.role.role_name %></td>
 			<td>
 				<%= link_to "Change role", edit_membership_path(m.id) %>
-				<% if m.role != "owner" %><%= link_to "Remove user", m, :method => "delete", :style => "padding-left:15px", :confirm => "This will remove #{m.user.email} from #{m.tenant.name}" %>
+				<% if m.role.role_name != "owner" && m.user != current_user %><%= link_to "Remove user", m, :method => "delete", :style => "padding-left:15px", :confirm => "This will remove #{m.user.email} from #{m.tenant.name}" %>
 				<% end %>
 			</td>
 		</tr>

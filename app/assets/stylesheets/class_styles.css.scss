@@ -7,6 +7,15 @@ $row-color: fade-out(lighten($background-color, 15), .3);
 $header-color: fade-out(darken($background-color, 7), .5);
 $font-color: lighten($background-color, 70);
 $header-font-color: lighten($complimentary-color,30);
+$static-page-color: #D9E8E5;
+$static-page-text-color: #13038D;
+
+body.static-page {
+  background-color: $static-page-color;
+  color: $static-page-text-color;
+  background-image: url('normal.png');
+  background-size: 525px 395px;
+}
 
 body.display {
   background-color: $background-color;
@@ -34,6 +43,18 @@ td.display {
   border-color: $border-color;
 }
 
+.hero-unit.hero-block {
+  background-color: darken($static-page-color, 3);
+}
+
+.page-heading {
+
+}
+
+.logo-font {
+  color: lighten($static-page-text-color, 10);
+}
+
 .display .dropdown {
   background-color: lighten($background-color,20);
   color: $font-color;
@@ -55,6 +76,11 @@ td.display {
   border-color: #FF0000;
   border-width: 3px;
   border-style: solid;
+}
+
+.navbar .nav .dropdown-toggle .caret.caret-header {
+  border-top-color: $header-font-color;
+  border-bottom-color: $header-font-color;
 }
 
 .pending {color:blue;}

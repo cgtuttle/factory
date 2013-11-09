@@ -11,13 +11,12 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body class="<%= @display ? "display" : "normal" %>">
+  <body class="<%= @body_class || "normal" %>">
     
-    
-
     <div id="main" role="main">
+      <% if !@fixed %>
       
-        <div class="<%= @fixed ? "container" : "container-fluid" %>">
+        <div class="container-fluid">
 
           <%= render 'layouts/header_layout_dropdown' %>          
           <%= render 'layouts/flash_messages' %>                           
@@ -25,17 +24,21 @@
           <%= render :partial => 'layouts/index_layout', :object => @index, :as => :index if @is_index_table %> 
           <%= render :partial => 'layouts/list_layout', :object => @list, :as => :list if @is_list_table %>  
           <%= yield %>
-                    
+
           <footer>
             <%= yield(:footer) %>
-          </footer>
-        
-        </div> <!--! end of .container -->
-      
-     
-    </div> <!--! end of #main -->
+          </footer>  
 
-    
+        </div> <!--! end of .container --> 
+      <% else %>
+        <div class="fixed" %>
+          <%= yield %>
+        </div>
+      <% end %>
+
+      
+
+    </div> <!--! end of #main -->
 
   </body>
 </html>

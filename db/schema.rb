@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027174116) do
+ActiveRecord::Schema.define(:version => 20131103171920) do
 
   create_table "analyses", :force => true do |t|
     t.string   "code",         :limit => 64,                     :null => false
@@ -102,10 +102,18 @@ ActiveRecord::Schema.define(:version => 20131027174116) do
     t.integer  "tenant_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "role"
+    t.integer  "role_id"
   end
 
   add_index "memberships", ["user_id", "tenant_id"], :name => "index_memberships_on_user_id_and_tenant_id", :unique => true
+
+  create_table "roles", :force => true do |t|
+    t.string   "role_name"
+    t.integer  "display_order"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.boolean  "viewable"
+  end
 
   create_table "specs", :force => true do |t|
     t.string   "code",          :limit => 64,                     :null => false

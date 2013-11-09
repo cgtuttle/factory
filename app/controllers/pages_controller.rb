@@ -4,6 +4,7 @@ class PagesController < ApplicationController
 
   def enter
   	@fixed = true
+  	@body_class = "static-page"
   end
   
 end

@@ -9,7 +9,7 @@
            
     <ul class="nav pull-right">
       <li>    
-        <%= link_to 'Admin <b class="caret"></b>'.html_safe, root_path, :id => 'dLabel', :'data-toggle' => 'dropdown', :class => 'dropdown-toggle' %>        
+        <%= link_to 'Admin <b class="caret caret-header"></b>'.html_safe, root_path, :id => 'dLabel', :'data-toggle' => 'dropdown', :class => 'dropdown-toggle' %>        
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">        
           <li><%= render 'layouts/menu/tenant_items' %></li>
           <li><%= render 'devise/menu/registration_items' %></li>        

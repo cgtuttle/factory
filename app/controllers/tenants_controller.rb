@@ -21,7 +21,7 @@ class TenantsController < ApplicationController
 	def show
 		@tenant ||= Tenant.find(params[:id])
 		@memberships = @tenant.memberships
-		@roles = Membership::ROLES
+		@roles = Roles.for_list
 	end
 
 	def index

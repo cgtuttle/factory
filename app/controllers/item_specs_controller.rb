@@ -66,7 +66,8 @@ class ItemSpecsController < ApplicationController
 
 	def display
 		@span = 12
-		@display = true	
+		@display = true
+		@body_class = "display"	
 		@no_menus = true
 		if params.has_key?(:item)
 			@item = Item.find(params[:item][:id])

@@ -1,9 +1,12 @@
 General:
+ ☐ Upgrade Bootstrap to 3.0
  ☐ Add application admin user view
- ☐ Sort users by role, starting with owner ***
+ ✔ Sort users by role, starting with owner *** @done (13-11-09 08:35)
  ☐ Add list .pdf output to models
- ☐ Change color of blue arrow on Admin dropdown
+ ✔ Change color of blue arrow on Admin dropdown @done (13-11-09 09:14)
  ✔ Add 'forgot password' functionality @done (13-11-02 15:09)
+ ✔ Change color of new record row in indexes @done (13-11-09 09:29)
+ ☐ Add batch edit capability or copy record capability
 Cleanup:
  ☐ pages/enter.html.erb
  ☐ tenants/show.html.erb

@@ -3,9 +3,9 @@ class Ability
 
   def initialize(user, tenant)
     if tenant          
-      role = Membership.where("user_id = ? AND tenant_id = ?", user, tenant).first.role      
+      role = Membership.where("user_id = ? AND tenant_id = ?", user, tenant).first.role.role_name      
     else
-      role = "user"
+      role = "guest"
     end
     
     case role

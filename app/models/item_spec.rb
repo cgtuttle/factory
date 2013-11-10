@@ -1,23 +1,23 @@
 class ItemSpec < ActiveRecord::Base
 	belongs_to :item
-	belongs_to :spec
+	belongs_to :trait
 	belongs_to :analysis
 
-	validates :item_id, :spec_id, :presence => true
+	validates :item_id, :trait_id, :presence => true
 	validate :valid_eff_date?
-	attr_accessible :spec_id, :string_value, :text_value, :numeric_value, :usl, :lsl, :unit_of_measure, :analysis_id, :eff_date, :item_id, :version
+	attr_accessible :trait_id, :string_value, :text_value, :numeric_value, :usl, :lsl, :unit_of_measure, :analysis_id, :eff_date, :item_id, :version
 
 	before_save :default_values
 
 	scope :active, where(:canceled => false)
 	
 	def self.by_status(item)
-		ItemSpec.includes(:spec => :category).where(:item_id => item).order("categories.display_order, specs.display_order, eff_date DESC, version DESC")
+		ItemSpec.includes(:trait => :category).where(:item_id => item).order("categories.display_order, traits.display_order, eff_date DESC, version DESC")
 	end
 	
 	def date_status
 		current_item_spec = ItemSpec.active
-			.where(["item_id = ? AND spec_id = ? AND eff_date <= ? ", self.item_id, self.spec_id, Date.today] )
+			.where(["item_id = ? AND trait_id = ? AND eff_date <= ? ", self.item_id, self.trait_id, Date.today] )
 			.order('eff_date DESC, version DESC').first
 		if current_item_spec		
 			current_date = current_item_spec.eff_date
@@ -49,8 +49,8 @@ class ItemSpec < ActiveRecord::Base
 	end
 	
 	def last_version
-		unless ItemSpec.where(:item_id => self.item_id, :spec_id => self.spec_id).empty?
-			ItemSpec.where(:item_id => self.item_id, :spec_id => self.spec_id).order('version DESC').first.version
+		unless ItemSpec.where(:item_id => self.item_id, :trait_id => self.trait_id).empty?
+			ItemSpec.where(:item_id => self.item_id, :trait_id => self.trait_id).order('version DESC').first.version
 		end
 	end
 	

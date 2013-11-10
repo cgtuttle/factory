@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id} # validates uniqueness within an account
 	has_many :item_specs
-	has_many :specs, :through => :item_specs
+	has_many :traits, :through => :item_specs
 	attr_accessible :code, :name
 	default_scope { where(tenant_id: Tenant.current_id) }
 
@@ -33,35 +33,35 @@ class Item < ActiveRecord::Base
 		end
 	end
 
-	def available_specs
-		sql_string_used_specs = "
+	def available_traits
+		sql_string_used_traits = "
 			SELECT a.*
 			FROM
 				((
-				SELECT spec_id, MAX(version) as ver
+				SELECT trait_id, MAX(version) as ver
 				FROM item_specs
 				WHERE item_id = #{self.id}					
-				GROUP BY spec_id) AS y
+				GROUP BY trait_id) AS y
 			INNER JOIN
 				(
 				SELECT *
 				FROM item_specs
 				WHERE item_id = #{self.id}
 				AND deleted = false) AS z
-			ON y.spec_id = z.spec_id
+			ON y.trait_id = z.trait_id
 			AND y.ver = z.version)
 			INNER JOIN
 				(
 				SELECT *
-				FROM specs) AS a
-			ON a.id = z.spec_id
+				FROM traits) AS a
+			ON a.id = z.trait_id
 			"
 
-		@used_specs = Spec.find_by_sql(sql_string_used_specs)
-		if @used_specs.empty?
-			Spec.all
+		@used_traits = Trait.find_by_sql(sql_string_used_traits)
+		if @used_traits.empty?
+			Trait.all
 		else
-			Spec.where('id NOT IN (?)', @used_specs)
+			Trait.where('id NOT IN (?)', @used_traits)
 		end
 	end
 

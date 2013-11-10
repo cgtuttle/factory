@@ -1,0 +1,31 @@
+<% set_title "Trait list"%>
+
+<% content_for :thead do %>
+	<tr>
+		<th style="width: 20%">Category</th>
+		<th style="width: 20%">Trait Code</th>
+		<th style="width: 20%">Trait Name</th>
+		<th style="width: 20%">Label</th>
+		<th style="width: 10%" class="centered">Default Order</th>
+		<th style="width: 10%"></th>
+	</tr>
+<% end %>
+		
+<% content_for :table do %>
+	<tr>
+		<%= render 'new' %>
+	</tr>
+
+	<% @traits.each do |t| %>
+		<tr>
+			<td><%= t.category_id  ? t.category.name : nil %></td>
+			<td><%= t.code %></td>
+			<td><%= t.name %></td>
+			<td><%= t.label %></td>
+			<td class="centered"><%= t.display_order %></td>
+			<td class="centered"><%= link_to "Edit", edit_trait_path(t) %>
+					<%= link_to "Delete", trait_path(t), :method => :delete, :confirm => "Are you sure?" %>
+			</td>
+		</tr>
+	<% end %>
+<% end %>

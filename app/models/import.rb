@@ -8,9 +8,9 @@ class Import < ActiveRecord::Base
 	require 'csv'
 	
 	NO_IMPORT = %w[id created_at updated_at deleted deleted_at canceled]
-	MODELS = %w[Category Item ItemSpec Spec Analysis]
+	MODELS = %w[Category Item ItemSpec Trait Analysis]
 	MODELS_WITH_FK = ["ItemSpec"]
-	MODEL_MINIMUM_FIELDS = {:category => "Code", :item => "Code", :item_spec => "Item Code, Spec Code", :spec => "Code", :analysis => "Code"}
+	MODEL_MINIMUM_FIELDS = {:category => "Code", :item => "Code", :item_spec => "Item Code, Trait Code", :trait => "Code", :analysis => "Code"}
 
 
 end

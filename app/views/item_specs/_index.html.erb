@@ -8,12 +8,12 @@
 	item_spec.date_status == 'current' %>
 	
 	<tr class="<%= item_spec.date_status %>">
-		<% if item_spec.spec.category %>
-			<td><%= item_spec.spec.category.code %></td>
+		<% if item_spec.trait.category %>
+			<td><%= item_spec.trait.category.code %></td>
 		<% else %>
 			<td></td>
 		<% end %>
-		<td><%= item_spec.spec.code %></td>			
+		<td><%= item_spec.trait.code %></td>			
 		<td><%= item_spec.string_value %></td>
 		<td><%= item_spec.text_value %>
 		<td><%= item_spec.numeric_value %></td>

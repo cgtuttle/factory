@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= yield :title %></title>
+    <title><%= yield(:title) %></title>
     <meta name="description" content="">
     <meta name="author" content="">
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -16,8 +16,7 @@
     <div id="main" role="main">
       <% if !@fixed %>
       
-        <div class="container-fluid">
-
+        <div class="container-fluid">          
           <%= render 'layouts/header_layout_dropdown' %>          
           <%= render 'layouts/flash_messages' %>                           
           <%= render :partial => 'layouts/edit_layout' if @is_edit_form %>

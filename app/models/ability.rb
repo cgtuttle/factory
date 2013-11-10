@@ -17,7 +17,7 @@ class Ability
       can :manage, :all
     when "manager"
       can :view, :all
-      can :manage, [Analysis, Category, Import, Item, ItemSpec, Spec]
+      can :manage, [Analysis, Category, Import, Item, ItemSpec, Trait]
     else
       can :display, [ItemSpec]
       can :view, [Tenant]

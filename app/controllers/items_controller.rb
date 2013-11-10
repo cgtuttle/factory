@@ -7,16 +7,14 @@ class ItemsController < ApplicationController
 
   def index
   	logger.debug "running items.index: @current_tenant = #{@current_tenant.inspect}"
-		@title = "Items"
 		@new_item = Item.new	
-		@specs = Spec.all
+		@traits = Trait.all
 		@is_index_table = true
 		@span = 5
   end
 
   def edit
 		@item = Item.find(params[:id])
-		@title = "Edit Item #{@item.code}"
 		@is_edit_form = true
   end
 

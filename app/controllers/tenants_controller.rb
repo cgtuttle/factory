@@ -10,7 +10,8 @@ class TenantsController < ApplicationController
   def create
 		@tenant = Tenant.new(params[:tenant])
 		if @tenant.save
-			@membership = Membership.new(:tenant_id => @tenant.id, :user_id => current_user.id, :role => "owner")
+			@role= Role.find_by_role_name("owner")
+			@membership = Membership.new(:tenant_id => @tenant.id, :user_id => current_user.id, :role_id => @role.id)
 			if @membership.save
 				set_current_tenant(@tenant)
 				redirect_to tenant_path(@tenant)
@@ -21,7 +22,7 @@ class TenantsController < ApplicationController
 	def show
 		@tenant ||= Tenant.find(params[:id])
 		@memberships = @tenant.memberships
-		@roles = Roles.for_list
+		@roles = Role.for_list
 	end
 
 	def index

@@ -8,15 +8,14 @@ class ItemSpecsController < ApplicationController
   	@span = 12
 		@show_history = params[:show_history] == "show_history"
 		@hide_pending = params[:hide_pending] == "hide_pending"
-		@specs = Spec.order(:display_order)
+		@traits = Trait.order(:display_order)
 		set_scope
   	if @item
 	  	@new_item_spec = ItemSpec.new
-			@title = "Specifications for Item"
 			@item_specs = ItemSpec.by_status(@item_id).paginate(:page => params[:page], :per_page => 20)
 			@index = @item_specs
 			@items = Item.order(:code)
-			@available_specs = Spec.all
+			@available_traits = Trait.all
 			@span = 12
 			@is_index_table = true
 		else
@@ -29,7 +28,6 @@ class ItemSpecsController < ApplicationController
 #		@item_spec = ItemSpec.find(params[:id])
 		@new_item_spec = @item_spec.dup
 		@is_edit_form = true
-		@title = "#{@new_item_spec.spec.name} Specification"
 	end
 	
 	def create
@@ -39,7 +37,7 @@ class ItemSpecsController < ApplicationController
 			@new_item_spec.set_version
 			@new_item_spec.set_editor(current_user.email)
 			if @new_item_spec.save!
-				flash[:success] = "Item Spec added/changed"
+				flash[:success] = "Item Trait added/changed"
 				redirect_to item_specs_path :item_id => params[:item_spec][:item_id]
 			else
 				redirect_to item_specs_path :item_id => params[:item_spec][:item_id]
@@ -57,7 +55,7 @@ class ItemSpecsController < ApplicationController
 		@delete_item_spec.set_version
 		@delete_item_spec.set_editor(current_user.email)
 		if @delete_item_spec.save
-			flash[:success] = "Item Spec deleted"
+			flash[:success] = "Item Trait deleted"
 			redirect_to item_specs_path :item_id => @item_spec.item_id
 		else
 			redirect_to item_specs_path :item_id => @item_spec.item_id
@@ -78,9 +76,8 @@ class ItemSpecsController < ApplicationController
 		end
 		if @item
 			cookies[:item_id] = @item.id
-			@title = @item.code
-			@item_specs = ItemSpec.joins(:spec => :category).where(:item_id => @item).order("categories.display_order")
-			@categories = @item_specs.group_by{|is| is.spec.category}			
+			@item_specs = ItemSpec.joins(:trait => :category).where(:item_id => @item).order("categories.display_order")
+			@categories = @item_specs.group_by{|is| is.trait.category}		
 		end
 	end	
 
@@ -94,7 +91,7 @@ class ItemSpecsController < ApplicationController
 		@item_spec.set_eff_date
 		@item_spec.set_version
 		if @item_spec.save
-			flash[:success] = "Future Item Spec canceled"
+			flash[:success] = "Future Item Trait canceled"
 			redirect_to item_specs_path :item_id => @item_spec.item_id
 		else
 			redirect_to item_specs_path :item_id => @item_spec.item_id
@@ -104,7 +101,6 @@ class ItemSpecsController < ApplicationController
 	def notes
 		@item_spec = ItemSpec.find(params[:id])
 		@is_edit_form = true
-		@title = "Notes for #{@item_spec.item.code}"
 	end
 	
 	def update

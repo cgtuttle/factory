@@ -1,7 +1,7 @@
 <tr>
 	<%= form_for(@new_item_spec) do |f| %>
 		<td></td>
-		<td><%= f.collection_select :spec_id, @available_specs, :id, :code, {:prompt => :true}, {:style => "width:100%;"} %></td>
+		<td><%= f.collection_select :trait_id, @available_traits, :id, :code, {:prompt => :true}, {:style => "width:100%;"} %></td>
 		<td><%= f.text_field :string_value, :style => "width:80%;" %></td>
 		<td><%= f.text_field :text_value, :style => "width:80%;" %>
 		<td><%= f.text_field :numeric_value, :style => "width:80%;" %></td>

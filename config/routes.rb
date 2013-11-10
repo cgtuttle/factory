@@ -21,7 +21,7 @@ Factory::Application.routes.draw do
 	resources :users
   resources :imports
   resources :items
-  resources :specs
+  resources :traits
   resources :categories
   resources :analyses
   resources :memberships

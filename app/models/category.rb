@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id}
-	has_many :specs
+	has_many :traits
 
   attr_accessible :code, :name, :display_order
 

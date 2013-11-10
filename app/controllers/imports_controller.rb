@@ -12,7 +12,6 @@ class ImportsController < ApplicationController
 		if params[:model]
 			@model = params[:model]
 		end
-		@title = "Import Data"
 		@is_edit_form = true
 	end
 	

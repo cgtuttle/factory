@@ -15,12 +15,12 @@ module ApplicationHelper
     end
   end
 
-  def title
-    base_title = "Factory"
-    if @title.nil?
-      base_title
+  def set_title(title)
+    base_title = "FactorySync"
+    if title.nil?
+      provide :title, base_title
     else
-      "#{base_title} | #{@title}"
+      provide :title, "#{base_title} | #{title}"
     end
   end
   

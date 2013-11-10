@@ -2,7 +2,6 @@ class AnalysesController < ApplicationController
 load_and_authorize_resource
 	
   def index
-  	@title = 'Analyses'
 		@analyses = Analysis.find(:all).paginate(:page => params[:page], :per_page => 30)
 		@index = @analyses
 		@analysis = Analysis.new
@@ -24,7 +23,6 @@ load_and_authorize_resource
 	end
 
   def edit
-		@title = "Edit analysis: #{@analysis.name}"
 		@is_edit_form = true		
 	end
 	

@@ -2,7 +2,6 @@ class CategoriesController < ApplicationController
 	load_and_authorize_resource
 	
 	def index
-		@title = 'Categories'
 		@categories = Category.order('display_order').paginate(:page => params[:page], :per_page => 30)
 		@index = @categories
 		@category = Category.new
@@ -25,7 +24,6 @@ class CategoriesController < ApplicationController
 	end
 
   def edit
-		@title = "Edit Category: #{@category.name}"
 		@is_edit_form = true
 	end
 	

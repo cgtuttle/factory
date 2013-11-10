@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131103171920) do
+ActiveRecord::Schema.define(:version => 20131110191006) do
 
   create_table "analyses", :force => true do |t|
     t.string   "code",         :limit => 64,                     :null => false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20131103171920) do
 
   create_table "item_specs", :force => true do |t|
     t.integer  "item_id"
-    t.integer  "spec_id"
+    t.integer  "trait_id"
     t.integer  "version",                        :default => 1
     t.date     "eff_date"
     t.string   "tag"
@@ -115,13 +115,19 @@ ActiveRecord::Schema.define(:version => 20131103171920) do
     t.boolean  "viewable"
   end
 
-  create_table "specs", :force => true do |t|
+  create_table "tenants", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "traits", :force => true do |t|
     t.string   "code",          :limit => 64,                     :null => false
     t.string   "name",          :limit => 128
     t.integer  "usl"
     t.integer  "lsl"
     t.string   "label",         :limit => 64
-    t.integer  "display_order"
+    t.integer  "display_order",                :default => 0
     t.string   "created_by"
     t.string   "changed_by"
     t.datetime "created_at"
@@ -132,14 +138,8 @@ ActiveRecord::Schema.define(:version => 20131103171920) do
     t.integer  "tenant_id"
   end
 
-  add_index "specs", ["tenant_id", "code"], :name => "spec_by_code", :unique => true
-  add_index "specs", ["tenant_id"], :name => "index_specs_on_tenant_id"
-
-  create_table "tenants", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+  add_index "traits", ["tenant_id", "code"], :name => "spec_by_code", :unique => true
+  add_index "traits", ["tenant_id"], :name => "index_specs_on_tenant_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false

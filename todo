@@ -8,6 +8,8 @@ General:
  ✔ Change color of new record row in indexes @done (13-11-09 09:29)
  ☐ Add batch edit capability or copy record capability
 Cleanup:
- ☐ pages/enter.html.erb
+ ✔ pages/enter.html.erb @done (13-11-09 17:14)
  ☐ tenants/show.html.erb
  ☐ tenants/index.html.erb
+Database:
+  ☐ Set up defaults for roles display order

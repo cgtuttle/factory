@@ -138,8 +138,8 @@ ActiveRecord::Schema.define(:version => 20131110191006) do
     t.integer  "tenant_id"
   end
 
-  add_index "traits", ["tenant_id", "code"], :name => "spec_by_code", :unique => true
-  add_index "traits", ["tenant_id"], :name => "index_specs_on_tenant_id"
+  add_index "traits", ["tenant_id", "code"], :name => "trait_by_code", :unique => true
+  add_index "traits", ["tenant_id"], :name => "index_traits_on_tenant_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false

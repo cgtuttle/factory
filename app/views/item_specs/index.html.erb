@@ -38,6 +38,6 @@
 <% end %>
 		
 <% content_for :table do %>
-	<%= render 'new' %>
-	<%= render :partial => 'index', :collection => @item_specs, :as => :item_spec %>
+	<%= render 'item_specs/body/new' %>
+	<%= render :partial => 'item_specs/body/index', :collection => @item_specs, :as => :item_spec %>
 <% end %>

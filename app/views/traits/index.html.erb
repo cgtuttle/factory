@@ -24,7 +24,7 @@
 			<td><%= t.label %></td>
 			<td class="centered"><%= t.display_order %></td>
 			<td class="centered"><%= link_to "Edit", edit_trait_path(t) %>
-					<%= link_to "Delete", trait_path(t), :method => :delete, :confirm => "Are you sure?" %>
+					<%= link_to "Delete", trait_path(t), :method => :delete, :confirm => "Delete #{t.code}" %>
 			</td>
 		</tr>
 	<% end %>

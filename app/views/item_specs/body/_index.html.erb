@@ -1,0 +1,41 @@
+
+
+<% if ((item_spec.date_status == 'past' || 
+	item_spec.date_status == 'deleted' ||
+	item_spec.date_status == 'unused') && @show_history) || 
+	(item_spec.date_status == 'pending' && !@hide_pending) ||
+	(item_spec.date_status == 'canceled' && !@hide_pending) ||
+	item_spec.date_status == 'current' %>
+	
+	<tr class="<%= item_spec.date_status %>">
+		<% if item_spec.trait.category %>
+			<td><%= item_spec.trait.category.code %></td>
+		<% else %>
+			<td></td>
+		<% end %>
+		<td><%= item_spec.trait.code %></td>			
+		<td><%= item_spec.string_value %></td>
+		<td><%= item_spec.text_value %>
+		<td><%= item_spec.numeric_value %></td>
+		<td><%= item_spec.usl %></td>
+		<td><%= item_spec.lsl %></td>
+		<td><%= item_spec.unit_of_measure %></td>
+		
+		<td><%= item_spec.analysis.code if item_spec.analysis %></td>
+		<td><%= item_spec.eff_date %></td>
+		
+		<td><%= item_spec.date_status %></td>
+		<td><%= item_spec.changed_by %></td>
+		<td class="centered">
+			<% if item_spec.date_status == 'current' %>
+				<%= link_to "Edit", edit_item_spec_path(item_spec) %>
+				<%= link_to "Delete",  item_spec, :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}" %>
+				
+			<% elsif item_spec.date_status == 'pending' %>
+				<%= link_to "Delete", cancel_item_spec_path(item_spec), :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code} " %>				
+			<% end %>
+			
+			<%= link_to "Notes", notes_path(item_spec) %>
+		</td>
+	</tr>	
+<% end %>

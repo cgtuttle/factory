@@ -41,12 +41,25 @@ class ItemsController < ApplicationController
 		if @item.save
 			flash[:success] = "Item added"
 			cookies[:item_id] = @item.id
-			redirect_to items_path
+			if params[:include_specs]
+				@item.copy_item_specs(params[:copy_item_id])
+				redirect_to item_specs_path
+			else
+				redirect_to items_path
+			end
 		else
 			flash[:error] = "Item could not be added"
-#TODO Add more descriptive error messages
 			redirect_to items_path
 		end
+	end
+
+	def copy
+		@copy_item = Item.find(params[:id])
+		@new_item = Item.new()
+		@new_item.name = @copy_item.name
+		@new_item.code = @copy_item.code
+		@new_item.tenant_id = @copy_item.tenant_id
+		@is_edit_form = true
 	end
 
   def destroy

@@ -13,19 +13,17 @@
 	</div>
 	<div class="row-fluid">
 		<div class="span6 offset3">
-			<% if user_signed_in? %>				
-				<li class="text-center">
-					<%= link_to("Logout: #{current_user.email}", main_app.destroy_user_session_path, :method => :get) %>
-					<%= link_to('Edit Registration', main_app.edit_user_registration_path, :class => "nav") %>
-				</li>	  	     
+			<% if user_signed_in? %>								
+				<div class="span6"><%= link_to("Logout: #{current_user.email}", destroy_user_session_path, :method => :get) %></div>
+				<div class="span6"><%= link_to("Enter", tenants_path, :class => "pull-right") %></div>					  	     
 			<% else %>
-				<%= form_for("user", :url => main_app.user_session_path, :html => {:class => "form-inline"}) do |f| %>
+				<%= form_for("user", :url => user_session_path, :html => {:class => "form-inline"}) do |f| %>
 					
 					<div class="text-center">
 						<%= f.text_field :email, :placeholder => "email", :class => "input-small" %>
 					  <%= f.password_field :password, :placeholder => "password", :class => "input-small" %>
 					  <%= f.submit 'Sign in' %>
-					  <%= link_to('Register', main_app.new_user_registration_path, :class => "nav pull-right", :style => "padding-left:10px")  %>
+					  <%= link_to('Register', new_user_registration_path, :class => "nav pull-right", :style => "padding-left:10px")  %>
 					</div>
 
 				<% end %>

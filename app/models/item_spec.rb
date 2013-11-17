@@ -5,7 +5,9 @@ class ItemSpec < ActiveRecord::Base
 
 	validates :item_id, :trait_id, :presence => true
 	validate :valid_eff_date?
-	attr_accessible :trait_id, :string_value, :text_value, :numeric_value, :usl, :lsl, :unit_of_measure, :analysis_id, :eff_date, :item_id, :version
+	attr_accessible :trait_id, :string_value, :text_value, :numeric_value, :usl, \
+		:lsl, :unit_of_measure, :analysis_id, :eff_date, :item_id, :version, :tag, \
+		:document_title, :document_url, :document_version, :deleted, :canceled, :notes
 
 	before_save :default_values
 
@@ -71,8 +73,6 @@ class ItemSpec < ActiveRecord::Base
 	end
 
 	def valid_eff_date?
-		logger.debug "self.eff_date = #{self.eff_date}"
-		logger.debug "Time.now.to_date = #{Time.now.to_date}"
 		if self.eff_date < Time.now.to_date
 			errors.add(:eff_date, 'must be later than now')
 		end

@@ -47,8 +47,8 @@ td.display {
   background-color: darken($static-page-color, 3);
 }
 
-.page-heading {
-
+.bottom-space {
+  padding-bottom: 12px;
 }
 
 .logo-font {
@@ -83,7 +83,7 @@ td.display {
   border-bottom-color: $header-font-color;
 }
 
-.pending {color:blue;}
+.pending {color: lighten(blue, 30);}
 
 .deleted {
 	color:red;

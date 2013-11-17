@@ -66,7 +66,6 @@ class ItemSpecsController < ApplicationController
 		@span = 12
 		@display = true
 		@body_class = "display"	
-		@no_menus = true
 		if params.has_key?(:item)
 			@item = Item.find(params[:item][:id])
 		elsif params.has_key?(:item_id)
@@ -76,7 +75,7 @@ class ItemSpecsController < ApplicationController
 		end
 		if @item
 			cookies[:item_id] = @item.id
-			@item_specs = ItemSpec.joins(:trait => :category).where(:item_id => @item).order("categories.display_order")
+			@item_specs = ItemSpec.includes(:trait => :category).where(:item_id => @item).order("categories.display_order")
 			@categories = @item_specs.group_by{|is| is.trait.category}		
 		end
 	end	

@@ -1,6 +1,6 @@
 <% set_title "Import Data" %>
 
-<div class="form span12">
+<div class="form col-md-12">
   <h4 class="title"><%= @title %></h4> 
   <h5>Row count: <%=@row_count%></h5> 
      
@@ -8,7 +8,7 @@
 
     <table class="table" style="width:auto;">
       <tr>
-        <td colspan="12"><h4>Destination table: <%= @import.model %></h4></td>
+        <td colcol-md-="12"><h4>Destination table: <%= @import.model %></h4></td>
       </tr>
       
       <tr>
@@ -36,7 +36,7 @@
       </tr>
       
       <tr>
-        <td colspan="12"><h4>Source table</h4></td>
+        <td colcol-md-="12"><h4>Source table</h4></td>
       </tr>
 
       <tr>
@@ -63,7 +63,7 @@
 
         <% if @row_count > 3 %>
           <tr>
-            <td colspan="12"><%= @row_count - 3 %> more rows...</td>
+            <td colcol-md-="12"><%= @row_count - 3 %> more rows...</td>
           </tr>
         <% end %>
 

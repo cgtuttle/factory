@@ -16,18 +16,19 @@
     <div id="main" role="main">
       <% if !@fixed %>
       
-        <div class="container-fluid">          
-          <%= render 'layouts/body/header_layout_dropdown' %>          
-          <%= render 'layouts/body/flash_messages' %>                           
-          <%= render :partial => 'layouts/body/edit_layout' if @is_edit_form %>
-          <%= render :partial => 'layouts/body/index_layout', :object => @index, :as => :index if @is_index_table %> 
-          <%= render :partial => 'layouts/body/list_layout', :object => @list, :as => :list if @is_list_table %>  
-          <%= yield %>
+        <div class="container-liquid">
+          <div class="full-fluid">
+            <%= render 'layouts/body/header_layout_dropdown' %>          
+            <%= render 'layouts/body/flash_messages' %>                           
+            <%= render :partial => 'layouts/body/edit_layout' if @is_edit_form %>
+            <%= render :partial => 'layouts/body/index_layout', :object => @index, :as => :index if @is_index_table %> 
+            <%= render :partial => 'layouts/body/list_layout', :object => @list, :as => :list if @is_list_table %>  
+            <%= yield %>
 
-          <footer>
-            <%= yield(:footer) %>
-          </footer>  
-
+            <footer>
+              <%= yield(:footer) %>
+            </footer>  
+          </div>
         </div> <!--! end of .container --> 
       <% else %>
         <div class="fixed" %>

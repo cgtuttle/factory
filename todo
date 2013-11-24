@@ -12,7 +12,8 @@ General:
  ✔ Add batch edit capability or copy record capability @done (13-11-16 15:51)
  ☐ Add search to items/index
  ☐ Add list .pdf output to models
- ☐ Add category to views/item_specs/edit.html.erb
+ ☐ Set up for smaller media
+ ✔ Add category to views/item_specs/edit.html.erb @done (13-11-17 10:30)
  ✔ Correct category display for traits and item_specs @done (13-11-17 10:12)
 Cleanup:
  ✔ pages/enter.html.erb @done (13-11-09 17:14)

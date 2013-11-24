@@ -1,22 +1,24 @@
 <% set_title @item.code %>
 
 <% content_for :controls do %>	
-
+	
 		<%= form_tag('item_specs', :method => :get, :class => "form-inline") do %>
-			 
-			<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item_id}, {:onchange => "this.form.submit();" } %>
+			<div class="form-group"> 
+				<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item_id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
 
-			<%= label_tag 'hide_pending', :class => "checkbox" do %>
-				<%= check_box_tag "hide_pending", "hide_pending", @hide_pending, :type => "checkbox" %>
-				Hide future
-			<% end %>
+				<%= label_tag 'hide_pending', :class => "checkbox" do %>
+					<%= check_box_tag "hide_pending", "hide_pending", @hide_pending, :type => "checkbox" %>
+					Hide future
+				<% end %>
 
-			<%= label_tag 'show_history', :class => "checkbox" do %>				
-				<%= check_box_tag "show_history", "show_history", @show_history, :type => "checkbox" %>
-				Show history
-			<% end %>
+				<%= label_tag 'show_history', :class => "checkbox" do %>				
+					<%= check_box_tag "show_history", "show_history", @show_history, :type => "checkbox" %>
+					Show history
+				<% end %>
 				
-			<%= submit_tag "Apply" %>
+				<%= submit_tag "Apply" %>
+
+			</div>
 		<% end %>
 	
 <% end %>

@@ -1,5 +1,6 @@
-	<div class="row-fluid">
-		<div class="span<%= @span %>">	
+
+	<div class="row">
+		
 			<h4 class="title"><%= @title %></h4>
 			<div class="controls">
 				<%= yield :controls %>
@@ -25,7 +26,7 @@
 					<%= will_paginate index, :renderer => BootstrapPagination::Rails %>
 				<% end %>
 			</div>
-		</div>
+		
 
 	</div>
 

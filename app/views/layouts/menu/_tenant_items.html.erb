@@ -1,12 +1,9 @@
-<!--<ul class="nav">-->
-	<% if current_user && !@no_menus %>
-		<li>
-			<%= link_to "Companies", tenants_path %>
-		</li>
-	<% end %>
-	<% if tenant_set? && !@no_menus && current_user %>
-		<% if can? :manage, User %>
-			<li><%= link_to "Users", memberships_path %></li>
-		<% end %>	
+<% if current_user && !@no_menus %>
+	<li><%= link_to "Companies", tenants_path %></li>
+<% end %>
+<% if tenant_set? && !@no_menus && current_user %>
+	<% if can? :manage, User %>
+		<li><%= link_to "Users", memberships_path %></li>
 	<% end %>	
-<!-- </ul> -->
+<% end %>	
+

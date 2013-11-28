@@ -123,6 +123,14 @@ hr.multi-view {
   padding-top: 20px;
 }
 
+.row-multi-view {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-color: lighten($border-color, 60);
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
 table .align_center {
   text-align:center;
 }

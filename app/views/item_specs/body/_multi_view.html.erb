@@ -1,3 +1,5 @@
+<!-- loop implied by collection passed from index -->
+
 <% if ((item_spec.date_status == 'past' || 
 	item_spec.date_status == 'deleted' ||
 	item_spec.date_status == 'unused') && @show_history) || 
@@ -6,11 +8,25 @@
 	item_spec.date_status == 'current' %>
 	
 
-	<div class="<%= item_spec.date_status %>">
+	<div class="<%= item_spec.date_status %> row row-multi-view">
 
 		<div class="row">
 			
 			<p class="col-xs-4"><%= item_spec.trait.code %></p>
+
+			<div class="col-xs-8">
+				<% if item_spec.date_status == 'current' %>
+					<%= link_to "Edit", edit_item_spec_path(item_spec), :class => "col-xs-4" %>
+					<%= link_to "Delete",  item_spec, :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}", :class => "col-xs-4" %>
+					
+				<% elsif item_spec.date_status == 'pending' %>
+					<%= link_to "Delete", cancel_item_spec_path(item_spec), :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code}", :class => "col-xs-4 col-xs-offset-4" %>				
+				<% end %>
+				
+				<%= link_to "Notes", notes_path(item_spec), :class => "col-xs-4" %>
+			</div>
+		</div>
+		<div class="row">
 			
 			<% if item_spec.string_value != "" %>							
 				<strong class="col-xs-12"><%= item_spec.string_value %></strong>				
@@ -32,19 +48,8 @@
 					<p class="col-xs-2"><%= item_spec.unit_of_measure %></p>				
 			<% end %>
 		
-		</div>
+		</div>		
 		
-		<div class="col-12">
-			<% if item_spec.date_status == 'current' %>
-				<%= link_to "Edit", edit_item_spec_path(item_spec) %>
-				<%= link_to "Delete",  item_spec, :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}" %>
-				
-			<% elsif item_spec.date_status == 'pending' %>
-				<%= link_to "Delete", cancel_item_spec_path(item_spec), :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code} " %>				
-			<% end %>
-			
-			<%= link_to "Notes", notes_path(item_spec) %>
-		</div>
-	<hr />		
-	</div>	
+	</div>
+
 <% end %>

@@ -1,2 +1,0 @@
-﻿insert into roles (role_name, display_order, created_at, updated_at, viewable)
-values('root',0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,false);

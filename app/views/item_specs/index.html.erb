@@ -1,7 +1,7 @@
 <% set_title @item.code %>
 
 <% content_for :controls do %>	
-	
+	<div class="row bottom-space col-xs-12">
 		<%= form_tag('item_specs', :method => :get, :class => "form-inline") do %>
 			<div class="form-group"> 
 				<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item_id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
@@ -22,7 +22,7 @@
 
 			</div>
 		<% end %>
-	
+	</div>
 <% end %>
 
 <% content_for :thead do %>	

@@ -13,7 +13,7 @@
 			<p class="col-xs-4"><%= item_spec.trait.code %></p>
 			
 			<% if item_spec.string_value != "" %>							
-				<strong class="col-xs-7"><%= item_spec.string_value %></strong>				
+				<strong class="col-xs-12"><%= item_spec.string_value %></strong>				
 			<% end %>
 
 			<% if item_spec.lsl %>				
@@ -33,6 +33,18 @@
 			<% end %>
 		
 		</div>
+		
+		<div class="col-12">
+			<% if item_spec.date_status == 'current' %>
+				<%= link_to "Edit", edit_item_spec_path(item_spec) %>
+				<%= link_to "Delete",  item_spec, :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}" %>
+				
+			<% elsif item_spec.date_status == 'pending' %>
+				<%= link_to "Delete", cancel_item_spec_path(item_spec), :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code} " %>				
+			<% end %>
 			
+			<%= link_to "Notes", notes_path(item_spec) %>
+		</div>
+	<hr />		
 	</div>	
 <% end %>

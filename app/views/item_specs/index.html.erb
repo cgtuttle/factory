@@ -6,6 +6,7 @@
 			<div class="form-group"> 
 				<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item_id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
 
+				
 				<%= label_tag 'hide_pending', :class => "checkbox" do %>
 					<%= check_box_tag "hide_pending", "hide_pending", @hide_pending, :type => "checkbox" %>
 					Hide future
@@ -15,8 +16,9 @@
 					<%= check_box_tag "show_history", "show_history", @show_history, :type => "checkbox" %>
 					Show history
 				<% end %>
+			
 				
-				<%= submit_tag "Apply" %>
+				<%= submit_tag "Apply", :class => "btn btn-primary" %>
 
 			</div>
 		<% end %>
@@ -44,16 +46,14 @@
 	<th class="col-xs-1">Edited By</th>
 	<th class="col-xs-1"></th>
 <% end %>
-		
+
+<!-- pass index the collection for the loop -->		
 <% content_for :table do %>
 	<%= render "item_specs/body/new" %>
-	<!-- pass index the collection for the loop -->
 	<%= render :partial => "item_specs/body/index", :collection => @item_specs, :as => :item_spec %>
 <% end %>
 
-<% content_for :multi_view do %>
-	<!-- pass multi_view the collection for the loop -->
-	
-	<%= render :partial => "item_specs/body/multi_view", :collection => @item_specs, :as => :item_spec %>
-	
+<!-- pass multi_view the collection for the loop -->
+<% content_for :multi_view do %>	
+	<%= render :partial => "item_specs/body/multi_view", :collection => @item_specs, :as => :item_spec %>	
 <% end %>

@@ -1,15 +1,15 @@
 <% if tenant_set? && !@no_menus && current_user %>
 	<% if can? :view, :all %>
-		<li><%= link_to "Floor Display", display_item_specs_path %></li>
-		<li><%= link_to "Specifications", main_app.item_specs_path %></li>
+		<li><%= link_to_unless_current( "Floor Display", { controller: "/item_specs", action: "display" }) { } %></li>
+		<li><%= link_to_unless_current( "Specifications", { controller: "/item_specs"}) { } %></li>
 		<li>
 			<%= link_to 'Setup <b class="caret caret-header"></b>'.html_safe, root_path, :id => 'dLeftLabel', :'data-toggle' => 'dropdown', :class => 'dropdown-toggle' %> 
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dleftLabel"> 
-				<li><%= link_to "Traits", main_app.traits_path %></li>
-				<li><%= link_to "Items", main_app.items_path %></li>
-				<li><%= link_to "Categories", main_app.categories_path %></li>
-				<li><%= link_to "Analyses", main_app.analyses_path %></li>
-				<li><%= link_to "Import Data", main_app.new_import_path %></li>
+				<li><%= link_to_unless_current( "Traits", { controller: "/traits"}) { } %></li>
+				<li><%= link_to_unless_current( "Items", {controller: "/items"}) { } %></li>
+				<li><%= link_to_unless_current( "Categories", { controller: "/categories"}) { } %></li>
+				<li><%= link_to_unless_current( "Analysis", { controller: "/analyses"}) { } %></li>
+				<li><%= link_to_unless_current( "Import Data", { controller: "/imports", action: "new"}) { } %></li>
 			</ul>
 		</li>				
 	<% end %>

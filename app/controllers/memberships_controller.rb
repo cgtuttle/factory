@@ -15,7 +15,7 @@ class MembershipsController < ApplicationController
 	end
 
 	def index
-		@is_index_table = true
+		@is_table = true
 		@membership = Membership.where("user_id = ? AND tenant_id = ?", @current_user.id, @current_tenant.id).first
 		@role = @membership.role
 		@tenants = Tenant.where("membership.role_name = ?", "owner")

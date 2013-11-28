@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
 		@index = @categories
 		@category = Category.new
 		@span = 6
-		@is_index_table = true
+		@is_table = true
 	end
 	
 	def create

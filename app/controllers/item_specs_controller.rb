@@ -17,7 +17,7 @@ class ItemSpecsController < ApplicationController
 			@items = Item.order(:code)
 			@available_traits = Trait.all
 			@span = 12
-			@is_index_table = true
+			@is_table = true
 		else
 			flash[:alert] = "There are no items yet - please add at least one"
 			redirect_to items_path

@@ -14,4 +14,8 @@
 
 	Role.create(role_name: 'root', display_order: '0', viewable: false)
 	Role.create(role_name: 'owner', display_order: '1', viewable: true)
+	Role.create(role_name: 'admin', display_order: '2', viewable: true)	
+	Role.create(role_name: 'manager', display_order: '3', viewable: true)
+	Role.create(role_name: 'user', display_order: '4', viewable: true)
+	Role.create(role_name: 'guest', display_order: '5', viewable: true)
 	Tenant.create(name: 'Root')

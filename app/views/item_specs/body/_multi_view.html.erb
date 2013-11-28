@@ -1,0 +1,38 @@
+<% if ((item_spec.date_status == 'past' || 
+	item_spec.date_status == 'deleted' ||
+	item_spec.date_status == 'unused') && @show_history) || 
+	(item_spec.date_status == 'pending' && !@hide_pending) ||
+	(item_spec.date_status == 'canceled' && !@hide_pending) ||
+	item_spec.date_status == 'current' %>
+	
+
+	<div class="<%= item_spec.date_status %>">
+
+		<div class="row">
+			
+			<p class="col-xs-5"><%= item_spec.trait.code %></p>
+			
+			<% if item_spec.string_value != "" %>							
+				<strong class="col-xs-7"><%= item_spec.string_value %></strong>				
+			<% end %>
+
+			<% if item_spec.lsl %>				
+					<p class="col-xs-2 text-left"><%= item_spec.lsl %> --- </p>				
+			<% end %>	
+	
+			<% if item_spec.numeric_value %>				
+				<strong class="col-xs-2 text-center"><%= item_spec.numeric_value %></strong>				
+			<% end %>
+
+			<% if item_spec.usl %>				
+				<p class="col-xs-2 text-right"> --- <%= item_spec.usl %></p>				
+			<% end %>
+
+			<% if item_spec.unit_of_measure != "" %>				
+					<p class="col-xs-1"><%= item_spec.unit_of_measure %></p>				
+			<% end %>
+		
+		</div>
+			
+	</div>	
+<% end %>

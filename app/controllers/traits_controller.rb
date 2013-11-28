@@ -6,7 +6,7 @@ class TraitsController < ApplicationController
   def index
   	@layout_type = "fluid"
 		@trait = Trait.new()
-		@is_index_table = true
+		@is_table = true
 		@span = 8
 	end
 	

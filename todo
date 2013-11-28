@@ -1,5 +1,5 @@
 General:
- ☐ Upgrade Bootstrap to 3.0
+ ✔ Upgrade Bootstrap to 3.0 @done (13-11-24 17:08)
  ☐ Add application admin user view
  ✔ Sort users by role, starting with owner *** @done (13-11-09 08:35)
  ✔ Change color of blue arrow on Admin dropdown @done (13-11-09 09:14)
@@ -8,6 +8,9 @@ General:
  ✔ Add nav items to display @done (13-11-16 10:07)
  ✔ Set imports to not display tenant as field choice @done (13-11-16 16:16)
  ☐ Add titles to all pages
+ ☐ Add role administration
+ ☐ Set user role as one of defaults
+ ☐ Set up breakpoints for fields shown at different screen sizes
  Usability:
  ✔ Add batch edit capability or copy record capability @done (13-11-16 15:51)
  ☐ Add search to items/index

@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   	logger.debug "running items.index: @current_tenant = #{@current_tenant.inspect}"
 		@new_item = Item.new	
 		@traits = Trait.all
-		@is_index_table = true
+		@is_table = true
 		@span = 5
   end
 

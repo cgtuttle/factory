@@ -6,7 +6,7 @@ load_and_authorize_resource
 		@index = @analyses
 		@analysis = Analysis.new
 		@span = 5
-		@is_index_table = true
+		@is_table = true
 	end
 	
 	def create

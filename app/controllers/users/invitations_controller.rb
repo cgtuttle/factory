@@ -42,7 +42,7 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def add_membership
-  	Membership.create(:tenant_id => current_tenant.id, :user_id => @user.id, :role => "user")
+  	Membership.create(:tenant_id => current_tenant.id, :user_id => @user.id, :role_id => Role.find_by_role_name("user"))
   end
 
   def current_inviter

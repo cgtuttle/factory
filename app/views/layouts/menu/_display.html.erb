@@ -1,10 +1,7 @@
 <% if @display %>
-	<li>
-		<ul class="nav">
-			<li><%= link_to "Home", tenants_path %></li>
-			<li><%= form_tag(display_item_specs_path, :method => 'get', :class => "navbar-form", :style => "margin:0;padding:5") do %>
-				<%= collection_select :item, :id, @items, :id, :code, {:selected => @item.id}, {:onchange => "this.form.submit();", :class => 'display dropdown'} %>
-			<% end %></li>
-		</ul>
-	</li>
+		
+	<li><%= form_tag(display_item_specs_path, :method => 'get', :class => "navbar-form navbar-left") do %>		
+		<%= collection_select :item, :id, @items, :id, :code, {:selected => @item.id}, {:onchange => "this.form.submit();", :class => "form-control display dropdown"} %>		
+	<% end %></li>
+			
 <% end %>

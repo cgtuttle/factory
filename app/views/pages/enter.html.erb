@@ -18,7 +18,7 @@
 		<% else %>
 			<%= form_for("user", :url => user_session_path, :html => {:class => "form-inline"}) do |f| %>					
 				<div class="text-center">
-					<%= f.text_field :email, :placeholder => "email", :class => "input-small" %>
+					<%= f.text_field :email, :placeholder => "email", :class => "input-small", :type => "Email" %>
 				  <%= f.password_field :password, :placeholder => "password", :class => "input-small" %>
 				  <%= f.submit 'Sign in' %>
 				  <%= link_to('Register', new_user_registration_path, :class => "navbar-link pull-right", :style => "padding-left:10px")  %>

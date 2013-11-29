@@ -4,6 +4,13 @@ class ItemSpecsController < ApplicationController
 	before_filter :find_items
 	load_and_authorize_resource 
 	
+  def new
+  	set_scope
+  	@current_traits = ItemSpec.where(:item_id => @item.id).pluck(:trait_id)
+  	@available_traits = Trait.where('id not in (?)', @current_traits )
+  	@new_item_spec = ItemSpec.new
+  end
+
   def index
   	@span = 12
 		@show_history = params[:show_history] == "show_history"

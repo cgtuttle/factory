@@ -54,6 +54,9 @@
 <% end %>
 
 <!-- pass multi_view the collection for the loop -->
-<% content_for :multi_view do %>	
+<% content_for :multi_view do %>
+	<div class="row">
+		<%= link_to "Add New Specification", new_item_spec_path, :class => "row col-xs-12" %>	
+	</div>
 	<%= render :partial => "item_specs/body/multi_view", :collection => @item_specs, :as => :item_spec %>	
 <% end %>

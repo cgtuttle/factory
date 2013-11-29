@@ -8,48 +8,54 @@
 	item_spec.date_status == 'current' %>
 	
 
-	<div class="<%= item_spec.date_status %> row row-multi-view">
-
-		<div class="row">
-			
-			<p class="col-xs-4"><%= item_spec.trait.code %></p>
-
-			<div class="col-xs-8">
-				<% if item_spec.date_status == 'current' %>
-					<%= link_to "Edit", edit_item_spec_path(item_spec), :class => "col-xs-4" %>
-					<%= link_to "Delete",  item_spec, :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}", :class => "col-xs-4" %>
-					
-				<% elsif item_spec.date_status == 'pending' %>
-					<%= link_to "Delete", cancel_item_spec_path(item_spec), :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code}", :class => "col-xs-4 col-xs-offset-4" %>				
-				<% end %>
-				
-				<%= link_to "Notes", notes_path(item_spec), :class => "col-xs-4" %>
+	<div class="<%= item_spec.date_status %> row">
+		<div class="panel panel-default">
+			<div class="panel-heading">				
+				<strong class="panel-title text-muted"><%= item_spec.trait.code %></strong>
 			</div>
-		</div>
-		<div class="row">
+
+			<div class="panel-body">
+						
+				<div>	
+					<% if item_spec.string_value != "" %>							
+						<h4 class="col-xs-12 col-sm-4"><%= item_spec.string_value %></h4>				
+					<% end %>
+
+					<% if item_spec.lsl %>				
+							<p class="col-xs-2 text-left"><%= item_spec.lsl %></p>				
+					<% end %>	
 			
-			<% if item_spec.string_value != "" %>							
-				<strong class="col-xs-12 col-sm-4"><%= item_spec.string_value %></strong>				
-			<% end %>
+					<% if item_spec.numeric_value %>				
+						<h4 class="col-xs-6 text-center"><%= item_spec.numeric_value %></h4>				
+					<% end %>
 
-			<% if item_spec.lsl %>				
-					<p class="col-xs-2 text-left"><%= item_spec.lsl %></p>				
-			<% end %>	
-	
-			<% if item_spec.numeric_value %>				
-				<strong class="col-xs-2 text-center"><%= item_spec.numeric_value %></strong>				
-			<% end %>
+					<% if item_spec.usl %>				
+						<p class="col-xs-2 text-right"><%= item_spec.usl %></p>				
+					<% end %>
 
-			<% if item_spec.usl %>				
-				<p class="col-xs-2 text-right"><%= item_spec.usl %></p>				
-			<% end %>
+					<% if item_spec.unit_of_measure != "" %>				
+							<p class="col-xs-2"><%= item_spec.unit_of_measure %></p>				
+					<% end %>
+				</div>
+			</div>
 
-			<% if item_spec.unit_of_measure != "" %>				
-					<p class="col-xs-2"><%= item_spec.unit_of_measure %></p>				
-			<% end %>
-		
-		</div>		
-		
+				<div class="panel-footer">
+					<div class="btn-group">
+					
+						<% if item_spec.date_status == 'current' %>
+							<%= link_to "Edit", edit_item_spec_path(item_spec), :class=>"btn btn-default" %>
+							<%= link_to "Delete",  item_spec, :class=>"btn btn-default", :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}" %>
+							
+						<% elsif item_spec.date_status == 'pending' %>
+							<%= link_to "Delete", cancel_item_spec_path(item_spec), :class=>"btn btn-default", :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code}" %>				
+						<% end %>
+						
+						<%= link_to "Notes", notes_path(item_spec), :class=>"btn btn-default" %>
+					</div>
+				</div>
+			
+					
+		</div>
 	</div>
 
 <% end %>

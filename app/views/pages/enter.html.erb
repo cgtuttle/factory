@@ -1,20 +1,10 @@
 <% set_title "Welcome!" %>
 
 <div class="container">
-	<div class="row">				
-		<div class="jumbotron hero-block">
-			<div class="text-center"><%= image_tag("icons/factory_white.svg", :alt=>"Factory", :size=>"66x60", :alt => "Main", :id => "factory") %></div>
-			<div class="text-center"><h1>Welcome to <span class="logo-font">FactorySync</span></h1></div>
-			<p class="lead text-center"><strong>A single source for your factory data...</strong></p>
-			<p class="lead small">Store all of the information needed by the people on the factory floor to do their jobs in a single, well organized location.
-				Enable anyone you want to edit and add to the information from any computer with web access, and display it in real time on the factory floor.</p>
-		</div>		
-	</div>
-
-	<div class="row">		
+	<div class="row bottom-space">		
 		<% if user_signed_in? %>							
-			<div class="col-xs-6 navbar-left navbar-text"><%= link_to("Logout: #{current_user.email}", destroy_user_session_path, :method => :get) %></div>
-			<div class="col-xs-6 navbar-right navbar-text"><%= link_to("Enter", tenants_path) %></div>					  	     
+			<div class="col-xs-6"><%= link_to("Logout: #{current_user.email}", destroy_user_session_path, :method => :get) %></div>
+			<div class="col-xs-6 text-right"><%= link_to("Enter", tenants_path) %></div>					  	     
 		<% else %>
 			<%= form_for("user", :url => user_session_path, :html => {:class => "form-inline"}) do |f| %>					
 				<div class="text-center">
@@ -26,4 +16,15 @@
 			<% end %>
 		<% end %>		
 	</div>
+
+	<div class="row">				
+		<div class="jumbotron hero-block">
+			<div class="text-center"><%= image_tag("icons/factory_white.svg", :alt=>"Factory", :size=>"66x60", :alt => "Main", :id => "jtron-factory") %></div>
+			<div class="text-center"><h1>Welcome to <span class="logo-font">FactorySync</span></h1></div>
+			<p class="lead text-center"><strong>A single source for your factory data...</strong></p>
+			<p class="lead small">Store all of the information needed by the people on the factory floor to do their jobs in a single, well organized location.
+				Enable anyone you want to edit and add to the information from any computer with web access, and display it in real time on the factory floor.</p>
+		</div>		
+	</div>
+
 </div>

@@ -11,6 +11,7 @@ General:
  ☐ Add role administration
  ☐ Set user role as one of defaults
  ☐ Set up breakpoints for fields shown at different screen sizes
+ ☐ Change classof apply button in item_specs/index from btn_primary to btn_normal
  Usability:
  ✔ Add batch edit capability or copy record capability @done (13-11-16 15:51)
  ☐ Add search to items/index

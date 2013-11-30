@@ -55,7 +55,7 @@ module Factory
 
     # Enable the asset pipeline
     config.assets.enabled = true
-    config.assets.precompile += ['admin_data.css', 'admin_data.js', 'display.css', 'factory_blue.svg']
+    config.assets.precompile += ['admin_data.css', 'admin_data.js', 'display.css']
     config.assets.initialize_on_precompile = false
 
 

@@ -10,11 +10,16 @@ $header-font-color: lighten($complimentary-color,30);
 $static-page-color: #D9E8E5;
 $static-page-text-color: #13038D;
 
+body {
+  padding-top: 50px;
+}
+
 body.static-page {
   background-color: $static-page-color;
   color: $static-page-text-color;
   background-image: url('normal.png');
   background-size: 525px 395px;
+  padding-top: 0px;
 }
 
 body.display {

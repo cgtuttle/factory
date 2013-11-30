@@ -14,8 +14,9 @@
   <body class="<%= @body_class || "normal" %>">
     
     <div id="main" role="main">
+
       <% if !@fixed %>
-      
+
         <div class="container-liquid">
           <div class="full-fluid">
             
@@ -30,16 +31,14 @@
               <%= yield(:footer) %>
             </footer>  
           </div>
-        </div> <!--! end of .container --> 
+        </div> <!--! end of .container -->
+        
       <% else %>
         <div class="fixed" %>
           <%= yield %>
         </div>
       <% end %>
 
-      
-
     </div> <!--! end of #main -->
-
   </body>
 </html>

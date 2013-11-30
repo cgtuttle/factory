@@ -1,28 +1,34 @@
 <% set_title "Welcome!" %>
 
 <div class="container">
-	<div class="row bottom-space">		
-		<% if user_signed_in? %>							
-			<div class="col-xs-6"><%= link_to("Logout: #{current_user.email}", destroy_user_session_path, :method => :get) %></div>
-			<div class="col-xs-6 text-right"><%= link_to("Enter", tenants_path) %></div>					  	     
-		<% else %>
-			<%= form_for("user", :url => user_session_path, :html => {:class => "form-inline"}) do |f| %>					
-				<div class="text-center">
-					<%= f.text_field :email, :placeholder => "email", :class => "input-small", :type => "Email", :class => "col-xs-4" %>
-				  <%= f.password_field :password, :placeholder => "password", :class => "input-small", :class => "col-xs-4" %>
-				  <%= f.submit 'Sign in', :class => "col-xs-4" %>
-				  <%= link_to('Register', new_user_registration_path, :class => "navbar-link pull-right", :style => "padding-left:10px")  %>
-				</div>
-			<% end %>
-		<% end %>		
+	<div class="row bottom-space top-space">
+		<div class="visible-md visible-lg">	
+			<% if user_signed_in? %>							
+				<div class="col-xs-6"><%= link_to("Logout: #{current_user.email}", destroy_user_session_path, :method => :get) %></div>
+				<div class="col-xs-6 text-right"><%= link_to("Enter", tenants_path) %></div>					  	     
+			<% else %>
+				<%= form_for("user", :url => user_session_path, :html => {:class => "form-inline pull-right"}) do |f| %>					
+					<div class="text-center">
+						<%= f.text_field :email, :placeholder => "email", :class => "input-small", :type => "Email" %>
+					  <%= f.password_field :password, :placeholder => "password", :class => "input-small" %>
+					  <%= f.submit 'Sign in' %>
+					  <%= link_to('Register', new_user_registration_path)  %>
+					</div>
+				<% end %>
+			<% end %>	
+		</div>
+		<div class="visible-xs visible-sm">
+			<%= link_to( "Sign in", new_user_session_path) %>
+			<%= link_to('Register', new_user_registration_path, :class => "pull-right")  %>
+		</div>
 	</div>
 
 	<div class="row">				
 		<div class="jumbotron hero-block">
-			<div class="text-center"><%= image_tag("icons/factory_white.svg", :alt=>"Factory", :size=>"66x60", :alt => "Main", :id => "jtron-factory") %></div>
+			<div class="text-center"><%= image_tag("icons/factory_blue.svg", :alt=>"Factory", :size=>"66x60", :alt => "Main", :id => "jtron-factory") %></div>
 			<div class="text-center"><h1>Welcome to <span class="logo-font">FactorySync</span></h1></div>
 			<p class="lead text-center"><strong>A single source for your factory data...</strong></p>
-			<p class="lead small">Store all of the information needed by the people on the factory floor to do their jobs in a single, well organized location.
+			<p class="lead small visible-md visible-lg">Store all of the information needed by the people on the factory floor to do their jobs in a single, well organized location.
 				Enable anyone you want to edit and add to the information from any computer with web access, and display it in real time on the factory floor.</p>
 		</div>		
 	</div>

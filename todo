@@ -25,3 +25,4 @@ Cleanup:
  ☐ tenants/index.html.erb
  ☐ imports/new.html.erb
 Database:
+ ☐ Remove multi-line text from ItemSpecs

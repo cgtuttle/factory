@@ -1,5 +1,6 @@
 
 <%= form_for @category do |f| %>
+	<%= render 'layouts/body/errors', :index => @category %>
 	<div>
 		<div>
 			<td><%= f.text_field :code %></td>

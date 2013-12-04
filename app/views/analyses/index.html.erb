@@ -22,3 +22,27 @@
 		</tr>
 	<% end %>
 <% end %>
+
+<% content_for :multi_view do %>
+	<% @analyses.each do |a| %>
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">				
+					<strong class="panel-title text-muted"><%= a.code %></strong>
+				</div>
+
+				<div class="panel-body">						
+					<div>
+						<p class="text-muted">Name</p>
+						<h4><%= a.name %></h4>
+					</div>
+					<div class="panel-footer">
+						<div class="btn-group">
+							<%= link_to "Instructions", :action => 'instructions', :id => a.id %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>

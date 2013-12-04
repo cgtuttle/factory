@@ -3,6 +3,7 @@ load_and_authorize_resource
 	
   def index
 		@analyses = Analysis.find(:all).paginate(:page => params[:page], :per_page => 30)
+		@columns = ["code", "name"]
 		@index = @analyses
 		@analysis = Analysis.new
 		@span = 5
@@ -27,12 +28,17 @@ load_and_authorize_resource
 	end
 	
 	def update
+		@is_edit_form = true
 		if params[:commit] != 'Cancel'
 			if @analysis.update_attributes(params[:analysis])
 				flash[:success] = 'analysis updated'
+				redirect_to analyses_path
+			else
+				render :action => :edit
 			end
+		else
+			redirect_to analyses_path
 		end
-		redirect_to analyses_path
 	end
 	
 	def instructions

@@ -114,11 +114,13 @@ class ItemSpecsController < ApplicationController
 		if params[:commit] != 'Cancel'			
 			if @item_spec.update_attributes(params[:item_spec])
 				flash[:success] = "Notes updated"
+				redirect_to item_specs_path :item_id => @item_spec.item_id
 			else
-				flash[:error] = "Unable to update notes"
+				render :action => :edit
 			end
+		else
+			redirect_to item_specs_path :item_id => @item_spec.item_id
 		end
-		redirect_to item_specs_path :item_id => @item_spec.item_id
   end
 
 	def set_scope

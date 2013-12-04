@@ -91,10 +91,36 @@ hr.multi-view {
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
-.error_box {
-  border-color: #FF0000;
-  border-width: 3px;
-  border-style: solid;
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h4 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation ul li {
+  list-style: square;
+  margin-top: 12px;
+  margin-left: 12px;
 }
 
 .navbar .nav .dropdown-toggle .caret.caret-header {
@@ -138,6 +164,12 @@ hr.multi-view {
   border-color: lighten($border-color, 60);
   padding-top: 5px;
   padding-bottom: 10px;
+}
+
+.flash {
+  margin-top: 12px;
+  margin-bottom: 6px;
+  padding: 6px 15px;
 }
 
 table .align_center {

@@ -28,12 +28,16 @@ class MembershipsController < ApplicationController
 
 	def update
 		if params[:commit] != 'Cancel'
-			@membership.update_attributes(params[:membership])
-			flash[:success] = "#{@membership.user.email} role changed to #{params[:membership][:role]}"
+			@membership = Membership.find(params[:id])
+			if @membership.update_attributes(params[:membership])
+				flash[:success] = "#{@membership.user.email} role changed to #{params[:membership][:role]}"
+			else
+				render :action => :edit
+			end
 		else
 			flash[:notice] = "Role edit canceled"
+			redirect_to memberships_path
 		end
-		redirect_to memberships_path
 	end
 
 	def destroy

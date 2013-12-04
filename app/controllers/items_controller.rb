@@ -69,7 +69,6 @@ class ItemsController < ApplicationController
   end
 	
 	def find_items
-		logger.debug 'running find_items'
 		@items = Item.where(:deleted => false).order('code').paginate(:page => params[:page], :per_page => 20)
 		@index = @items
 	end

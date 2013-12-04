@@ -47,7 +47,7 @@ class TraitsController < ApplicationController
 				flash[:success] = "Trait updated"
 				redirect_to traits_path
 			else
-				redirect_to traits_path
+				render :action => :edit
 			end
 		else
 			redirect_to traits_path

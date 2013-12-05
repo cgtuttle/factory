@@ -33,13 +33,13 @@
 
 				<div class="panel-body">						
 					<div>
-						<p class="text-muted">Name</p>
-						<h4><%= a.name %></h4>
+						<p class="text-muted col-xs-5">Name</p>
+						<h4 class="col-xs-7"><%= a.name %></h4>
 					</div>
-					<div class="panel-footer">
-						<div class="btn-group">
-							<%= link_to "Instructions", :action => 'instructions', :id => a.id %>
-						</div>
+				</div>
+				<div class="panel-footer">
+					<div class="btn-group">
+						<%= link_to "Instructions", :action => 'instructions', :id => a.id %>
 					</div>
 				</div>
 			</div>

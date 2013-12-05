@@ -31,4 +31,30 @@
 		</tr>
 	<% end %>	
 		
-<% end %>					
+<% end %>	
+
+<% content_for :multi_view do %>
+	<% @categories.each do |c| %>
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">				
+					<strong class="panel-title text-muted"><%= c.code %></strong>
+				</div>
+
+				<div class="panel-body">						
+					<div>
+						<p class="text-muted col-xs-5">Name</p>
+						<h4 class="col-xs-7"><%= c.name %></h4>
+					</div>
+				</div>
+				<div class="panel-footer">
+					
+						<%= link_to "Edit", edit_category_path(c), :class => "btn btn-primary" %>
+					
+				</div>
+				
+			</div>
+		</div>
+	<% end %>
+<% end %>
+

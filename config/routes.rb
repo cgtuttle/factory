@@ -20,11 +20,14 @@ Factory::Application.routes.draw do
 	
 	resources :users
   resources :imports
-  resources :items
   resources :traits
   resources :categories
   resources :analyses
   resources :memberships
+
+  resources :items do
+    resources :item_specs
+  end
 
   resources :item_specs do
     get 'display', :on => :collection

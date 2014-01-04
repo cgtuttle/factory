@@ -4,6 +4,8 @@ ruby '2.0.0'
 
 gem 'rails', '3.2.13'
 gem 'rake', '10.1.0'
+gem 'ffi', '1.9.3'
+gem 'therubyracer'
 
 gem 'pg'
 gem 'figaro'
@@ -15,9 +17,9 @@ gem 'devise_invitable', '~> 1.2.1'
 gem 'cancan'
 
 gem 'jquery-rails'
+gem "jquery-ui-rails", "~> 4.1.1"
 gem 'will_paginate-bootstrap'
 gem 'bootstrap-datepicker-rails'
-gem 'dynamic_form'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

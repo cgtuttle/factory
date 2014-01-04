@@ -1,13 +1,15 @@
-<% set_title "Edit #{@tenant.name}"%>
+<% set_title "#{@tenant.name}", prefix: "Edit ", suffix: " Company"%>
 
-<h2>Edit Company</h2>
+<% set_width(6, 10) %>
+
+<%= form_for @tenant do |f| %>
+
+	<div class="form-group">
+		<%= f.label :name %>
+		<%= f.text_field :name, :class => "form-control" %>
+	</div>
 	
-	<%= form_for @tenant do |f| %>
+	<%= f.submit :class => "btn btn-primary" %>
+	<%= link_to 'Cancel', tenants_path, :class => "btn btn-default" %>
 
-		<p><%= f.label :name %></p>
-		<p><%= f.text_field :name %></p>
-
-		<%= f.submit 'Update', :class => 'btn btn-primary' %>
-		<%= link_to 'Cancel', tenant_path(@tenant.id), :class => "btn" %>
-	
-	<% end %>
+<% end %>

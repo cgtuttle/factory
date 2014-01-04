@@ -7,22 +7,84 @@ General:
  ✔ Change color of new record row in indexes @done (13-11-09 09:29)
  ✔ Add nav items to display @done (13-11-16 10:07)
  ✔ Set imports to not display tenant as field choice @done (13-11-16 16:16)
- ☐ Add titles to all pages
+ ✔ Add titles to all pages @done (13-12-28 17:27)
  ☐ Add role administration
  ☐ Set user role as one of defaults
  ☐ Set up breakpoints for fields shown at different screen sizes
- ☐ Change classof apply button in item_specs/index from btn_primary to btn_normal
+ ✘ Change class of apply button in item_specs/index from btn_primary to btn_normal @cancelled (13-12-29 09:02)
+ ✔ Add fade-out to flash messages @done (13-12-28 15:09)
+ ✔ Center all forms < 100% of page width @done (14-01-01 10:28)
+ ✔ Add emphasis to title's subjects @done (14-01-03 20:46)
+ ✔ Remove row class from edit forms @done (14-01-03 20:46)
+ ☐ Change _new partials to form-control class
+ ✔ Limit lists to height of screen @done (14-01-04 15:38)
  Usability:
  ✔ Add batch edit capability or copy record capability @done (13-11-16 15:51)
  ☐ Add search to items/index
  ☐ Add list .pdf output to models
- ☐ Set up for smaller media
+ ✔ Set up for smaller media @done (13-12-28 14:09)
  ✔ Add category to views/item_specs/edit.html.erb @done (13-11-17 10:30)
  ✔ Correct category display for traits and item_specs @done (13-11-17 10:12)
+ ✔ Set focus on first field in new form of indexes (sp. category) @done (13-12-29 09:12)
+ ✔ Move category order from edit view to index view @done (13-12-28 14:09)
+ ✔ Fix imports view - columns to rows @done (13-12-28 09:29)
+ ✔ Add delete to analyses/index @done (13-12-29 09:20)
+ ✔ Fix import/new Cancel button @done (13-12-29 10:05)
+ ☐ Add remember me to sign-in
+ ✔ Add edit for tenants @done (13-12-29 15:16)
+ ✔ Change item_specs/index controls checkboxes to update on change @done (13-12-28 19:59)
+ ☐ Add forgot password to home
+ ☐ Change look of sort functionality
+ ☐ Change all "Cancel" submits to link_to's
+ ✔ Change all @width's to set_width @done (14-01-03 20:47)
+ ☐ Remove _list_layout from system
 Cleanup:
  ✔ pages/enter.html.erb @done (13-11-09 17:14)
- ☐ tenants/show.html.erb
- ☐ tenants/index.html.erb
- ☐ imports/new.html.erb
+ ✔ Move flash next to title so page doesn't move up on fade @done (13-12-29 15:30)
+ ✔ All buttons on edit pages to bootstrap @done (13-12-29 17:29)
+ ✘ tenants/show.html.erb @cancelled (13-12-29 18:02)
+ ✔ tenants/index.html.erb @done (13-12-29 18:02)
+ ✔ imports/new.html.erb @done (13-12-29 18:03)
+ ✔ item_specs/i/notes @done (13-12-29 18:13)
+ ✔ item_specs/i/edit (title) @done (13-12-29 18:22)
+ ☐ items/i/copy
+ ✔ analyses/i/edit (title) @done (13-12-29 18:23)
+ ✔ tenants (narrow) @done (13-12-29 17:30)
+ ✔ memberships (narrow) @done (13-12-29 17:33)
+ ✔ header in pages - re-flow sign-in form @done (13-12-29 17:57)
+ ✔ sessions/new @done (13-12-31 09:18)
+ ✔ tenants/new @done (13-12-31 09:35)
+ ✔ tenants/i/edit @done (13-12-31 09:35)
+   
+   users/invitation/new
+   ✔ Add cancel button @done (13-12-29 18:39)
+   ✔ Change Send button to bootstrap @done (13-12-29 18:39)
+   ✔ Re-flow @done (13-12-29 18:39)
+
+   users/password/new
+   ✔ Reflow @done (13-12-29 18:49)
+   ✔ Remove redundant title @done (13-12-29 18:49)
+   ✔ Change buttons to bootstrap @done (13-12-29 18:49)
+
+   edit-registration
+   ✔ Remove redundant title @done (13-12-31 08:59)
+   ✔ Change buttons to bootstrap @done (13-12-31 08:59)
+   ✔ Re-flow Update button @done (13-12-31 09:00)
+
+   signup
+   ✔ Reflow @done (13-12-31 09:02)
+   ✔ Remove redundant title @done (13-12-31 09:02)
+   ✔ Change buttons to bootstrap @done (13-12-31 09:02)
+
+   traits/i/edit
+   ✔ Remove display_order @done (13-12-31 09:05)
+   ✔ Change title of Definition Name @done (13-12-31 09:05)
+   ✔ Change title to 'Edit <%= code %> Trait' @done (13-12-31 09:05)
+
+   categories/i/edit
+   ✔ Change title to 'Edit <%= code %> Category' @done (13-12-31 09:05)
+   ✔ Remove display order @done (13-12-31 09:07)
+
 Database:
  ☐ Remove multi-line text from ItemSpecs
+ ☐ Remove label from traits, etc.

@@ -3,9 +3,8 @@
 	<%= render 'layouts/body/errors', :index => @category %>
 	<div>
 		<div>
-			<td><%= f.text_field :code %></td>
+			<td><%= f.text_field :code, :autofocus => true %></td>
 			<td><%= f.text_field :name %></td>
-			<td class="centered"><%= f.number_field :display_order %></td>
 			<td class="centered"><%= f.submit "Add Category" %></td>
 		</div>
 	</div>

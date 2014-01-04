@@ -1,31 +1,59 @@
-<% set_title "Trait list"%>
+<% set_title "Traits"%>
+
+<% set_width(10, 12) %>
 
 <% content_for :thead do %>
-	<tr>
-		<th style="width: 20%">Category</th>
-		<th style="width: 20%">Trait Code</th>
-		<th style="width: 20%">Trait Name</th>
-		<th style="width: 20%">Label</th>
-		<th style="width: 10%" class="centered">Default Order</th>
-		<th style="width: 10%"></th>
-	</tr>
+	
+		<tr>
+			<th class="col-md-2">Category</th>
+			<th class="col-md-2">Trait Code</th>
+			<th class="col-md-3">Trait Name</th>
+			<th class="col-md-2">Label</th>
+			<th class="col-md-2"></th>
+		</tr>
+	
 <% end %>
 		
 <% content_for :table do %>
+	
 	<tr>
 		<%= render 'new' %>
 	</tr>
+		<% @traits.each do |t| %>
+			<%= content_tag_for(:tr, t, class: "sortable") do %>
+				<td><%= t.category_id  ? t.category.code : nil %></td>
+				<td><%= t.code %></td>
+				<td><%= t.name %></td>
+				<td><%= t.label %></td>
+				<td><%= link_to "Edit", edit_trait_path(t) %>
+						<%= link_to "Delete", trait_path(t), :method => :delete, :confirm => "Delete #{t.code}" %>
+				</td>
+			<% end %>
+		<% end %>
+	
+<% end %>
 
+<% content_for :multi_view do %>
 	<% @traits.each do |t| %>
-		<tr>
-			<td><%= t.category_id  ? t.category.code : nil %></td>
-			<td><%= t.code %></td>
-			<td><%= t.name %></td>
-			<td><%= t.label %></td>
-			<td class="centered"><%= t.display_order %></td>
-			<td class="centered"><%= link_to "Edit", edit_trait_path(t) %>
-					<%= link_to "Delete", trait_path(t), :method => :delete, :confirm => "Delete #{t.code}" %>
-			</td>
-		</tr>
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">				
+					<strong class="panel-title text-muted"><%= t.code %></strong>
+				</div>
+
+				<div class="panel-body">						
+					<div>
+						<p class="text-muted col-xs-5">Name</p>
+						<h4 class="col-xs-7"><%= t.name %></h4>
+					</div>
+				</div>
+				<div class="panel-footer">
+					
+						<%= link_to "Edit", edit_item_path(t), :class => "btn btn-primary" %>
+						
+				</div>
+				
+			</div>
+		</div>
 	<% end %>
 <% end %>

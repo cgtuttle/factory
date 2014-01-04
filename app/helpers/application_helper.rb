@@ -15,15 +15,18 @@ module ApplicationHelper
     end
   end
 
-  def set_title(title)
+  def set_title(title, options={})
     base_title = "FactorySync"
-    if title.nil?
-      provide :title, base_title
-    else
-      provide :title, "#{base_title} | #{title}"
+    prefix = options[:prefix] || ""
+    suffix = options[:suffix] || ""
+    provide :title, "#{base_title} | #{title}"
+    provide :page_title do
+      @content = content_tag(:span, prefix)
+      @content << content_tag(:strong, title)        
+      @content << content_tag(:span, suffix)
     end
   end
-  
+
   def get_item_id
     logger.debug "cookies  = #{cookies[:item_id]}"
     Item.id_by_existence(cookies[:item_id])
@@ -77,6 +80,21 @@ module ApplicationHelper
  
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  def set_width(lg, md)
+    @liquid = lg == 12
+    @container = @liquid ? "container-liquid" : "container"
+    offset_lg = ((12 - lg) / 2 ).floor
+    offset_md = ((12 - md) / 2 ).floor
+    full_class = "col-md-#{md} col-lg-#{lg} col-md-offset-#{offset_md} col-lg-offset-#{offset_lg}"       
+    @width = @liquid ? "full-fluid" : full_class
+    @hidden_lg = "hidden-md hidden-lg" if @liquid
+    @hidden_sm = "hidden-xs hidden-sm" if @liquid
+    @menu = true
+    @title = true
+    logger.debug "@liquid = #{@liquid}, @container = #{@container}, @width = #{@width}" 
+    logger.debug "@hidden_lg = #{@hidden_lg}, @hidden_sm = #{@hidden_sm}"
   end
 
 end

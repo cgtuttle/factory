@@ -1,61 +1,57 @@
 <!-- loop implied by collection passed from index -->
 
-<% if ((item_spec.date_status == 'past' || 
-	item_spec.date_status == 'deleted' ||
-	item_spec.date_status == 'unused') && @show_history) || 
-	(item_spec.date_status == 'pending' && !@hide_pending) ||
-	(item_spec.date_status == 'canceled' && !@hide_pending) ||
-	item_spec.date_status == 'current' %>
+<div class="panel panel-default">
+	<div class="panel-heading">				
+		<strong class="panel-title text-muted">
+			<div class="row">
+				<div class="<%= item_spec.eff_status %> col-xs-4"><%= item_spec.trait.code %></div>
+				<div class="<%= item_spec.eff_status %> col-xs-4"><%= item_spec.eff_status %></div>
+				<div class="<%= item_spec.eff_status %> col-xs-4 text-right"><%= item_spec.eff_date %></div>
+			</div>
+		</strong>
+	</div>
+
+	<div class="panel-body">
+				
+		<div>	
+			<% if item_spec.string_value != "" %>							
+				<h4 class="<%= item_spec.eff_status %> col-xs-12 col-sm-4"><%= item_spec.string_value %></h4>				
+			<% end %>
+
+			<% if item_spec.lsl %>				
+					<p class="<%= item_spec.eff_status %> col-xs-2 text-left"><%= item_spec.lsl %></p>				
+			<% end %>	
 	
+			<% if item_spec.numeric_value %>				
+				<h4 class="<%= item_spec.eff_status %> col-xs-6 text-center"><%= item_spec.numeric_value %></h4>				
+			<% end %>
 
-	<div class="<%= item_spec.date_status %> row">
-		<div class="panel panel-default">
-			<div class="panel-heading">				
-				<strong class="panel-title text-muted"><%= item_spec.trait.code %></strong>
-			</div>
+			<% if item_spec.usl %>				
+				<p class="<%= item_spec.eff_status %> col-xs-2 text-right"><%= item_spec.usl %></p>				
+			<% end %>
 
-			<div class="panel-body">
-						
-				<div>	
-					<% if item_spec.string_value != "" %>							
-						<h4 class="col-xs-12 col-sm-4"><%= item_spec.string_value %></h4>				
-					<% end %>
-
-					<% if item_spec.lsl %>				
-							<p class="col-xs-2 text-left"><%= item_spec.lsl %></p>				
-					<% end %>	
-			
-					<% if item_spec.numeric_value %>				
-						<h4 class="col-xs-6 text-center"><%= item_spec.numeric_value %></h4>				
-					<% end %>
-
-					<% if item_spec.usl %>				
-						<p class="col-xs-2 text-right"><%= item_spec.usl %></p>				
-					<% end %>
-
-					<% if item_spec.unit_of_measure != "" %>				
-							<p class="col-xs-2"><%= item_spec.unit_of_measure %></p>				
-					<% end %>
-				</div>
-			</div>
-
-				<div class="panel-footer">
-					<div class="btn-group">
-					
-						<% if item_spec.date_status == 'current' %>
-							<%= link_to "Edit", edit_item_spec_path(item_spec), :class=>"btn btn-default" %>
-							<%= link_to "Delete",  item_spec, :class=>"btn btn-default", :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}" %>
-							
-						<% elsif item_spec.date_status == 'pending' %>
-							<%= link_to "Delete", cancel_item_spec_path(item_spec), :class=>"btn btn-default", :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code}" %>				
-						<% end %>
-						
-						<%= link_to "Notes", notes_path(item_spec), :class=>"btn btn-default" %>
-					</div>
-				</div>
-			
-					
+			<% if item_spec.unit_of_measure != "" %>				
+					<p class="<%= item_spec.eff_status %> col-xs-2"><%= item_spec.unit_of_measure %></p>				
+			<% end %>
 		</div>
 	</div>
 
-<% end %>
+		<div class="panel-footer">
+			<div class="btn-group">
+			
+				<% if item_spec.eff_status == 'current' %>
+					<%= link_to "Edit", edit_item_spec_path(item_spec), :class=>"btn btn-default" %>
+					<%= link_to "Delete",  item_spec, :class=>"btn btn-default", :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}" %>
+					
+				<% elsif item_spec.eff_status == 'pending' %>
+					<%= link_to "Delete", cancel_item_spec_path(item_spec), :class=>"btn btn-default", :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code}" %>				
+				<% end %>
+				
+				<%= link_to "Notes", notes_path(item_spec), :class=>"btn btn-default" %>
+			</div>
+		</div>
+	
+			
+</div>
+
+

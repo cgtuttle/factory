@@ -1,10 +1,12 @@
 <% set_title "Analyses" %>
 
+<% set_width(10, 12) %>
+
 <% content_for :thead do %>
 	<tr>
-		<th style="width: 25%">Code</th>
-		<th style="width: 25%">Name</th>
-		<th style="width: 35%">Instructions</th>
+		<th>Code</th>
+		<th>Name</th>
+		<th>Instructions</th>
 		<th></th>
 	</tr>
 <% end %>
@@ -17,8 +19,11 @@
 		<tr>
 			<td><%= t.code %></td>
 			<td><%= t.name %></td>
-			<td class="centered"><%= link_to "Instructions", :controller => 'analyses', :action => 'instructions', :id => t.id %></td>
-			<td class="centered"><%= link_to "Edit", edit_analysis_path(t) %></td>
+			<td><%= link_to "Instructions", :controller => 'analyses', :action => 'instructions', :id => t.id %></td>
+			<td>
+				<%= link_to "Edit", edit_analysis_path(t), :class => "pull-left" %>
+				<%= link_to "Delete", t, :method => :delete, :confirm => "Delete Analysis #{t.code}", :class => "pull-right" %>
+			</td>
 		</tr>
 	<% end %>
 <% end %>

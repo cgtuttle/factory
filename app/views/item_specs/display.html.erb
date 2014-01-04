@@ -1,6 +1,9 @@
-<div class="row row-display">
-	<% set_title @item.code %>
-	<table class="table table-bordered table-hover display">
+<% set_width 12, 12 %>
+<% @title = false %>
+
+<div class="row-display">
+	
+	<table class="table table-bordered table-hover table-responsive display">
 		
 			<thead class="display-header">
 				<tr>
@@ -18,7 +21,7 @@
 					
 						<% first_row = true %>										
 						<% for s in item_specs %>	
-							<% if s.date_status == "current" %>
+							<% if s.eff_status == "current" %>
 								<tr class="display-row">
 									<% if first_row %>
 										<% first_row = false %>

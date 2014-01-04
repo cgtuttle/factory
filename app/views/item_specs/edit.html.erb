@@ -1,48 +1,44 @@
-<% set_title @new_item_spec.item.code %>
-<div class="row top-space">
-	<p>Item: <%= @new_item_spec.item.code %></p>
-	<p>Trait: <%= @new_item_spec.trait.code %></p>
-</div>
+<% set_title "#{@item_spec.item.code}:#{@item_spec.trait.code}", prefix: "Edit ", suffix: " Specification" %>
 	
-<div class="row top-space">
-	<div class="col-xs-12 col-sm-8 col-md-3 col-lg-2">
-		<%= form_for(@new_item_spec) do |f| %>
-			<%= render 'layouts/body/errors', :index => @new_item_spec %>				
-			<%= f.hidden_field :item_id %>
-			<%= f.hidden_field :trait_id %>
-			<%= f.hidden_field :version %>
-			<div class="form-group">
-				<%= f.label "Text" %>
-				<%= f.text_field :string_value, :class => "form-control" %>
-			</div>
-			<div class="form-group">
-				<%= f.label "Value" %>
-				<%= f.text_field :numeric_value, :class => "form-control" %>
-			</div>
-			<div class="form-group">
-				<%= f.label "USL" %>
-				<%= f.text_field :usl, :class => "form-control" %>
-			</div>
-			<div class="form-group">
-				<%= f.label "LSL" %>
-				<%= f.text_field :lsl, :class => "form-control" %>
-			</div>
-			<div class="form-group">
-				<%= f.label "UOM" %>
-				<%= f.text_field :unit_of_measure, :class => "form-control" %>
-			</div>
-			<div class="form-group">				
-				<%= f.label "analysis" %>				
-				<%= f.collection_select :analysis_id, Analysis.order('code'), :id, :code, :prompt => true, :include_blank => true, :class => "form-control" %>
-			</div>					
-			<div class="form-group">			
-				<%= f.label "Effective Date of Edit" %>
-				<%= f.text_field :eff_date, :class => "form-control", 'data-behaviour' => 'datepicker' %>
-			</div>
-			<div class="form-group">
-				<%= f.submit "Update Item" %>
-				<%= f.submit "Cancel" %>
-			</div>
-		<% end %>	
+<% set_width(6, 10) %>
+
+<%= form_for(@new_item_spec) do |f| %>
+	<%= render 'layouts/body/errors', :index => @new_item_spec %>				
+	<%= f.hidden_field :item_id %>
+	<%= f.hidden_field :trait_id %>
+	<%= f.hidden_field :version %>
+	<div class="form-group">
+		<%= f.label "Text" %>
+		<%= f.text_field :string_value, :class => "form-control" %>
 	</div>
-</div>
+	<div class="form-group">
+		<%= f.label "Value" %>
+		<%= f.text_field :numeric_value, :class => "form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.label "USL" %>
+		<%= f.text_field :usl, :class => "form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.label "LSL" %>
+		<%= f.text_field :lsl, :class => "form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.label "UOM" %>
+		<%= f.text_field :unit_of_measure, :class => "form-control" %>
+	</div>
+	<div class="form-group">				
+		<%= f.label "analysis" %>				
+		<%= f.collection_select :analysis_id, Analysis.order('code'), :id, :code, :prompt => true, :include_blank => true, :class => "form-control" %>
+	</div>					
+	<div class="form-group">			
+		<%= f.label "Effective Date of Edit" %>
+		<%= f.text_field :eff_date, :class => "form-control", 'data-behaviour' => 'datepicker' %>
+	</div>
+	<div class="form-group">
+		<%= f.submit "Update Item Spec", :class => "btn btn-primary" %>
+		<%= f.submit "Cancel", :class => "btn btn-default" %>
+	</div>
+<% end %>	
+
+

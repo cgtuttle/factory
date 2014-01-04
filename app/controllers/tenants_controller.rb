@@ -38,7 +38,7 @@ class TenantsController < ApplicationController
 		@tenant = Tenant.find(params[:id])
 		@tenant.update_attributes(params[:tenant])	
 		if can? :manage, :all
-			redirect_to tenant_path(@current_tenant)
+			redirect_to tenants_path
 		else
 			redirect_to display_item_specs_path
 		end
@@ -49,8 +49,9 @@ class TenantsController < ApplicationController
 
 	def set
 	  set_current_tenant(params[:id])
+	  flash[:success] = "You successfully switched to #{current_tenant.name}"
 	  if can? :manage, @current_tenant
-			redirect_to tenant_path(@current_tenant)
+			redirect_to tenants_path
 		else
 			redirect_to display_item_specs_path
 		end

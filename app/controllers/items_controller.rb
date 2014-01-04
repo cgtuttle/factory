@@ -10,7 +10,6 @@ class ItemsController < ApplicationController
 		@new_item = Item.new	
 		@traits = Trait.all
 		@is_table = true
-		@span = 5
   end
 
   def edit
@@ -69,7 +68,8 @@ class ItemsController < ApplicationController
   end
 	
 	def find_items
-		@items = Item.where(:deleted => false).order('code').paginate(:page => params[:page], :per_page => 20)
+logger.debug "@per_page = #{@per_Page}"
+		@items = Item.where(:deleted => false).order('code').paginate(:page => params[:page], :per_page => @per_page)
 		@index = @items
 	end
 

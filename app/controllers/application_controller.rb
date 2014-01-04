@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   around_filter :scope_current_tenant
   before_filter :scope_current_item
+  before_filter :set_per_page
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to tenants_path, :alert => exception.message
@@ -24,6 +25,16 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_item
 
+#  def get_per_page
+#    height = cookies[:height]
+#    logger.debug "Running get_per_page - height = #{height}"
+#    @per_page = 5
+#    @per_page = 10 if height > '700'
+#    @per_page = 12 if height > '800'
+#    @per_page = 16 if height > '900'
+#  end
+#  helper_method :get_per_page
+
 
 private
 
@@ -45,6 +56,16 @@ private
       logger.debug "Item.current_id = #{Item.current_id}"
     end
   end
+
+  def set_per_page
+    height = cookies[:height]
+    logger.debug "height = #{height}"
+    @per_page = 5
+    @per_page = 10 if height > '700'
+    @per_page = 12 if height > '800'
+    @per_page = 16 if height > '900'
+  end
+    
 
   def current_ability
     logger.debug "running current_ability"

@@ -20,10 +20,17 @@ Factory::Application.routes.draw do
 	
 	resources :users
   resources :imports
-  resources :traits
-  resources :categories
   resources :analyses
   resources :memberships
+
+
+  resources :categories do
+    collection { post :sort}
+  end
+
+  resources :traits do
+    collection { post :sort}
+  end
 
   resources :items do
     resources :item_specs

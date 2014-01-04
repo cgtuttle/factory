@@ -11,33 +11,30 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
-  <body class="<%= @body_class || "normal" %>">
-    
-    <div id="main" role="main">
+  
+  <body class="<%= @body_class || "normal" %>">    
+    <div id="main" role="main">     
+      <%= content_tag :div, :class => @container do %> <!--! either "container-liquid" or "container" -->      
+        <%= content_tag :div, :class => @width do %> <!--! either "full-fluid" or "...hidden-sm col-md-n..." -->
 
-      <% if !@fixed %>
+          <%= render 'layouts/body/header_layout' if @menu %>  
 
-        <div class="container-liquid">
-          <div class="full-fluid">
-            
-            <%= render 'layouts/body/header_layout' %>          
-            <%= render 'layouts/body/flash_messages' %>                                       
-            <%= render :partial => 'layouts/body/table_layout', :object => @index, :as => :index if @is_table %> 
-            <%= render :partial => 'layouts/body/list_layout', :object => @list, :as => :list if @is_list %>  
-            <%= yield %>
-
-            <footer>
-              <%= yield(:footer) %>
-            </footer>  
+          <div class="row">                        
+            <%= render 'layouts/body/title_layout' if @title %>
+            <%= render :partial => 'layouts/body/table_layout', :object => @index, :as => :index if @is_table %>
+            <!--! rendered table_layout --> 
+            <%= render :partial => 'layouts/body/list_layout', :object => @list, :as => :list if @is_list %>
+            <!--! rendered list_layout -->  
+            <%= yield %>      
           </div>
-        </div> <!--! end of .container -->
 
-      <% else %>
-        <div class="fixed" %>
-          <%= yield %>
-        </div>
+          <footer class="row">
+            <%= yield(:footer) %>
+          </footer>  
+        
+        <% end %>
+       <!--! end of .container -->
       <% end %>
-
     </div> <!--! end of #main -->
   </body>
 </html>

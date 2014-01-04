@@ -2,7 +2,8 @@ class CategoriesController < ApplicationController
 	load_and_authorize_resource
 
 	def index
-		@categories = Category.order('display_order').paginate(:page => params[:page], :per_page => 30)
+		@categories = Category.order('display_order').paginate(:page => params[:page], :per_page => @per_page)
+		@sortable_url = sort_categories_url
 		@index = @categories
 		@category = Category.new
 		@span = 6
@@ -49,6 +50,13 @@ class CategoriesController < ApplicationController
 			flash[:success] = 'Category deleted'
 			redirect_to categories_path
 		end
+	end
+
+	def sort
+		params[:category].each_with_index do |id, index|
+			Category.update_all({display_order: index + 1}, {id: id})
+		end
+		render nothing: true
 	end
 
 end

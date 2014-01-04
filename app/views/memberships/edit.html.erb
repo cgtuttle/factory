@@ -1,6 +1,6 @@
-<% set_title 'Edit membership' %>
+<% set_title "#{@membership.tenant.name} - #{@membership.user.email Membership}", prefix: "Edit " %>
 
-<h2><%= @membership.tenant.name %> - <%= @membership.user.email %></h2>
+<% set_width(6, 10) %>
 
 <%= form_for @membership do |f| %>
 	

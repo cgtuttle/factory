@@ -1,50 +1,49 @@
-<% set_title @item.code %>
+<% set_title "Item Specifications", prefix: "#{@item.code} " %>
+<% set_width 12, 12 %>
 
-<% content_for :controls do %>	
-	<div class="row bottom-space col-xs-12">
-		<%= form_tag('item_specs', :method => :get, :class => "form-inline") do %>
-			<div class="form-group"> 
+<% content_for :controls do %>
+
+	<div class="bottom-space">
+		<%= form_tag(item_specs_path, :method => :get, :class => "form-inline") do %>
+			<div class="form-group">
+
 				<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item_id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
-
 				
-				<%= label_tag 'hide_pending', :class => "checkbox" do %>
-					<%= check_box_tag "hide_pending", "hide_pending", @hide_pending, :type => "checkbox" %>
-					Hide future
+				<%= label_tag 'show_pending', :class => "checkbox" do %>
+					<%= check_box_tag name = "show_pending", value = "1", checked = @pending, {:type => "checkbox", :onchange => "this.form.submit();"} %>
+					Show pending
 				<% end %>
 
 				<%= label_tag 'show_history', :class => "checkbox" do %>				
-					<%= check_box_tag "show_history", "show_history", @show_history, :type => "checkbox" %>
+					<%= check_box_tag name = "show_history", value = "1", checked = @history, {:type => "checkbox", :onchange => "this.form.submit();"} %>
 					Show history
 				<% end %>
-			
-				
-				<%= submit_tag "Apply", :class => "btn btn-primary" %>
+
+				<%= label_tag 'show_deleted', :class => "checkbox" do %>				
+					<%= check_box_tag name = "show_deleted", value = "1", checked = @deleted, {:type => "checkbox", :onchange => "this.form.submit();"} %>
+					Show deleted
+				<% end %>			
 
 			</div>
 		<% end %>
 	</div>
 <% end %>
 
-<% content_for :thead do %>	
-	<div class="col-xs-1">		
+<% content_for :thead do %>
+	<div>				
 		<th>Category</th>
-		<th>Specification</th>
-	</div>
-	<th class="col-xs-2">Text</th>
-	<th class="col-xs-2">Multi-Line Text</th>
-	<div class="col-xs-3">
+		<th>Specification</th>		
+		<th class="col-xs-2">Text</th>		
 		<th>Value</th>
 		<th>USL</th>
 		<th>LSL</th>
-		<th>UOM</th>
+		<th>UOM</th>		
+		<th class="col-xs-1 hidden-md">Analysis</th>		
+		<th class="col-md-1 col-lg-1">Eff Dt</th>	
+		<th class="hidden-md">Status</th>		
+		<th class="col-xs-1 hidden-md">Edited By</th>
+		<th class="col-xs-1"></th>
 	</div>
-	<th class="col-xs-1">Analysis</th>
-	<div class="col-xs-1">
-		<th>Eff Dt</th>	
-		<th>Status</th>
-	</div>
-	<th class="col-xs-1">Edited By</th>
-	<th class="col-xs-1"></th>
 <% end %>
 
 <!-- pass index the collection for the loop -->		
@@ -55,8 +54,8 @@
 
 <!-- pass multi_view the collection for the loop -->
 <% content_for :multi_view do %>
-	<div class="row">
-		<%= link_to "Add New Specification", new_item_spec_path, :class => "row col-xs-12" %>	
+	<div class="bottom-space">	
+		<%= link_to "Add New Specification", new_item_spec_path, :class => "btn btn-default" %>	
 	</div>
 	<%= render :partial => "item_specs/body/multi_view", :collection => @item_specs, :as => :item_spec %>	
 <% end %>

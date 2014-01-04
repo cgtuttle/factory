@@ -2,7 +2,7 @@ class AnalysesController < ApplicationController
 load_and_authorize_resource
 	
   def index
-		@analyses = Analysis.find(:all).paginate(:page => params[:page], :per_page => 30)
+		@analyses = Analysis.order("code").paginate(:page => params[:page], :per_page => @per_page)
 		@columns = ["code", "name"]
 		@index = @analyses
 		@analysis = Analysis.new
@@ -40,8 +40,16 @@ load_and_authorize_resource
 			redirect_to analyses_path
 		end
 	end
+
+	def destroy
+		if Analysis.find(params[:id]).destroy		
+			flash[:success] = 'Analysis deleted'
+			redirect_to analyses_path
+		end
+	end
 	
 	def instructions
 		@analysis = Analysis.find(params[:id])
 	end
+
 end

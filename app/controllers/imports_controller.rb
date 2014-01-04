@@ -4,14 +4,13 @@ class ImportsController < ApplicationController
 	load_and_authorize_resource
 		
 	def index
-#		@import = Import.params[:id]
 	end
 
 	def new
-#		@import = Import.new
 		if params[:model]
 			@model = params[:model]
 		end
+		@is_list = false
 		@is_edit_form = true
 	end
 	
@@ -26,7 +25,7 @@ class ImportsController < ApplicationController
 				field_choices
 				render 'edit'
 			else
-				redirect_to new_import_path
+				redirect_to :back
 			end
 		else
 			redirect_to new_import_path

@@ -1,7 +1,7 @@
-<% set_title @analysis.code %>
+<% set_title @analysis.code, suffix: " Instructions" %>
 
-<h4 class='page_header'>Instructions</h4>
+<% set_width(8,10) %>
 
-<%= simple_format(@analysis.instructions) %>
-<br/>
+<p><%= @analysis.instructions %><p>
+
 <%= link_to "Back", :back %>

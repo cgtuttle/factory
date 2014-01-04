@@ -1,22 +1,24 @@
-<% set_title "Item list" %>
+<% set_title "Items" %>
+
+<% set_width 8, 10 %>
 
 <% content_for :thead do %>
-	<tr>
-		<th style="width: 20em">Item Code</th>
-		<th style="width: 20em">Name</th>
-		<th></th>
-	</tr>
+		<tr>
+			<th>Item Code</th>
+			<th>Name</th>
+			<th colspan="3"></th>
+		</tr>
 <% end %>
 
 <% content_for :table do %>
 	<%= render 'new' %>
 	<% @items.each do |i| %>
 		<tr>
-			<td><%= i.code %></td>
+			<td><%= link_to i.code, item_item_specs_path(i) %></td>
 			<td><%= i.name %></td>
-			<td class="centered"><%= link_to "Edit", edit_item_path(i), :class => 'link' %>
-					<%= link_to "Delete", item_path(i), :method => :delete, :confirm => "Delete Item #{i.code}" %>
-					<%= link_to "Copy", copy_item_path(i), :method => :copy %></td>
+			<td><%= link_to "Edit", edit_item_path(i), :class => "pull-left" %></td>
+			<td><%= link_to "Delete", item_path(i), :method => :delete, :confirm => "Delete Item #{i.code}" %></td>
+			<td><%= link_to "Copy", copy_item_path(i), :method => :copy, :class => "pull-right" %></td>
 		</tr>
 	<% end %>
 <% end %>

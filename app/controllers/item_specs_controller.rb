@@ -2,6 +2,7 @@ class ItemSpecsController < ApplicationController
 	include ApplicationHelper
 	require 'will_paginate/array'
 	before_filter :find_items
+	before_filter :initialize_status_checkboxes
 	load_and_authorize_resource 
 	
   def new
@@ -13,13 +14,29 @@ class ItemSpecsController < ApplicationController
 
   def index
   	@span = 12
-		@show_history = params[:show_history] == "show_history"
-		@hide_pending = params[:hide_pending] == "hide_pending"
+
+  	if !params.has_key?(:item_spec)
+  		# cookies & params are "1" or "0", @variables are true or false
+			params[:show_history] = cookies[:history] == "1" ? "1" : nil
+	  	params[:show_pending] = cookies[:pending] == "1" ? "1" : nil
+	  	params[:show_deleted] = cookies[:deleted] == "1" ? "1" : nil
+	  end
+	  
+  	@history = params[:show_history] == "1"
+  	@pending = params[:show_pending] == "1"
+  	@deleted = params[:show_deleted] == "1"
+
+  	cookies[:history] = @history ? "1" : "0"
+  	cookies[:pending] = @pending ? "1" : "0"
+  	cookies[:deleted] = @deleted ? "1" : "0"
+
+		@visibility = (@history ? 1 : 0) + (@pending ? 4 : 0) + (@deleted ? 8 : 0) + 18
 		@traits = Trait.order(:display_order)
 		set_scope
   	if @item
 	  	@new_item_spec = ItemSpec.new
-			@item_specs = ItemSpec.by_status(@item_id).paginate(:page => params[:page], :per_page => 20)
+			@item_specs = ItemSpec.visible(@item_id, @visibility).paginate(:page => params[:page], :per_page => 15) #main ItemSpec retrieval
+
 			@index = @item_specs
 			@items = Item.order(:code)
 			@available_traits = Trait.all
@@ -30,9 +47,8 @@ class ItemSpecsController < ApplicationController
 			redirect_to items_path
 		end
   end
-	
+
 	def edit
-#		@item_spec = ItemSpec.find(params[:id])
 		@new_item_spec = @item_spec.dup
 		@is_edit_form = true
 	end
@@ -55,16 +71,16 @@ class ItemSpecsController < ApplicationController
 	end
 
 	def destroy
-#		@item_spec = ItemSpec.find(params[:id])
 		@delete_item_spec = @item_spec.dup
 		@delete_item_spec.deleted = true
-		@delete_item_spec.set_eff_date
+		@delete_item_spec.eff_date = Date.today
 		@delete_item_spec.set_version
 		@delete_item_spec.set_editor(current_user.email)
-		if @delete_item_spec.save
+		if @delete_item_spec.save!
 			flash[:success] = "Item Trait deleted"
 			redirect_to item_specs_path :item_id => @item_spec.item_id
 		else
+			flash[:alert] = "Could not delete Item Trait"
 			redirect_to item_specs_path :item_id => @item_spec.item_id
 		end
 	end
@@ -110,7 +126,6 @@ class ItemSpecsController < ApplicationController
 	end
 	
 	def update
-#		@item_spec = ItemSpec.find(params[:id])
 		if params[:commit] != 'Cancel'			
 			if @item_spec.update_attributes(params[:item_spec])
 				flash[:success] = "Notes updated"
@@ -128,22 +143,26 @@ class ItemSpecsController < ApplicationController
 			@item_id = params[:item]	
 		elsif params.has_key?(:item_spec)
 			@item_id = params[:item_spec][:item_id]
+		elsif params.has_key?(:item_id)
+			@item_id = params[:item_id]
 		else
 			@item_id = get_item_id
 		end
 
 		@item = Item.exists?(@item_id) ? Item.find(@item_id) : nil
 
-		cookies[:item_id] = @item_id	
-
-		@show_history = (params[:show_history] && !params[:show_history].blank?) || (@show_history && !@show_history.blank?)
-		@hide_pending = (params[:hide_pending] && !params[:hide_pending].blank?) || (@hide_pending && !@hide_pending.blank?)
+		cookies[:item_id] = @item_id
 	end
 
 	def find_items
-		logger.debug 'running find_items'
-		@items = Item.where(:deleted => false).order('code').paginate(:page => params[:page], :per_page => 20)
+		@items = Item.where(:deleted => false).order('code').paginate(:page => params[:page], :per_page => @per_page)
 		@index = @items
+	end
+
+	def initialize_status_checkboxes
+		cookies[:history] ||= "0"
+		cookies[:pending] ||= "1"
+		cookies[:deleted] ||= "0"
 	end
 	
 end

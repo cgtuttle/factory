@@ -1,11 +1,12 @@
 <% set_title "Categories" %>
 
+<% set_width(6, 10) %>
+
 <% content_for :thead do %>
 
 	<tr>
 		<th>Code</th>
 		<th>Name</th>
-		<th>Display Order</th>
 		<th></th>
 	</tr>
 <% end %>
@@ -18,17 +19,16 @@
 	</tr>	
 
 	<% @categories.each do |c| %>
-		<tr>
+		<%= content_tag_for(:tr, c, class: "sortable") do %>
 			<td><%= c.code %></td>
 			<td><%= c.name %></td>
-			<td style="max-width:50px" class="centered"><%= c.display_order %></td>
 			
 			<td class="centered">
 					<%= link_to "Edit", edit_category_path(c) %>
 					<%= link_to "Delete",  c, :method => :delete, :confirm => "Delete Category #{c.code}" %>
 			</td>
 			
-		</tr>
+		<% end %>
 	<% end %>	
 		
 <% end %>	

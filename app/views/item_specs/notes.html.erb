@@ -1,18 +1,15 @@
-<% set_title "#{@item_spec.item.code} notes" %>
+<% set_title "#{@item_spec.item.code}:#{@item_spec.trait.code}", prefix: "Notes for " %>
 
-<% content_for :edit_form do %>
+<% set_width(6, 10) %>
 
-	<p>Item: <%= @item_spec.item.code %></p>
-	<p>Trait: <%= @item_spec.trait.code %></p>
-	
-	<%= form_for(@item_spec) do |f| %>
-		
+<%= form_for(@item_spec) do |f| %>
+	<div class="form-group">		
 		<%= f.label "Notes" %>
-		<%= f.text_area :notes %>
-		
-		<div class="actions">
-			<%= f.submit "Update Notes" %>
-			<%= f.submit "Cancel" %>
-		</div>
-	<% end %>	
+		<%= f.text_area :notes, :class => "form-control" %>
+	</div>
+	
+	<div class="actions">
+		<%= f.submit "Update Notes", :class => "btn btn-primary" %>
+		<%= f.submit "Cancel", :class => "btn btn-default" %>
+	</div>
 <% end %>	

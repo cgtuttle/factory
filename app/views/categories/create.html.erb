@@ -1,4 +1,6 @@
-<% set_title "New Category" %>
+<% set_title "Category", prefix: "New " %>
+
+<% set_width(6, 10) %>
 
 <%= form_for @category, :role => "form" do |f| %>
 	<%= render 'layouts/body/errors', :index => @category %>

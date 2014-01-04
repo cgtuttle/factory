@@ -1,8 +1,10 @@
-<% set_title "User list" %>
+<% set_title "Users" %>
+
+<% set_width(10, 12) %>
 
 <% content_for :thead do %>
 
-	<h2><%= current_tenant.name %> : <%= @role.role_name %></h2>
+	<p><%= current_tenant.name %> : <%= @role.role_name %></p>
 
 		<tr>
 			<th>User</th>

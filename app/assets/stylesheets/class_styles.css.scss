@@ -49,6 +49,18 @@ table > tbody > tr > td.display {
   border-color: $complimentary-color;
 }
 
+table .align_center {
+  text-align:center;
+}
+
+table .align_right {
+  text-align:right;
+}
+
+table .bold {
+  font-weight: bold;
+}
+
 select.inline-select {
   width: auto;
 }
@@ -56,6 +68,14 @@ select.inline-select {
 hr.multi-view {
   height: 1px;
   background-color: $border-color;
+}
+
+button.close {
+  padding-left: 50px;
+}
+
+.pad {
+  padding: 0 30px;
 }
 
 .jumbotron.hero-block {
@@ -150,8 +170,8 @@ hr.multi-view {
 }
 
 .full-fluid {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 20px; 
+  padding-right: 20px; 
 }
 
 .row-display {
@@ -169,19 +189,13 @@ hr.multi-view {
 .flash {
   margin-top: 12px;
   margin-bottom: 6px;
-  padding: 6px 15px;
+  padding: 8px 15px;
 }
 
-table .align_center {
-  text-align:center;
-}
-
-table .align_right {
-  text-align:right;
-}
-
-table .bold {
-  font-weight: bold;
+#sortable {
+  tr.sortable {
+    cursor: row-resize;
+  }
 }
 
 #factory {
@@ -189,4 +203,10 @@ table .bold {
   padding-right: 20px;
   height: 50px;
   width: auto;
+}
+
+#title {
+  padding: 0 10px 0 0;
+  font-family: "Times New Roman",Georgia,Serif;
+  color: blue;
 }

@@ -1,17 +1,22 @@
 <% set_title "Invite new user"%>
 
-<h2><%= t "devise.invitations.new.header" %></h2>
-
+<% set_width(6, 10) %>
 <p>Invite a new user to join <%= current_tenant.name %></p>
 
 <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
   <%= devise_error_messages! %>
 
-<% resource.class.invite_key_fields.each do |field| -%>
-  <%= f.label field, :class => 'field_label' %>
-  <%= f.text_field field, :autofocus => true, :class => 'text_field' %>
-<% end -%>
+	<% resource.class.invite_key_fields.each do |field| -%>
+		<div class="form-group">
+		  <%= f.label field, :class => 'field_label' %>
+		  <%= f.text_field field, :autofocus => true, :class => 'form-control' %>
+		</div>
+	<% end -%>
 
-  <p><%= f.submit t("devise.invitations.new.submit_button") %></p>
+	<div class="form-group">
+		<%= f.submit t("devise.invitations.new.submit_button"), :class => "btn btn-primary" %>
+		<%= f.submit "Cancel", :class => "btn btn-default" %>
+	</div>
+
 <% end %>
 

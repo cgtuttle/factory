@@ -1,16 +1,24 @@
-<% set_title "Your companies"%>
+<% set_title "Your Companies"%>
+
+<% set_width 8, 4 %>
+
 
 <% content_for :thead do %>
 	<tr>
+		<th class="col-md-1">Selected</th>
 		<th>Company</th>
+		<th></th>
 	</tr>
 <% end %>
 
 <% content_for :table do %>
 	
 	<% @tenants.each do |t| %>
+		
 		<tr>
-			<td><%= link_to t.name, :action => :set, :id => t.id %></td>
+			<td><% if t == current_tenant %><span class="glyphicon glyphicon-ok"></span><% end %></td>
+			<td><%= link_to t.name, {:controller => :tenants, :action => :set, :id => t.id}, :class => ("text-muted" if t != current_tenant) %></td>		
+			<td><%= link_to "Edit", edit_tenant_path(t) %></td>
 		</tr>
 	<% end %>
 

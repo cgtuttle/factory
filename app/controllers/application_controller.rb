@@ -25,17 +25,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_item
 
-#  def get_per_page
-#    height = cookies[:height]
-#    logger.debug "Running get_per_page - height = #{height}"
-#    @per_page = 5
-#    @per_page = 10 if height > '700'
-#    @per_page = 12 if height > '800'
-#    @per_page = 16 if height > '900'
-#  end
-#  helper_method :get_per_page
-
-
 private
 
   def after_sign_in_path_for(resource)

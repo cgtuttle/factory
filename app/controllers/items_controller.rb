@@ -18,15 +18,13 @@ class ItemsController < ApplicationController
   end
 
   def update
-  	if params[:commit] != 'Cancel'
-			@item = Item.find(params[:id])
-			@history = params[:history]
-			@future = params[:future]
-			if @item.update_attributes(params[:item])
-				flash[:success] = "Item updated"
-			else
-				flash[:error] = "Unable to update item"
-			end
+		@item = Item.find(params[:id])
+		@history = params[:history]
+		@future = params[:future]
+		if @item.update_attributes(params[:item])
+			flash[:success] = "Item updated"
+		else
+			flash[:error] = "Unable to update item"
 		end
 		redirect_to items_path
   end

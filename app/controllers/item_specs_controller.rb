@@ -50,23 +50,20 @@ class ItemSpecsController < ApplicationController
 
 	def edit
 		@new_item_spec = @item_spec.dup
+		@new_item_spec.eff_date = Date.today
 		@is_edit_form = true
 	end
 	
 	def create
-		if params[:commit] != 'Cancel'		
-			@new_item_spec = ItemSpec.new(params[:item_spec])
-			@new_item_spec.set_eff_date
-			@new_item_spec.set_version
-			@new_item_spec.set_editor(current_user.email)
-			if @new_item_spec.save!
-				flash[:success] = "Item Trait added/changed"
-				redirect_to item_specs_path :item_id => params[:item_spec][:item_id]
-			else
-				redirect_to item_specs_path :item_id => params[:item_spec][:item_id]
-			end
-		else
+		@new_item_spec = ItemSpec.new(params[:item_spec])
+		@new_item_spec.set_eff_date
+		@new_item_spec.set_version
+		@new_item_spec.set_editor(current_user.email)
+		if @new_item_spec.save!
+			flash[:success] = "Item Trait added/changed"
 			redirect_to item_specs_path :item_id => params[:item_spec][:item_id]
+		else
+			render :new
 		end
 	end
 
@@ -87,6 +84,7 @@ class ItemSpecsController < ApplicationController
 
 	def display
 		@span = 12
+		@items = Item.order('code')
 		@display = true
 		@body_class = "display"	
 		if params.has_key?(:item)
@@ -126,15 +124,11 @@ class ItemSpecsController < ApplicationController
 	end
 	
 	def update
-		if params[:commit] != 'Cancel'			
-			if @item_spec.update_attributes(params[:item_spec])
-				flash[:success] = "Notes updated"
-				redirect_to item_specs_path :item_id => @item_spec.item_id
-			else
-				render :action => :edit
-			end
-		else
+		if @item_spec.update_attributes(params[:item_spec])
+			flash[:success] = "Notes updated"
 			redirect_to item_specs_path :item_id => @item_spec.item_id
+		else
+			render :notes
 		end
   end
 

@@ -1,6 +1,10 @@
-<% if tenant_set? && !@no_menus && current_user %>
-	<% if can? :view, :all %>
+<% if tenant_set? && current_user %>
+	
+	<% if can? :display, ItemSpec %>
 		<li><%= link_to_unless_current( "Floor Display", { controller: "/item_specs", action: "display" }) { } %></li>
+	<% end %>
+
+	<% if can? :view, :all %>
 		<li><%= link_to_unless_current( "Specifications", { controller: "/item_specs"}) { } %></li>
 		<li>
 			<%= link_to 'Setup <b class="caret caret-header"></b>'.html_safe, root_path, :id => 'dLeftLabel', :'data-toggle' => 'dropdown', :class => 'dropdown-toggle' %> 

@@ -27,16 +27,11 @@ class MembershipsController < ApplicationController
 	end
 
 	def update
-		if params[:commit] != 'Cancel'
-			@membership = Membership.find(params[:id])
-			if @membership.update_attributes(params[:membership])
-				flash[:success] = "#{@membership.user.email} role changed to #{params[:membership][:role]}"
-			else
-				render :action => :edit
-			end
+		@membership = Membership.find(params[:id])
+		if @membership.update_attributes(params[:membership])
+			flash[:success] = "#{@membership.user.email} role changed to #{params[:membership][:role]}"
 		else
-			flash[:notice] = "Role edit canceled"
-			redirect_to memberships_path
+			render :action => :edit
 		end
 	end
 

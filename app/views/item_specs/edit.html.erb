@@ -33,11 +33,11 @@
 	</div>					
 	<div class="form-group">			
 		<%= f.label "Effective Date of Edit" %>
-		<%= f.text_field :eff_date, :class => "form-control", 'data-behaviour' => 'datepicker' %>
+		<%= f.text_field :eff_date, 'data-behaviour' => 'datepicker', :class => "form-control" %>
 	</div>
 	<div class="form-group">
 		<%= f.submit "Update Item Spec", :class => "btn btn-primary" %>
-		<%= f.submit "Cancel", :class => "btn btn-default" %>
+		<%= link_to 'Cancel', item_specs_path(@new_item_spec.item_id), :class => "btn btn-default" %>
 	</div>
 <% end %>	
 

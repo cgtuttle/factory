@@ -4,8 +4,7 @@
 <% set_width(6, 10) %>
 	
 <%= form_for @analysis do |f| %>
-		<%= render 'layouts/body/errors', :index => @analysis %>
-
+	<%= render 'layouts/body/errors', :index => @analysis %>
 	<div class="form-group">
 		<%= f.label :code %>
 		<%= f.text_field :code, :class => "form-control" %>
@@ -20,6 +19,6 @@
 	</div>
 	<div class="form-group">
 		<%= f.submit :class => "btn btn-primary" %>
-		<%= f.submit "Cancel", :class => "btn btn-default" %>
+		<%= link_to 'Cancel', analyses_path, :class => "btn btn-default" %>
 	</div>
 <% end %>

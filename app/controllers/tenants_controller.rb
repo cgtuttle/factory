@@ -26,7 +26,7 @@ class TenantsController < ApplicationController
 	end
 
 	def index
-		@is_list = true
+		@is_table = true
 		@tenants ||= current_user.tenants.all(:order => 'name')
 	end
 

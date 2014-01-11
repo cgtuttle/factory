@@ -10,6 +10,6 @@
 	
 	<div class="actions">
 		<%= f.submit "Update Notes", :class => "btn btn-primary" %>
-		<%= f.submit "Cancel", :class => "btn btn-default" %>
+		<%= link_to 'Cancel', item_specs_path(@item_spec.item_id), :class => "btn btn-default" %>
 	</div>
 <% end %>	

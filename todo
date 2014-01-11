@@ -16,7 +16,7 @@ General:
  ✔ Center all forms < 100% of page width @done (14-01-01 10:28)
  ✔ Add emphasis to title's subjects @done (14-01-03 20:46)
  ✔ Remove row class from edit forms @done (14-01-03 20:46)
- ☐ Change _new partials to form-control class
+ ✔ Change _new partials to form-control class @done (14-01-05 14:51)
  ✔ Limit lists to height of screen @done (14-01-04 15:38)
  Usability:
  ✔ Add batch edit capability or copy record capability @done (13-11-16 15:51)
@@ -35,9 +35,10 @@ General:
  ✔ Change item_specs/index controls checkboxes to update on change @done (13-12-28 19:59)
  ☐ Add forgot password to home
  ☐ Change look of sort functionality
- ☐ Change all "Cancel" submits to link_to's
+ ✔ Change all "Cancel" submits to link_to's @done (14-01-05 14:02)
  ✔ Change all @width's to set_width @done (14-01-03 20:47)
- ☐ Remove _list_layout from system
+ ✔ Remove _list_layout from system @done (14-01-05 13:25)
+ ☐ Add error messages
 Cleanup:
  ✔ pages/enter.html.erb @done (13-11-09 17:14)
  ✔ Move flash next to title so page doesn't move up on fade @done (13-12-29 15:30)

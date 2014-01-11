@@ -1,20 +1,20 @@
 <tr>
 	<%= form_for(@new_item_spec) do |f| %>
-		<td></td>
-		<td><%= f.collection_select :trait_id, @available_traits, :id, :code, {:prompt => :true}, {:style => "width:100%;"} %></td>
-		<td><%= f.text_field :string_value, :style => "width:80%;" %></td>
-		
-		<td><%= f.text_field :numeric_value, :style => "width:80%;" %></td>
-		<td><%= f.text_field :usl, :style => "width:80%;" %></td>
-		<td><%= f.text_field :lsl, :style => "width:80%;" %></td>
-		<td><%= f.text_field :unit_of_measure, :style => "width:80%;" %></td>		
-		<td><%= f.collection_select :analysis_id, Analysis.all, :id, :code, {:prompt => :true}, {:style => "width:100%;"} %></td>
-		<td class="hidden-md"><%= f.text_field :eff_date, :style => "width:80%;" , 'data-behaviour' => 'datepicker' %></td>
-		<td class="hidden-md"></td>
-		
-		<td class="hidden-md"></td>
-		<td class="centered"><%= f.submit "Add Specification" %></td>
-		<%= f.hidden_field :item_id, :value => @item_id %>
+		<div class="form-group">
+			<td></td>
+			<td><%= f.collection_select :trait_id, @available_traits, :id, :code, {:prompt => "Select"}, :class => "form-control input-sm" %></td>
+			<td><%= f.text_field :string_value, :class => "form-control input-sm" %></td>			
+			<td><%= f.text_field :numeric_value, :class => "form-control input-sm" %></td>
+			<td><%= f.text_field :usl, :class => "form-control input-sm" %></td>
+			<td><%= f.text_field :lsl, :class => "form-control input-sm" %></td>
+			<td><%= f.text_field :unit_of_measure, :class => "form-control input-sm" %></td>		
+			<td><%= f.collection_select :analysis_id, Analysis.all, :id, :code, {:prompt => :true}, :class => "form-control input-sm" %></td>
+			<td class="hidden-md"><%= f.text_field :eff_date, 'data-behaviour' => 'datepicker', :class => "form-control input-sm" %></td>
+			<td class="hidden-md"></td>			
+			<td class="hidden-md"></td>
+			<td><%= f.submit "Add Specification", :class => "btn btn-default btn-sm" %></td>
+			<%= f.hidden_field :item_id, :value => @item_id %>
+		</div>
 	<% end %>
 </tr>
 

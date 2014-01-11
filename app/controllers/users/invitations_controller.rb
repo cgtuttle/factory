@@ -22,6 +22,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # GET /resource/invitation/accept?invitation_token=abcdef
   def edit
+    @is_edit_form = true
     @user = User.find_by_invitation_token(params[:invitation_token])
     logger.debug "@user.sign_in_count: #{@user.sign_in_count}"
     if @user.sign_in_count > 0
@@ -42,7 +43,7 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def add_membership
-  	Membership.create(:tenant_id => current_tenant.id, :user_id => @user.id, :role_id => Role.find_by_role_name("user"))
+  	Membership.create(:tenant_id => current_tenant.id, :user_id => @user.id, :role_id => Role.find_by_role_name("user").id)
   end
 
   def current_inviter

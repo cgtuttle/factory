@@ -15,7 +15,7 @@
 
 	<div class="form-group">
 		<%= f.submit t("devise.invitations.new.submit_button"), :class => "btn btn-primary" %>
-		<%= f.submit "Cancel", :class => "btn btn-default" %>
+		<%= link_to 'Cancel', memberships_path, :class => "btn btn-default" %>
 	</div>
 
 <% end %>

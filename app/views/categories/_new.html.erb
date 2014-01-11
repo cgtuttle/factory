@@ -1,11 +1,7 @@
-
 <%= form_for @category do |f| %>
-	<%= render 'layouts/body/errors', :index => @category %>
-	<div>
-		<div>
-			<td><%= f.text_field :code, :autofocus => true %></td>
-			<td><%= f.text_field :name %></td>
-			<td class="centered"><%= f.submit "Add Category" %></td>
-		</div>
+	<div class="form-group">
+		<td><%= f.text_field :code, :autofocus => true, :class => "form-control input-sm" %></td>
+		<td><%= f.text_field :name, :class => "form-control input-sm" %></td>
+		<td><%= f.submit "Add Category", :class => "btn btn-default btn-sm" %></td>
 	</div>
 <% end %>

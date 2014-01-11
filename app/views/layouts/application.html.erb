@@ -22,9 +22,7 @@
           <div class="row">                        
             <%= render 'layouts/body/title_layout' if @title %>
             <%= render :partial => 'layouts/body/table_layout', :object => @index, :as => :index if @is_table %>
-            <!--! rendered table_layout --> 
-            <%= render :partial => 'layouts/body/list_layout', :object => @list, :as => :list if @is_list %>
-            <!--! rendered list_layout -->  
+            <!--! rendered table_layout -->  
             <%= yield %>      
           </div>
 

@@ -6,6 +6,7 @@
 	<div class="top-space"></div>
 
 	<%= form_for (@new_item_spec), :role => "form" do |f| %>
+		<%= render 'layouts/body/errors', :index => @new_item_spec %>	
 		<%= f.hidden_field :item_id, :value => @item_id %>
 		<%= f.hidden_field :version %>
 		<div class="form-group">

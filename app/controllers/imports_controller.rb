@@ -10,7 +10,6 @@ class ImportsController < ApplicationController
 		if params[:model]
 			@model = params[:model]
 		end
-		@is_list = false
 		@is_edit_form = true
 	end
 	

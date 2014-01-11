@@ -9,18 +9,15 @@ load_and_authorize_resource
 		@span = 5
 		@is_table = true
 	end
-	
-	def create
-		if params[:commit] != 'Cancel'
-			@analysis = Analysis.new(params[:analysis])
-			if @analysis.save
-				flash[:success] = "analysis added"
-			else
-				flash[:error] = "analysis could not be added"
-#TODO Add more descriptive error messages
-			end
-		end
-		redirect_to analyses_path
+
+	def create	
+		@analysis = Analysis.new(params[:analysis])
+		if @analysis.save
+			flash[:success] = "Analysis added"
+			redirect_to analyses_path
+		else
+			render :new
+		end		
 	end
 
   def edit
@@ -28,16 +25,12 @@ load_and_authorize_resource
 	end
 	
 	def update
-		@is_edit_form = true
-		if params[:commit] != 'Cancel'
-			if @analysis.update_attributes(params[:analysis])
-				flash[:success] = 'analysis updated'
-				redirect_to analyses_path
-			else
-				render :action => :edit
-			end
-		else
+		@is_edit_form = true		
+		if @analysis.update_attributes(params[:analysis])
+			flash[:success] = 'Analysis updated'
 			redirect_to analyses_path
+		else
+			render :edit
 		end
 	end
 

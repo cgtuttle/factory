@@ -11,16 +11,12 @@ class CategoriesController < ApplicationController
 	end
 	
 	def create
-		if params[:commit] != 'Cancel'
-			@category = Category.new(params[:category])
-			order = (params[:category][:display_order]).to_i
-			@category.reorder(order)
-			if @category.save
-				flash[:success] = "Category added"
-				redirect_to categories_path
-			end
-		else
+		@category = Category.new(params[:category])
+		if @category.save
+			flash[:success] = "Category added"
 			redirect_to categories_path
+		else
+			render :new
 		end
 	end
 
@@ -30,19 +26,13 @@ class CategoriesController < ApplicationController
 	
 	def update
 		@is_edit_form = true
-		if params[:commit] != 'Cancel'
-			@category = Category.find(params[:id])
-			order = (params[:category][:display_order]).to_i
-			@category.reorder(order)
-			if @category.update_attributes(params[:category])
-				flash[:success] = "Category updated"
-				redirect_to categories_path				
-			else
-				render :action => :edit
-			end
+		@category = Category.find(params[:id])
+		if @category.update_attributes(params[:category])
+			flash[:success] = "Category updated"
+			redirect_to categories_path				
 		else
-			redirect_to categories_path
-		end		
+			render :edit
+		end
 	end
 
 	def destroy

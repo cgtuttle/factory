@@ -18,19 +18,14 @@ class TraitsController < ApplicationController
 	end
 	
 	def create
-		if params[:commit] != 'Cancel'
-			@trait = Trait.new(params[:trait])
-			order = (params[:trait][:display_order]).to_i
-			@trait.reorder(order)
-			if @trait.save
-				flash[:success] = "Trait added"
-				redirect_to traits_path
-			else
-				flash[:error] = "Trait could not be added"
-#TODO Add more descriptive error messages
-				redirect_to traits_path
-			end
+		@trait = Trait.new(params[:trait])
+		order = (params[:trait][:display_order]).to_i
+		@trait.reorder(order)
+		if @trait.save
+			flash[:success] = "Trait added"
+			redirect_to traits_path
 		else
+			flash[:error] = "Trait could not be added"
 			redirect_to traits_path
 		end
 	end
@@ -41,19 +36,15 @@ class TraitsController < ApplicationController
   end
 	
 	def update
-		if params[:commit] != 'Cancel'
-			@trait = Trait.find(params[:id])
-			order = (params[:trait][:display_order]).to_i
-			order = 0 if order.nil?
-			@trait.reorder(order)
-			if @trait.update_attributes(params[:trait])
-				flash[:success] = "Trait updated"
-				redirect_to traits_path
-			else
-				render :action => :edit
-			end
-		else
+		@trait = Trait.find(params[:id])
+		order = (params[:trait][:display_order]).to_i
+		order = 0 if order.nil?
+		@trait.reorder(order)
+		if @trait.update_attributes(params[:trait])
+			flash[:success] = "Trait updated"
 			redirect_to traits_path
+		else
+			render :action => :edit
 		end
 	end
 

@@ -14,7 +14,7 @@ class TenantsController < ApplicationController
 			@membership = Membership.new(:tenant_id => @tenant.id, :user_id => current_user.id, :role_id => @role.id)
 			if @membership.save
 				set_current_tenant(@tenant)
-				redirect_to tenant_path(@tenant)
+				redirect_to tenants_path
 			end
 		end
 	end

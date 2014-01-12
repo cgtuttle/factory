@@ -15,6 +15,7 @@ class Ability
       can :manage, :all 
     when "admin"
       can :manage, :all
+      cannot [:update, :create, :destroy], Tenant
     when "manager"
       can :view, :all
       can :manage, [Analysis, Category, Import, Item, ItemSpec, Trait]

@@ -49,6 +49,7 @@ Cleanup:
  ✔ imports/new.html.erb @done (13-12-29 18:03)
  ✔ item_specs/i/notes @done (13-12-29 18:13)
  ✔ item_specs/i/edit (title) @done (13-12-29 18:22)
+ ☐ Change Role.role_name to Role.name
  ☐ items/i/copy
  ✔ analyses/i/edit (title) @done (13-12-29 18:23)
  ✔ tenants (narrow) @done (13-12-29 17:30)

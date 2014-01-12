@@ -16,7 +16,7 @@
         <tr>
         <td></td>
           <% (1..@column_count).each do |col| %>    
-            <td class="column-label">Column <%= col %></td>
+            <td>Column <%= col %></td>
           <% end %>
         </tr>
 
@@ -24,8 +24,7 @@
         <td></td>  
           <% (1..@column_count).each do %>                
             <td>
-              <%= select_tag "field_choices[]", options_for_select(@field_choices), :prompt => '--Select--',
-                :style => "width:100%;" %>
+              <%= select_tag "field_choices[]", options_for_select(@field_choices), :prompt => '--Select--', :class => "form-control" %>
             </td>        
           <% end %>
         </tr>

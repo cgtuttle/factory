@@ -10,9 +10,9 @@
     <li><h4><small> Select Target Table</small></h4></li>
   </ul>
     
-  <div class="form-group" style="padding:20px 0 0 0;">       
+  <div class="form-group">       
     <%= f.label 'import into' do %>
-      Import into <%= f.select :model, Import::MODELS.sort, :selected => @model, :include_blank => '--- Select Table ---'  %>
+      Import into <%= f.select :model, Import::MODELS.sort, {:selected => @model}, :include_blank => '--- Select Table ---', :class => "form-control"  %>
     <% end %>
   </div>
 
@@ -25,7 +25,7 @@
 
   <div class="form-group" >   
     <%= f.label 'upload file' do %>
-      <%= file_field_tag :file, :class => "btn" %>
+      <%= file_field_tag :file %>
     <% end %>
   </div>
   <hr>

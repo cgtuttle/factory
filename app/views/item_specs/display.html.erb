@@ -5,17 +5,17 @@
 	
 	<table class="table table-bordered table-hover table-responsive display">
 		
-			<thead class="display-header">
-				<tr>
-					<th class="category-name display">Category</th>
-					<th class="display">Specification</th>
-					<th class="display">Lower Limit</th>
-					<th class="align_center display">Target</th>
-					<th class="align_right display">Upper Limit</th>
-					<th class="align_center display">Notes</th>
-				</tr>
-			</thead>
-			<% if @categories %>
+		<thead class="display-header">
+			<tr>
+				<th class="category-name display">Category</th>
+				<th class="display">Specification</th>
+				<th class="display">Lower Limit</th>
+				<th class="align_center display">Target</th>
+				<th class="align_right display">Upper Limit</th>
+				<th class="align_center display">Notes</th>
+			</tr>
+		</thead>
+		<% if @categories %>
 			<tbody>
 				<% @categories.each do |category, item_specs| %>					
 					
@@ -58,13 +58,16 @@
 									
 								</tr>										
 							<% end %>	
-						<% end %>
-					
+						<% end %>					
 				<% end %>
 			</tbody>
-			<% end %>
-			
-		
+		<% else %>
+			<tbody>
+				<tr class="display-row">
+					<td colspan="6", class="align_center display"><strong>No Item Specifications exist</strong></td>
+				</tr>
+			</tbody>
+		<% end %>		
 	</table> <!--! end of table -->
 </div>
 

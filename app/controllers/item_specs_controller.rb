@@ -87,13 +87,14 @@ class ItemSpecsController < ApplicationController
 		@items = Item.order('code')
 		@display = true
 		@body_class = "display"	
-		if params.has_key?(:item)
-			@item = Item.find(params[:item][:id])
-		elsif params.has_key?(:item_id)
-			@item = Item.by_existence(params[:item_id])		
-		else
-			@item = Item.find(get_item_id)
-		end
+		set_scope
+#		if params.has_key?(:item)
+#			@item = Item.find(params[:item][:id])
+#		elsif params.has_key?(:item_id)
+#			@item = Item.by_existence(params[:item_id])		
+#		else
+#			@item = Item.find(get_item_id)
+#		end
 		if @item
 			cookies[:item_id] = @item.id
 			@item_specs = ItemSpec.includes(:trait => :category).where(:item_id => @item).order("categories.display_order")

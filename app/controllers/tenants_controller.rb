@@ -53,8 +53,12 @@ class TenantsController < ApplicationController
 	  flash[:success] = "You successfully switched to #{current_tenant.name}"
 	  if can? :manage, @current_tenant
 			redirect_to tenants_path
-		else			
-			redirect_to display_item_specs_path			
+		else
+			if can? :manage, ItemSpec
+				redirect_to item_specs_path
+			else
+				redirect_to display_item_specs_path
+			end
 		end
   end
 

@@ -48,7 +48,7 @@ logger.debug "Running import/update"
 		end
 		if @import.update_attributes(params[:import])
 			if save_import
-loger.debug "Saved Import"
+logger.debug "Saved Import"
 				flash[:success] = "Import completed successfully."
 			else
 				flash[:error] = "Import not completed"

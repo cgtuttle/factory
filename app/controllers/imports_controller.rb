@@ -14,27 +14,25 @@ class ImportsController < ApplicationController
 	end
 	
 	def create
-		if params[:file]
-			if params[:import_file]=='Continue' # Continue button clicked
-				@import = Import.new(params[:import])
-				@import.user_id = 0 #current_user.id
-				@model = @import.model #selected model
-				@import.save
-				import_file
-				field_choices
-				render 'edit'
-			else
-				redirect_to :back
-			end
+		if params[:file]			
+			@import = Import.new(params[:import])
+			@import.user_id = 0 #current_user.id
+			@model = @import.model #selected model
+			@import.save
+			import_file
+			field_choices
+			render 'edit'
 		else
 			redirect_to new_import_path
 		end
 	end
 	
 	def edit
+logger.debug "Running import/edit"
 	end
 	
-	def update		
+	def update
+logger.debug "Running import/update"		
 		@import = Import.find(params[:id])
 		@first_row = params[:first_row]
 		@row_count = params[:row_count]
@@ -50,11 +48,14 @@ class ImportsController < ApplicationController
 		end
 		if @import.update_attributes(params[:import])
 			if save_import
+loger.debug "Saved Import"
 				flash[:success] = "Import completed successfully."
 			else
 				flash[:error] = "Import not completed"
 			end
-		end		
+		end
+logger.debug "Completed Import"
+		redirect_to new_import_path		
 	end
 
 	def help

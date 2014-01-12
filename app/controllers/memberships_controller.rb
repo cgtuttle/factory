@@ -30,6 +30,7 @@ class MembershipsController < ApplicationController
 		@membership = Membership.find(params[:id])
 		if @membership.update_attributes(params[:membership])
 			flash[:success] = "#{@membership.user.email} role changed to #{params[:membership][:role]}"
+			redirect_to memberships_path
 		else
 			render :action => :edit
 		end

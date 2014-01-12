@@ -32,6 +32,7 @@ class TenantsController < ApplicationController
 
 	def edit
 		@tenant = Tenant.find(params[:id])
+		@is_edit_form = true
 	end
 
 	def update

@@ -37,9 +37,6 @@ class TraitsController < ApplicationController
 	
 	def update
 		@trait = Trait.find(params[:id])
-		order = (params[:trait][:display_order]).to_i
-		order = 0 if order.nil?
-		@trait.reorder(order)
 		if @trait.update_attributes(params[:trait])
 			flash[:success] = "Trait updated"
 			redirect_to traits_path

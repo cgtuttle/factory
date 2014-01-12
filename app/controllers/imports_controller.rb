@@ -32,7 +32,6 @@ logger.debug "Running import/edit"
 	end
 	
 	def update
-logger.debug "Running import/update"		
 		@import = Import.find(params[:id])
 		@first_row = params[:first_row]
 		@row_count = params[:row_count]
@@ -48,13 +47,11 @@ logger.debug "Running import/update"
 		end
 		if @import.update_attributes(params[:import])
 			if save_import
-logger.debug "Saved Import"
 				flash[:success] = "Import completed successfully."
 			else
 				flash[:error] = "Import not completed"
 			end
 		end
-logger.debug "Completed Import"
 		redirect_to new_import_path		
 	end
 

@@ -39,7 +39,7 @@ General:
  ✔ Change all @width's to set_width @done (14-01-03 20:47)
  ✔ Remove _list_layout from system @done (14-01-05 13:25)
  ☐ Add error messages
- ☐ Set up item_specs/display to work with no entries
+ ✔ Set up item_specs/display to work with no entries @done (14-01-12 10:59)
 Cleanup:
  ✔ pages/enter.html.erb @done (13-11-09 17:14)
  ✔ Move flash next to title so page doesn't move up on fade @done (13-12-29 15:30)

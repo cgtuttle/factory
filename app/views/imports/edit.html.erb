@@ -1,5 +1,7 @@
 <% set_title "Import Data" %>
 
+<% set_width 12, 12 %> 
+
 <div>
   <h5>Row count: <%=@row_count%></h5>
 
@@ -81,9 +83,9 @@
         <% end %>
       </div>
 
-      <%= submit_tag 'Import', :name => 'import_file' %>
+      <%= submit_tag 'Import', :name => 'import_file', :class => "btn btn-primary" %>
 
-      <%= submit_tag 'Cancel', :name => 'import_file' %>
+      <%= link_to 'Cancel', new_import_path, :class => "btn btn-default" %>
 
     <% end %>
   </div>

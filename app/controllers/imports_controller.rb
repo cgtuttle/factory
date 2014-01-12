@@ -32,33 +32,29 @@ class ImportsController < ApplicationController
 	end
 	
 	def edit
-#		@import = Import.find(params[:import])
 	end
 	
-	def update
-		if params[:import_file] == 'Import'
-			@import = Import.find(params[:id])
-			@first_row = params[:first_row]
-			@row_count = params[:row_count]
-			@field_choices = params[:field_choices]
-			@import.first_row = @first_row
-			@import.row_count = @row_count
-			@import.cells.each do |cell|
-				if cell.column <= @field_choices.length && cell.row >= params[:import][:first_row].to_i
-					if @field_choices[cell.column-1] != 'Do not import'
-						cell.field_name = @field_choices[cell.column-1]
-					end
-				end		
-			end
-			if @import.update_attributes(params[:import])
-				if save_import
-					flash[:success] = "Import completed successfully."
-				else
-					flash[:error] = "Import not completed"
+	def update		
+		@import = Import.find(params[:id])
+		@first_row = params[:first_row]
+		@row_count = params[:row_count]
+		@field_choices = params[:field_choices]
+		@import.first_row = @first_row
+		@import.row_count = @row_count
+		@import.cells.each do |cell|
+			if cell.column <= @field_choices.length && cell.row >= params[:import][:first_row].to_i
+				if @field_choices[cell.column-1] != 'Do not import'
+					cell.field_name = @field_choices[cell.column-1]
 				end
-			end
+			end		
 		end
-		redirect_to new_import_path
+		if @import.update_attributes(params[:import])
+			if save_import
+				flash[:success] = "Import completed successfully."
+			else
+				flash[:error] = "Import not completed"
+			end
+		end		
 	end
 
 	def help

@@ -6,6 +6,7 @@ gem 'rails', '3.2.13'
 gem 'rake', '10.1.0'
 gem 'ffi', '1.9.3'
 gem 'therubyracer'
+gem 'thin'
 
 gem 'pg'
 gem 'figaro'
@@ -33,7 +34,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'thin'
 	gem 'webrick', '~> 1.3.1'
   gem 'hirb'
   gem 'guard-rspec'

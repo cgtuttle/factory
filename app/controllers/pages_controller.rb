@@ -6,5 +6,5 @@ class PagesController < ApplicationController
   	@fixed = true
   	@body_class = "static-page"
   end
-  
+
 end

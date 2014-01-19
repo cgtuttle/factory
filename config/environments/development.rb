@@ -37,6 +37,9 @@ Factory::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  # config.use_ssl = true
+  # config.ssl_port = 3001
+
   #config.middleware.use Rails::Rack::LogTailer
   
 end

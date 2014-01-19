@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  force_ssl
   around_filter :scope_current_tenant
   before_filter :scope_current_item
   before_filter :set_per_page
@@ -55,7 +56,6 @@ private
     @per_page = 16 if height > '900'
   end
     
-
   def current_ability
     logger.debug "running current_ability"
     @current_ability || Ability.new(current_user, current_tenant)

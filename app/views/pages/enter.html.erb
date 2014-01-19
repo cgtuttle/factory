@@ -3,20 +3,41 @@
 <% @title = false %>
 
 <div class="container">
-	<div class="row bottom-space top-space">
+	<div class="row">
 		<div class="visible-md visible-lg">	
 			<% if user_signed_in? %>							
 				<div class="col-xs-6"><%= link_to("Logout: #{current_user.email}", destroy_user_session_path, :method => :get) %></div>
 				<div class="col-xs-6 text-right"><%= link_to("Enter", tenants_path) %></div>					  	     
 			<% else %>
-				<%= form_for("user", :url => user_session_path, :html => {:class => "form-inline pull-right"}) do |f| %>					
-					<div class="text-center">
-						<%= f.text_field :email, :placeholder => "email", :class => "input-small", :type => "Email" %>
-					  <%= f.password_field :password, :placeholder => "password", :class => "input-small" %>
-					  <%= f.submit 'Sign in' %>
-					  <%= link_to('Register', new_user_registration_path)  %>
-					</div>
-				<% end %>
+						
+				<nav class="navbar pull-left">
+					<ul class="nav navbar-nav">							
+						<li><%= link_to 'Register', new_user_registration_path %></li>						
+						<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>								
+							<li><%= link_to "Forgot your password?", new_password_path(resource_name), :class => "pull-left" %></li>							
+						<% end -%>
+					</ul>
+				</nav>
+
+				<nav class="navbar pull-right">
+					<%= form_for("user", :url => user_session_path, :html => {:class => "navbar-form navbar-right"}) do |f| %>
+						<div class="form-group">
+							<%= f.label "email", :class => "sr-only" %>
+							<%= f.text_field :email, :placeholder => "email", :class => "form-control input-small", :type => "Email" %>						
+						</div>
+						<div class="form-group">
+							<%= f.label "password", :class => "sr-only" %>
+						  <%= f.password_field :password, :placeholder => "password", :class => "form-control input-small" %>
+						</div>
+						<%= f.submit 'Sign in', :class => "btn btn-primary btn-small" %>	
+						<div class="checkbox">
+							<%= f.label :remember_me, :class => "text-primary" do %>
+								<%= f.check_box :remember_me %>
+								Remember me
+							<% end %>
+						</div>		
+					<% end %>
+				</nav>
 			<% end %>	
 		</div>
 		<div class="visible-xs visible-sm">

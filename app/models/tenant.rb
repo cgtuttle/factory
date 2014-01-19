@@ -14,4 +14,10 @@ class Tenant < ActiveRecord::Base
   	logger.debug "running (get) self.current_id: current_id = #{Thread.current[:tenant_id]}"
     Thread.current[:tenant_id]
   end 
+
+  def self.factory_sync_id
+    Tenant.find_by_name("Factory Sync").id
+  end
+
+
 end

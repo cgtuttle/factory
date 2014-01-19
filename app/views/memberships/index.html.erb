@@ -4,33 +4,40 @@
 
 <% content_for :thead do %>
 
-	<p><%= current_tenant.name %> : <%= @role.role_name %></p>
+	<p><%= current_user.email %> : <%= current_tenant.name %> : <%= @role.role_name %></p>
 
 		<tr>
 			<th>User</th>
 			<th>Company</th>
 			<th>Role</th>
-			<th></th>
+			<th>Edit</th>
 		</tr>
 <% end %>
 
 <% content_for :table do %>
 	
 	<% @memberships.each do |m| %>
-		<tr>
-			<td><%= m.user.email %></td>
-			<td><%= m.tenant.name %></td>
-			<td><%= m.role.role_name %></td>
-			<td>
-				<%= link_to "Change role", edit_membership_path(m.id) %>
-				<% if m.role.role_name != "owner" && m.user != current_user %><%= link_to "Remove user", m, :method => "delete", :style => "padding-left:15px", :confirm => "This will remove #{m.user.email} from #{m.tenant.name}" %>
-				<% end %>
-			</td>
-		</tr>
+		<% if m.user == current_user || m.role.viewable %>
+			<tr>
+				<td><%= m.user.email %></td>
+				<td><%= m.tenant.name %></td>
+				<td><%= m.role.role_name %></td>
+				<td>
+					<% if m.role.role_name != "root" %>
+						<%= link_to "Change role", edit_membership_path(m.id) %>
+					<% end %>
+					<% if m.role.role_name != "owner" && m.user != current_user %>
+						<%= link_to "Remove user", m, :method => "delete", :style => "padding-left:15px", :confirm => "This will remove #{m.user.email} from #{m.tenant.name}" %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
 	<% end %>
 
 <% end %>
 
 <% content_for :footer do %>
-	<%= link_to "Invite new", new_user_invitation_path, :class => "btn btn-primary" %>
+	<% if can? :create, User %>
+		<%= link_to "Invite new", new_user_invitation_path, :class => "btn btn-primary" %>
+	<% end %>
 <% end %>	

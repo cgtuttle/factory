@@ -9,6 +9,7 @@ gem 'therubyracer'
 
 gem 'pg'
 gem 'figaro'
+gem 'thin'
 
 gem 'rails_12factor'
 

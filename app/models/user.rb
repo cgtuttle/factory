@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
+
+  def self.root_user_id
+    User.find_by_email('sysadmin@factorysync.com').id
+  end
   
 
 end

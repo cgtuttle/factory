@@ -18,6 +18,7 @@ General:
  ✔ Remove row class from edit forms @done (14-01-03 20:46)
  ✔ Change _new partials to form-control class @done (14-01-05 14:51)
  ✔ Limit lists to height of screen @done (14-01-04 15:38)
+ ☐ Make https in production and staging environments
  Usability:
  ✔ Add batch edit capability or copy record capability @done (13-11-16 15:51)
  ☐ Add search to items/index
@@ -30,10 +31,10 @@ General:
  ✔ Fix imports view - columns to rows @done (13-12-28 09:29)
  ✔ Add delete to analyses/index @done (13-12-29 09:20)
  ✔ Fix import/new Cancel button @done (13-12-29 10:05)
- ☐ Add remember me to sign-in
+ ✔ Add remember me to sign-in @done (14-01-18 16:33)
  ✔ Add edit for tenants @done (13-12-29 15:16)
  ✔ Change item_specs/index controls checkboxes to update on change @done (13-12-28 19:59)
- ☐ Add forgot password to home
+ ✔ Add forgot password to home @done (14-01-18 17:19)
  ☐ Change look of sort functionality
  ✔ Change all "Cancel" submits to link_to's @done (14-01-05 14:02)
  ✔ Change all @width's to set_width @done (14-01-03 20:47)

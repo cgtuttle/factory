@@ -20,16 +20,4 @@
 	Role.create(role_name: 'guest', display_order: '5', viewable: true)
 	Tenant.create(name: 'Factory Sync')
 	User.create(email: 'sysadmin@factorysync.com', password: 'password', password_confirmation: 'password')
-	Membership.create(user_id: root_user_id, tenant_id: factory_sync_id, role_id: root_role_id )
-
-	def root_user_id
-		User.find_by_email('sysadmin@factorysync.com').id
-	end
-
-	def factory_sync_id
-		Tenant.find_by_name("Factory Sync").id
-	end
-
-	def root_role_id
-		role.find_by_role_name("root").id
-	end
+	Membership.create(user_id: User.root_user_id, tenant_id: Tenant.factory_sync_id, role_id: Role.root_role_id )

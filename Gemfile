@@ -6,7 +6,7 @@ gem 'rails', '3.2.13'
 gem 'rake', '10.1.0'
 gem 'ffi', '1.9.3'
 gem 'therubyracer'
-# gem 'thin'
+gem 'thin'
 
 gem 'pg'
 gem 'figaro'

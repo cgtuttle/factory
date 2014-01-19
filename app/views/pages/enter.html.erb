@@ -5,9 +5,19 @@
 <div class="container">
 	<div class="row">
 		<div class="visible-md visible-lg">	
-			<% if user_signed_in? %>							
-				<div class="col-xs-6"><%= link_to("Logout: #{current_user.email}", destroy_user_session_path, :method => :get) %></div>
-				<div class="col-xs-6 text-right"><%= link_to("Enter", tenants_path) %></div>					  	     
+			<% if user_signed_in? %>
+				<nav class="navbar pull-left">
+					<ul class="nav navbar-nav">														
+						<li><%= link_to "Logout: #{current_user.email}", destroy_user_session_path, :method => :get %></li>
+					</ul>
+				</nav>
+
+				<nav class="navbar pull-right">
+					<ul class="nav navbar-nav">														
+						<li><%= link_to "Enter", tenants_path %></li>
+					</ul>
+				</nav>
+
 			<% else %>
 						
 				<nav class="navbar pull-left">

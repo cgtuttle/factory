@@ -10,7 +10,7 @@ General:
  ✔ Add titles to all pages @done (13-12-28 17:27)
  ☐ Add role administration
  ☐ Set user role as one of defaults
- ☐ Set up breakpoints for fields shown at different screen sizes
+ ✔ Set up breakpoints for fields shown at different screen sizes @done (14-01-18 17:19)
  ✘ Change class of apply button in item_specs/index from btn_primary to btn_normal @cancelled (13-12-29 09:02)
  ✔ Add fade-out to flash messages @done (13-12-28 15:09)
  ✔ Center all forms < 100% of page width @done (14-01-01 10:28)

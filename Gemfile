@@ -9,7 +9,6 @@ gem 'therubyracer'
 
 gem 'pg'
 gem 'figaro'
-gem 'thin'
 
 gem 'rails_12factor'
 
@@ -29,15 +28,18 @@ group :assets do
   gem 'bootstrap-sass', '~> 3.0.2.0'
 end
 
-group :development do
-	gem 'webrick', '~> 1.3.1'
+group :development, :test do
   gem 'rspec-rails', '~> 2.0'
+end
+
+group :development do
+  gem 'thin'
+	gem 'webrick', '~> 1.3.1'
   gem 'hirb'
   gem 'guard-rspec'
 end
 
 group :test do
-  gem 'rspec-rails', '~> 2.0'
   gem 'capybara'
   gem 'launchy'
   gem 'factory_girl_rails'

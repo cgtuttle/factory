@@ -8,6 +8,9 @@ gem 'ffi', '1.9.3'
 gem 'therubyracer'
 gem 'thin'
 
+gem 'sass-rails',   '~> 3.2.3'
+gem 'bootstrap-sass', '~> 3.1.0'
+
 gem 'pg'
 gem 'figaro'
 
@@ -23,10 +26,8 @@ gem 'will_paginate-bootstrap'
 gem 'bootstrap-datepicker-rails'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'bootstrap-sass', '~> 3.0.2.0'
 end
 
 group :development, :test do

@@ -19,6 +19,11 @@ General:
  ✔ Change _new partials to form-control class @done (14-01-05 14:51)
  ✔ Limit lists to height of screen @done (14-01-04 15:38)
  ☐ Make https in production and staging environments
+ ✔ Create "Copy To" at item_spec level @done (14-02-16 12:44)
+ ☐ Create "Copy To" at item level for item_specs
+ ☐ Create "Sync to/from" at item_spec level
+ ☐ Create Bulk Edit at item_spec level
+ ☐ Add item_spec index by item for a trait
  Usability:
  ✔ Add batch edit capability or copy record capability @done (13-11-16 15:51)
  ☐ Add search to items/index
@@ -60,6 +65,7 @@ Cleanup:
  ✔ sessions/new @done (13-12-31 09:18)
  ✔ tenants/new @done (13-12-31 09:35)
  ✔ tenants/i/edit @done (13-12-31 09:35)
+ ☐ items/copy
    
    users/invitation/new
    ✔ Add cancel button @done (13-12-29 18:39)

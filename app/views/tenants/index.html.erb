@@ -17,7 +17,7 @@
 		
 		<tr>
 			<td><% if t == current_tenant %><span class="glyphicon glyphicon-ok"></span><% end %></td>
-			<td><%= link_to t.name, {:controller => :tenants, :action => :set, :id => t.id}, :class => ("text-muted" if t != current_tenant) %></td>
+			<td><%= link_to_if t != current_tenant, t.name, {:controller => :tenants, :action => :set, :id => t.id} %></td>
 			<td><% if can? :update, Tenant %>		
 				<%= link_to "Edit", edit_tenant_path(t) %>
 			<% end %></td>

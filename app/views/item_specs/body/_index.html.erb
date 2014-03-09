@@ -1,14 +1,16 @@
-
-
-
 	
 	<tr class="<%= item_spec.eff_status %>">
-		<% if item_spec.trait.category %>
-			<td><%= item_spec.trait.category.code %></td>
+		<% if @list_for_an_item %>
+			<% if item_spec.trait.category %>
+				<td><%= item_spec.trait.category.code %></td>
+			<% else %>
+				<td></td>
+			<% end %>
+			<td><%= item_spec.trait.code %></td>
 		<% else %>
-			<td></td>
-		<% end %>
-		<td><%= item_spec.trait.code %></td>			
+			<td><%= link_to item_spec.item.code, item_specs_path(:list_by => "item", :item_spec => {:item_id => item_spec.item.id})	%></td>
+			<td><%= item_spec.item.name	%></td>
+		<% end %>		
 		<td><%= item_spec.string_value %></td>
 		
 		<td><%= item_spec.numeric_value %></td>
@@ -25,9 +27,11 @@
 			<% if item_spec.eff_status == 'current' %>
 				<%= link_to "Edit", edit_item_spec_path(item_spec) %>
 				<%= link_to "Delete",  item_spec, :method => :delete, :confirm => "Delete #{item_spec.trait.code} specification for #{item_spec.item.code}" %>
-				
+				<%= link_to "Copy", copy_item_spec_path(item_spec), :action => :copy %>
+
 			<% elsif item_spec.eff_status == 'pending' %>
-				<%= link_to "Delete", cancel_item_spec_path(item_spec), :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code} " %>				
+				<%= link_to "Delete", cancel_item_spec_path(item_spec), :confirm => "Delete pending update of #{item_spec.trait.code} specification for #{item_spec.item.code} " %>
+				<%= link_to "Copy", copy_item_spec_path(item_spec), :action => :copy %>				
 			<% end %>
 			
 			<%= link_to "Notes", notes_path(item_spec) %>

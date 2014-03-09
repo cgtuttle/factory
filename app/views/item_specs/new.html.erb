@@ -1,18 +1,32 @@
 <% set_title "New Specification" %>
 
 <div class="row top-space">
-
-	<strong>Item Code: <%= @item.code %></strong>
+	<% if !@list_by_trait %>
+		<strong>Item Code: <%= @item.code %></strong>
+	<% else %>
+		<strong>Trait Code: <%= @trait.code %></strong>
+	<% end %>
 	<div class="top-space"></div>
 
 	<%= form_for (@new_item_spec), :role => "form" do |f| %>
-		<%= render 'layouts/body/errors', :index => @new_item_spec %>	
-		<%= f.hidden_field :item_id, :value => @item_id %>
-		<%= f.hidden_field :version %>
-		<div class="form-group">
-	    <%= f.label "Trait" %>
-			<%= f.collection_select :trait_id, @available_traits, :id, :code, {:prompt => :true}, {:class => "form-control"} %>
-  	</div>
+		<%= render 'layouts/body/errors', :index => @new_item_spec %>
+
+		<% if !@list_by_trait %>
+			<%= f.hidden_field :item_id, :value => @item_id %>
+			<%= f.hidden_field :version %>
+			<div class="form-group">
+		    <%= f.label "Trait" %>
+				<%= f.collection_select :trait_id, @available_traits, :id, :code, {:prompt => :true}, {:class => "form-control"} %>
+	  	</div>
+	  <% else %>
+			<%= f.hidden_field :trait_id, :value => @trait_id %>
+			<%= f.hidden_field :version %>
+			<div class="form-group">
+		    <%= f.label "Item" %>
+				<%= f.collection_select :item_id, @available_items, :id, :code, {:prompt => :true}, {:class => "form-control"} %>
+			</div>
+	  <% end %>
+
 		<div class="form-group">
 	    <%= f.label "Text" %>
 			<%= f.text_field :string_value, :class => "form-control" %>

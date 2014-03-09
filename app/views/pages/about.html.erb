@@ -1,0 +1,60 @@
+<% set_title "About FactorySync" %>
+<% @menu = false %>
+
+<div class="container">
+	<div class="row">
+		<div class="visible-md visible-lg">	
+			<% if user_signed_in? %>
+				<nav class="navbar pull-left">
+					<ul class="nav navbar-nav">														
+						<li><%= link_to "Logout: #{current_user.email}", destroy_user_session_path, :method => :get %></li>
+					</ul>
+				</nav>
+
+				<nav class="navbar pull-right">
+					<ul class="nav navbar-nav">														
+						<li><%= link_to "Enter", tenants_path %></li>
+					</ul>
+				</nav>
+
+			<% else %>
+						
+				<nav class="navbar pull-left">
+					<ul class="nav navbar-nav">							
+						<li><%= link_to 'Register', new_user_registration_path %></li>						
+						<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>								
+							<li><%= link_to "Forgot your password?", new_password_path(resource_name), :class => "pull-left" %></li>							
+						<% end -%>
+					</ul>
+				</nav>
+
+				<nav class="navbar pull-right">
+					<%= form_for("user", :url => user_session_path, :html => {:class => "navbar-form navbar-right"}) do |f| %>
+						<div class="form-group">
+							<%= f.label "email", :class => "sr-only" %>
+							<%= f.text_field :email, :placeholder => "email", :class => "form-control input-small", :type => "Email" %>						
+						</div>
+						<div class="form-group">
+							<%= f.label "password", :class => "sr-only" %>
+						  <%= f.password_field :password, :placeholder => "password", :class => "form-control input-small" %>
+						</div>
+						<%= f.submit 'Sign in', :class => "btn btn-primary btn-small" %>	
+						<div class="checkbox">
+							<%= f.label :remember_me, :class => "text-primary" do %>
+								<%= f.check_box :remember_me %>
+								Remember me
+							<% end %>
+						</div>		
+					<% end %>
+				</nav>
+			<% end %>	
+		</div>
+		<div class="visible-xs visible-sm">
+			<%= link_to( "Sign in", new_user_session_path) %>
+			<%= link_to('Register', new_user_registration_path, :class => "pull-right")  %>
+		</div>
+	</div>
+
+	
+
+</div>

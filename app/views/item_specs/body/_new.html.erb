@@ -1,8 +1,15 @@
 <tr>
 	<%= form_for(@new_item_spec) do |f| %>
 		<div class="form-group">
-			<td></td>
-			<td><%= f.collection_select :trait_id, @available_traits, :id, :code, {:prompt => "Select"}, :class => "form-control input-sm" %></td>
+			<% if @list_for_an_item %>
+				<td></td>
+				<td><%= f.collection_select :trait_id, @available_traits, :id, :code, {:prompt => "Select"}, :class => "form-control input-sm" %></td>
+				<%= f.hidden_field :item_id, :value => @item.id %>
+			<% else %>
+				<td><%= f.collection_select :item_id, @items, :id, :code, {:prompt => "Select"}, :class => "form-control input-sm" %></td>
+				<td></td>
+				<%= f.hidden_field :trait_id, :value => @trait.id %>
+			<% end %>
 			<td><%= f.text_field :string_value, :class => "form-control input-sm" %></td>			
 			<td><%= f.text_field :numeric_value, :class => "form-control input-sm" %></td>
 			<td><%= f.text_field :usl, :class => "form-control input-sm" %></td>
@@ -13,7 +20,6 @@
 			<td class="hidden-md"></td>			
 			<td class="hidden-md"></td>
 			<td><%= f.submit "Add Specification", :class => "btn btn-default btn-sm" %></td>
-			<%= f.hidden_field :item_id, :value => @item_id %>
 		</div>
 	<% end %>
 </tr>

@@ -1,6 +1,7 @@
 class TenantsController < ApplicationController
 	before_filter :authenticate_user!
 	skip_around_filter :scope_current_tenant
+	skip_before_filter :initialize_resources
 	load_and_authorize_resource :except => [:index, :set, :new, :create]
 
   def new

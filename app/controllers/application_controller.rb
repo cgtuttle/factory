@@ -2,15 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   force_ssl
   around_filter :scope_current_tenant
-  before_filter :scope_current_item
   before_filter :set_per_page
+  before_filter :initialize_item, :initialize_trait
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to tenants_path, :alert => exception.message
   end
 
   def tenant_set?
-    logger.debug "Running tenant_set?"
     @tenant_set = !!current_tenant
   end
   helper_method :tenant_set?
@@ -20,31 +19,60 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_tenant
 
-  def current_item
-    @current_item ||= session[:current_item_id] && Item.find_by_id(session[:current_item_id])
-    @current_item ||= Item.first
+  def set_current_item
+    initialize_item
   end
-  helper_method :current_item
+  helper_method :set_current_item
+
+  def set_current_trait
+    initialize_trait
+  end
+  helper_method :set_current_trait
+
 
 private
 
   def after_sign_in_path_for(resource)
     tenants_path
 	end
+    
+  def current_ability
+    @current_ability || Ability.new(current_user, current_tenant)
+  end
+
+  def initialize_item
+    initialize_resources("item")
+  end
+
+  def initialize_trait
+    initialize_resources("trait")
+  end
+
+  def initialize_resources(resource_name)
+    resource = resource_name.capitalize.constantize
+    current_object = instance_variable_get("@#{resource_name}")
+    if current_object.blank?
+      current_id = cookies[resource_name.to_sym]
+      if !current_id.blank?
+        current_object = resource.find(current_id)
+      else
+        current_object = resource.first
+      end
+    end
+    exists = !current_object.blank?
+    cookies.delete resource_name.to_sym
+    instance_variable_set("@#{resource_name}s_exist", exists)
+    if exists
+      cookies[resource_name.to_sym] = current_object.id
+      instance_variable_set("@#{resource_name}", current_object)
+    end    
+  end
 
 	def scope_current_tenant
-    logger.debug "Running scope_currrent_tenant: current_tenant.id = #{current_tenant.id}"
     Tenant.current_id = current_tenant.id
     yield
   ensure
     Tenant.current_id = nil
-  end
-
-  def scope_current_item
-    if current_item
-      Item.current_id = current_item.id
-      logger.debug "Item.current_id = #{Item.current_id}"
-    end
   end
 
   def set_per_page
@@ -54,11 +82,6 @@ private
     @per_page = 10 if height > '700'
     @per_page = 12 if height > '800'
     @per_page = 16 if height > '900'
-  end
-    
-  def current_ability
-    logger.debug "running current_ability"
-    @current_ability || Ability.new(current_user, current_tenant)
   end
 
 end

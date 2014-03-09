@@ -27,11 +27,6 @@ module ApplicationHelper
     end
   end
 
-  def get_item_id
-    logger.debug "cookies  = #{cookies[:item_id]}"
-    Item.id_by_existence(cookies[:item_id])
-  end
-  
   def flatten_hash(hash = params, ancestor_names = [])
     flat_hash = {}
     hash.each do |k, v|

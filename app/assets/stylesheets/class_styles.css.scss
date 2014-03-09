@@ -1,5 +1,9 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
 $base-color: #00FF00;
 $base-color: #52526F;
+$page-color: #F1F1F1;
 $complimentary-color: #333333;
 $background-color: darken($base-color,40);
 $border-color: lighten($background-color,3);
@@ -8,10 +12,12 @@ $header-color: fade-out(darken($background-color, 7), .5);
 $font-color: lighten($background-color, 70);
 $header-font-color: lighten($complimentary-color,30);
 $static-page-color: #D9E8E5;
+$static-page-color: #F1F1F1;
 $static-page-text-color: #13038D;
 
 body {
   padding-top: 50px;
+  background-color: $page-color;
 }
 
 body.static-page {
@@ -79,7 +85,10 @@ button.close {
 }
 
 .jumbotron.hero-block {
-  background-color: darken($static-page-color, 5);
+  @include gradient-vertical(darken($static-page-color,10), lighten($static-page-color,10));
+  border-style: solid;
+  border-width: 1px;
+  border-color: darken($static-page-color, 20);
 }
 
 .bottom-space {

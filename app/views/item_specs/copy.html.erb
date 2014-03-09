@@ -1,0 +1,22 @@
+<% set_title "Copy Specification to" %>
+
+<% set_width(10, 12) %>
+
+<%= form_tag({:action => 'paste'}, {:id => @item_spec.id}) do %>
+	<%= submit_tag "Copy Item Spec", :class => "btn btn-primary" %>
+    <label>
+      <%= check_box "eff_date", "copy" %>
+      Copy Effective Date
+    </label>	
+	<div class="top-space"><strong>Target Items	</strong></div>
+	<% @items.each do |i| %>
+		<div class="checkbox">
+	    <label>
+	      <%= check_box "copy_to", "items", {:multiple => true }, i.code, nil %>
+	      <%= i.code %>
+	    </label>
+	  </div>
+  <% end %>	
+  <%= submit_tag "Copy Item Spec", :class => "btn btn-primary" %>	
+<% end %>
+

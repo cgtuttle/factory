@@ -1,4 +1,4 @@
-<% set_title "Item Specifications", prefix: "#{@item.code} " %>
+<% set_title "Item Specifications" %>
 <% set_width 12, 12 %>
 
 <% content_for :controls do %>
@@ -6,8 +6,18 @@
 	<div class="bottom-space">
 		<%= form_tag(item_specs_path, :method => :get, :class => "form-inline") do %>
 			<div class="form-group">
+				<div class="btn-group">
+					<%= radio_button_tag :list_by, "item", @list_for_an_item,  {:onchange => "this.form.submit();"} %>
+					<%= label_tag :list_by_item, "For an Item" %>
+					<%= radio_button_tag :list_by, "trait", @list_for_a_trait, {:onchange => "this.form.submit();"} %>
+					<%= label_tag :list_by_trait, "For a Trait"  %>
+				</div>
 
-				<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item_id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
+				<% if !@list_for_a_trait %>
+					<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
+				<% else %>
+					<%= collection_select :item_spec, :trait_id, @traits, :id, :code, {:selected => @trait.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
+				<% end %>
 				
 				<%= label_tag 'show_pending', :class => "checkbox" do %>
 					<%= check_box_tag name = "show_pending", value = "1", checked = @pending, {:type => "checkbox", :onchange => "this.form.submit();"} %>
@@ -30,10 +40,15 @@
 <% end %>
 
 <% content_for :thead do %>
-	<div>				
-		<th>Category</th>
-		<th>Specification</th>		
-		<th class="col-xs-2">Text</th>		
+	<div>
+		<% if !@list_for_a_trait %>				
+			<th>Category</th>
+			<th>Trait</th>
+		<% else %>
+			<th>Item Code</th>
+			<th class="col-xs-2">Name</th>
+		<% end %>	
+		<th class="col-xs-1">Text</th>		
 		<th>Value</th>
 		<th>USL</th>
 		<th>LSL</th>
@@ -42,20 +57,24 @@
 		<th class="col-md-1 col-lg-1">Eff Dt</th>	
 		<th class="hidden-md">Status</th>		
 		<th class="col-xs-1 hidden-md">Edited By</th>
-		<th class="col-xs-1"></th>
+		<th class="col-xs-2"></th>
 	</div>
 <% end %>
 
-<!-- pass index the collection for the loop -->		
-<% content_for :table do %>
-	<%= render "item_specs/body/new" %>
-	<%= render :partial => "item_specs/body/index", :collection => @item_specs, :as => :item_spec %>
+
+<% if @item %>
+	<!-- pass index the collection for the loop -->		
+	<% content_for :table do %>
+		<%= render "item_specs/body/new" %>
+		<%= render :partial => "item_specs/body/index", :collection => @item_specs, :as => :item_spec %>
+	<% end %>
+
+	<!-- pass multi_view the collection for the loop -->
+	<% content_for :multi_view do %>
+		<div class="bottom-space">	
+			<%= link_to "Add New Specification", new_item_spec_path, :class => "btn btn-default" %>	
+		</div>
+		<%= render :partial => "item_specs/body/multi_view", :collection => @item_specs, :as => :item_spec %>	
+	<% end %>
 <% end %>
 
-<!-- pass multi_view the collection for the loop -->
-<% content_for :multi_view do %>
-	<div class="bottom-space">	
-		<%= link_to "Add New Specification", new_item_spec_path, :class => "btn btn-default" %>	
-	</div>
-	<%= render :partial => "item_specs/body/multi_view", :collection => @item_specs, :as => :item_spec %>	
-<% end %>

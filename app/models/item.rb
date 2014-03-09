@@ -5,33 +5,6 @@ class Item < ActiveRecord::Base
 	attr_accessible :code, :name
 	default_scope { where(tenant_id: Tenant.current_id) }
 
-	def self.filtered(filter)
-		Item.where('code LIKE ?', filter).order('code') | Item.where('code NOT LIKE ?', filter).order('code')
-	end
-
-	def self.by_existence(id)
-		@count = Item.count(:all)
-		case @count
-		when 0
-			nil
-		when 1
-			Item.find(:first)			
-		else
-			if Item.exists?(id)
-				Item.find(id)
-			else
-				Item.find(:first)				
-			end	
-		end	
-	end
-
-	def self.id_by_existence(id)
-		if Item.by_existence(id).blank?
-			0
-		else
-			Item.by_existence(id).id
-		end
-	end
 
 	def available_traits
 		sql_string_used_traits = "
@@ -75,14 +48,6 @@ class Item < ActiveRecord::Base
 			spec.eff_date = Date.today	
 			spec.save!
 		end
-	end
-
-	def self.current_id=(id)
-		Thread.current[:item_id] = id
-	end
-
-	def self.current_id
-		Thread.current[:item_id]
 	end
 
 end

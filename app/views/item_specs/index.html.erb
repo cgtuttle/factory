@@ -12,8 +12,8 @@
 					<%= label_tag :list_for_trait, "For a Trait"  %>
 				</div>
 
-				<% if @list_for_an_item %>
-					<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
+				<% if @list_for_an_item %>					
+					<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item.id }, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>					
 				<% else %>
 					<%= collection_select :item_spec, :trait_id, @traits, :id, :code, {:selected => @trait.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
 				<% end %>

@@ -61,7 +61,6 @@ class ItemSpecsController < ApplicationController
 		end	
 		set_current_item
 		if @item
-logger.debug "Running item_specs:display for #{@item}"
 			cookies[:item_id] = @item.id
 			@item_specs = ItemSpec.includes(:trait => :category).where(:item_id => @item).order("categories.display_order")
 			@categories = @item_specs.group_by{|is| is.trait.category}		
@@ -95,6 +94,9 @@ logger.debug "Running item_specs:display for #{@item}"
 				@item_specs = ItemSpec.visible_by_item(@item.id, @visibility).paginate(:page => params[:page], :per_page => 15) #main ItemSpec retrieval
 				@index = @item_specs
 				@items = Item.order(:code)				
+			else
+				flash[:alert] = "No items exist. Please add at least one."
+				redirect_to items_path
 			end
 		else # @list_for_a_trait
 			if params.has_key?(:item_spec)

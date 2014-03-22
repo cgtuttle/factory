@@ -5,11 +5,11 @@ module ApplicationHelper
       when :success
         "alert-success"
       when :error
-        "alert-error"
+        "alert-danger"
       when :alert
-        "alert-block"
+        "alert-danger"
       when :notice
-        "alert-info"
+        "alert-success"
       else
         flash_type.to_s
     end

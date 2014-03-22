@@ -1,19 +1,18 @@
 <% set_title "Item Specifications" %>
 <% set_width 12, 12 %>
-
 <% content_for :controls do %>
 
 	<div class="bottom-space">
 		<%= form_tag(item_specs_path, :method => :get, :class => "form-inline") do %>
 			<div class="form-group">
 				<div class="btn-group">
-					<%= radio_button_tag :list_by, "item", @list_for_an_item,  {:onchange => "this.form.submit();"} %>
-					<%= label_tag :list_by_item, "For an Item" %>
-					<%= radio_button_tag :list_by, "trait", @list_for_a_trait, {:onchange => "this.form.submit();"} %>
-					<%= label_tag :list_by_trait, "For a Trait"  %>
+					<%= radio_button_tag :list_for, "item", @list_for_an_item,  {:onchange => "this.form.submit();"} %>
+					<%= label_tag :list_for_item, "For an Item" %>
+					<%= radio_button_tag :list_for, "trait", @list_for_a_trait, {:onchange => "this.form.submit();"} %>
+					<%= label_tag :list_for_trait, "For a Trait"  %>
 				</div>
 
-				<% if !@list_for_a_trait %>
+				<% if @list_for_an_item %>
 					<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
 				<% else %>
 					<%= collection_select :item_spec, :trait_id, @traits, :id, :code, {:selected => @trait.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>

@@ -54,9 +54,14 @@ class ItemSpecsController < ApplicationController
 		@span = 12
 		@items = Item.order('code')
 		@display = true
-		@body_class = "display"	
-		set_item_scope
+		@body_class = "display"
+		if params.has_key?(:item)
+			@item_id = params[:item][:id]
+			@item = Item.exists?(@item_id) ? Item.find(@item_id) : nil
+		end	
+		set_current_item
 		if @item
+logger.debug "Running item_specs:display for #{@item}"
 			cookies[:item_id] = @item.id
 			@item_specs = ItemSpec.includes(:trait => :category).where(:item_id => @item).order("categories.display_order")
 			@categories = @item_specs.group_by{|is| is.trait.category}		
@@ -70,38 +75,11 @@ class ItemSpecsController < ApplicationController
 	end
 
   def index
-  	@span = 12
-  	@is_table = true
-  	if params.has_key?(:list_by)
-logger.debug "Setting @list_for... by parameter"
-	  	@list_for_an_item = params[:list_by] == "item"
-	  elsif !cookies[:list_for_item].blank?
-logger.debug "Setting @list_for... by cookie"
-	  	@list_for_an_item = cookies[:list_for_item] == "1"
-	  else
-logger.debug "Setting @list_for... by value"
-	  	@list_for_an_item = true
-	  end
-	  @list_for_a_trait = !@list_for_an_item
-	  cookies[:list_for_item] = @list_for_an_item ? "1" : "0"
-
-  	if !params.has_key?(:item_spec)
-  		# cookies & params are "1" or "0", @variables are true or false
-			params[:show_history] = cookies[:history] == "1" ? "1" : "0" #nil
-	  	params[:show_pending] = cookies[:pending] == "1" ? "1" : "0" #nil
-	  	params[:show_deleted] = cookies[:deleted] == "1" ? "1" : "0" #nil
-	  end
-	  
-  	@history = params[:show_history] #== "1"
-  	@pending = params[:show_pending] #== "1"
-  	@deleted = params[:show_deleted] #== "1"
-
-  	cookies[:history] = @history #? "1" : "0"
-  	cookies[:pending] = @pending #? "1" : "0"
-  	cookies[:deleted] = @deleted #? "1" : "0"
-
-	 	@visibility = @history.to_i + (@pending.to_i * 4) + (@deleted.to_i * 8) + 18
-		# @visibility = (@history ? 1 : 0) + (@pending ? 4 : 0) + (@deleted ? 8 : 0) + 18
+  	@span = 12  	
+		@is_table = true
+  	set_list_view
+  	set_visibility
+  	
 		@traits = Trait.order(:display_order)
 		@available_traits = Trait.all
 		@available_items = Item.all
@@ -111,10 +89,6 @@ logger.debug "Setting @list_for... by value"
 				@item_id = params[:item_spec][:item_id]
 				@item = Item.exists?(@item_id) ? Item.find(@item_id) : nil
 			end
-			# if params.has_key?(:item_id)
-			# 	@item_id = params[:item_id]
-			# 	@item = Item.exists?(@item_id) ? Item.find(@item_id) : nil
-			# end
 			set_current_item
 	  	if @item
 		  	@new_item_spec = ItemSpec.new
@@ -208,14 +182,50 @@ logger.debug "Setting @list_for... by value"
 		elsif params.has_key?(:item_id)
 			@item_id = params[:item_id]
 		else
-			@item_id = get_item_id
+			if Item.count > 0
+				@item_id = Item.first.id
+			else
+				@item_id = nil
+			end
 		end
 		@item = Item.exists?(@item_id) ? Item.find(@item_id) : nil
+	end
+
+	def set_list_view
+  	if params.has_key?(:list_for)
+	  	@list_for_an_item = params[:list_for] == "item"
+	  elsif !cookies[:list_for_item].blank?
+	  	@list_for_an_item = cookies[:list_for_item] == "1"
+	  else
+	  	@list_for_an_item = true
+	  end
+	  @list_for_a_trait = !@list_for_an_item
+	  cookies[:list_for_item] = @list_for_an_item ? "1" : "0"
 	end
 
 	def set_trait_scope
 		@trait_id = params[:item_spec][:trait_id]
 		@trait = Trait.exists?(@trait_id) ? Trait.find(@trait_id) : nil
+	end
+
+	def set_visibility
+		if !params.has_key?(:item_spec)
+  		# cookies & params are "1" or "0", @variables are true or false
+			params[:show_history] = cookies[:history] == "1" ? "1" : "0" #nil
+	  	params[:show_pending] = cookies[:pending] == "1" ? "1" : "0" #nil
+	  	params[:show_deleted] = cookies[:deleted] == "1" ? "1" : "0" #nil
+	  end
+	  
+  	@history = params[:show_history] #== "1"
+  	@pending = params[:show_pending] #== "1"
+  	@deleted = params[:show_deleted] #== "1"
+
+  	cookies[:history] = @history #? "1" : "0"
+  	cookies[:pending] = @pending #? "1" : "0"
+  	cookies[:deleted] = @deleted #? "1" : "0"
+
+	 	@visibility = @history.to_i + (@pending.to_i * 4) + (@deleted.to_i * 8) + 18
+		# @visibility = (@history ? 1 : 0) + (@pending ? 4 : 0) + (@deleted ? 8 : 0) + 18
 	end
 
 end

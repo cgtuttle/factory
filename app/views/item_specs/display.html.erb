@@ -1,10 +1,7 @@
 <% set_width 12, 12 %>
 <% @title = false %>
-
-<div class="row-display">
-	
-	<table class="table table-bordered table-hover table-responsive display">
-		
+<div class="row-display">	
+	<table class="table table-bordered table-hover table-responsive display">		
 		<thead class="display-header">
 			<tr>
 				<th class="category-name display">Category</th>
@@ -17,55 +14,51 @@
 		</thead>
 		<% if @categories %>
 			<tbody>
-				<% @categories.each do |category, item_specs| %>					
-					
-						<% first_row = true %>										
-						<% for s in item_specs %>	
-							<% if s.eff_status == "current" %>
-								<tr class="display-row">
-									<% if first_row %>
-										<% first_row = false %>
-										<td class="category-name display">
-											<%= category.name if category %>
-										</td>
-									<% else %>
-										<td class="display"></td>
-									<% end %>
-
-									<td class="trait-name bold display"><%= s.trait.name %></td>
-
-									<td class="display"><%= s.lsl ||= nil %></td>
-
-									<td class="align_center bold display">
-										
-										<% if s.numeric_value %>								
-											<%= "#{s.numeric_value} #{s.unit_of_measure}" %>
-										<% end %>
-
-										<% if !s.string_value.empty? %>
-											<%= s.string_value %>
-										<% end %>
-
-										<% if !s.text_value.empty? %>
-											<%= s.text_value %>								
-										<% end %>
-
+				<% @categories.each do |category, item_specs| %>										
+					<% first_row = true %>										
+					<% for s in item_specs %>	
+						<% if s.eff_status == "current" %>
+							<tr class="display-row">
+								<% if first_row %>
+									<% first_row = false %>
+									<td class="category-name display">
+										<%= category.name if category %>
 									</td>
-
-									<td class="align_right display"><%= s.usl ||= nil %></td>								
-
-									<td class="right-margin display"><%= simple_format(s.notes ||= "") %></td>
-									
-								</tr>										
-							<% end %>	
-						<% end %>					
+								<% else %>
+									<td class="display"></td>
+								<% end %>
+								<td class="trait-name bold display"><%= s.trait.name %></td>
+								<td class="display"><%= s.lsl ||= nil %></td>
+								<td class="align_center bold display">										
+									<%= "#{s.numeric_value} #{s.unit_of_measure}" if s.numeric_value %>
+									<%= s.string_value if !s.string_value.empty? %>
+									<%= s.text_value if !s.text_value.empty? %>								
+								</td>
+								<td class="align_right display"><%= s.usl ||= nil %></td>								
+								<td class="right-margin display"><%= simple_format(s.notes ||= "") %></td>								
+							</tr>										
+						<% end %>	
+					<% end %>					
 				<% end %>
 			</tbody>
 		<% else %>
 			<tbody>
-				<tr class="display-row">
-					<td colspan="6", class="align_center display"><strong>No Item Specifications exist</strong></td>
-				</tr>
+				<% for s in @item_specs %>	
+					<% if s.eff_status == "current" %>
+						<tr class="display-row">
+							<td class="display"></td>
+							<td class="trait-name bold display"><%= s.trait.name %></td>
+							<td class="display"><%= s.lsl ||= nil %></td>
+							<td class="align_center bold display">										
+								<%= "#{s.numeric_value} #{s.unit_of_measure}" if s.numeric_value %>
+								<%= s.string_value if !s.string_value.empty? %>
+								<%= s.text_value if !s.text_value.empty? %>								
+							</td>
+							<td class="align_right display"><%= s.usl ||= nil %></td>								
+							<td class="right-margin display"><%= simple_format(s.notes ||= "") %></td>								
+						</tr>										
+					<% end %>	
+				<% end %>		
 			</tbody>
 		<% end %>		
 	</table> <!--! end of table -->

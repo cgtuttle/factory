@@ -49,10 +49,13 @@ private
   end
 
   def initialize_resources(resource_name)
+    logger.debug "Running initialize_resources(#{resource_name}"
     resource = resource_name.capitalize.constantize
     current_object = instance_variable_get("@#{resource_name}")
+    logger.debug "current_object = #{current_object.inspect}"
+    cookie_name = "#{current_tenant.id}_#{resource_name}".to_sym
     if current_object.blank?
-      current_id = cookies[resource_name.to_sym]
+      current_id = cookies[cookie_name]
       if !current_id.blank?
         current_object = resource.find(current_id)
       else
@@ -60,10 +63,11 @@ private
       end
     end
     exists = !current_object.blank?
-    cookies.delete resource_name.to_sym
+    cookies.delete cookie_name
     instance_variable_set("@#{resource_name}s_exist", exists)
     if exists
-      cookies[resource_name.to_sym] = current_object.id
+logger.debug "Exists"
+      cookies[cookie_name] = current_object.id
       instance_variable_set("@#{resource_name}", current_object)
     end    
   end

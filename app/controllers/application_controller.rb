@@ -56,7 +56,7 @@ private
     cookie_name = "#{current_tenant.id}_#{resource_name}".to_sym
     if current_object.blank?
       current_id = cookies[cookie_name]
-      if !current_id.blank?
+      if !current_id.blank? && resource.exists?(current_id)
         current_object = resource.find(current_id)
       else
         current_object = resource.first
@@ -66,7 +66,6 @@ private
     cookies.delete cookie_name
     instance_variable_set("@#{resource_name}s_exist", exists)
     if exists
-logger.debug "Exists"
       cookies[cookie_name] = current_object.id
       instance_variable_set("@#{resource_name}", current_object)
     end    

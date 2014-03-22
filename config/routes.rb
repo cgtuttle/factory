@@ -9,11 +9,6 @@ Factory::Application.routes.draw do
     post "/login" => "devise/sessions#create", :as => :user_session
     get "/logout" => "devise/sessions#destroy", :as => :destroy_user_session
     get "signup" => "devise/registrations#new", :as => :new_user_registration
-    # put "update-registration" => "devise/registrations#update", :as => :user_registration
-    # delete "delete-registration" => "devise/registrations#destroy", :as => :delete_user_registration
-    # get "edit-registration" => "devise/registrations#edit", :as => :edit_user_registration
-    # get "cancel-registration" => "devise/registrations#cancel", :as => :cancel_user_registration
-    # post "create-registration" => "devise/registrations#create", :as => :user_registration
     put "update-registration" => "users/registrations#update", :as => :user_registration
     delete "delete-registration" => "users/registrations#destroy", :as => :delete_user_registration
     get "edit-registration" => "users/registrations#edit", :as => :edit_user_registration

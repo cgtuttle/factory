@@ -6,7 +6,6 @@ production:
   username: cgtuttle
   password: cgtuttle
 
-
 development:
   adapter: postgresql
   encoding: unicode

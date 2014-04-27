@@ -74,7 +74,9 @@ class ItemSpec < ActiveRecord::Base
 	end
 
 	def valid_eff_date?
-		if self.eff_date < Date.today
+		if self.eff_date.blank?
+			self.eff_date = Date.today
+		elsif self.eff_date < Date.today
 			errors.add(:eff_date, 'must be today or later')
 		end
 	end

@@ -12,7 +12,7 @@ module ImportsHelper
 					@cell = @import.cells.new
 					@cell.row = i + 1
 					@cell.column = j + 1
-					@cell.cell_value = cell
+					@cell.cell_value = cell.blank? ? "" : cell.encode('UTF-8', 'binary', :invalid => :replace, :undef => :replace, replace: "")
 					@cell.import_id = @import.id
 					@cell.save
 					if j+1 > @column_count
@@ -35,6 +35,8 @@ module ImportsHelper
 			end
 		end
 	end
+
+# When importing a new ItemSpec, the Eff_Date field is not being inserted, causing validation to fail.
 	
 	def save_import
 		@obj = @import.model.constantize

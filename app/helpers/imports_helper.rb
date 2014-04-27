@@ -35,8 +35,6 @@ module ImportsHelper
 			end
 		end
 	end
-
-# When importing a new ItemSpec, the Eff_Date field is not being inserted, causing validation to fail.
 	
 	def save_import
 		@obj = @import.model.constantize

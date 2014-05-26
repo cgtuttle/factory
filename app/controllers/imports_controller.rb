@@ -1,6 +1,7 @@
 class ImportsController < ApplicationController
 	include ApplicationHelper
 	include ImportsHelper
+	include ImportCSV
 	load_and_authorize_resource
 		
 	def index
@@ -19,7 +20,8 @@ class ImportsController < ApplicationController
 			@import.user_id = 0 #current_user.id
 			@model = @import.model #selected model
 			@import.save
-			import_file
+			import_file(params[:file])
+			store_csv_cells
 			field_choices
 			render 'edit'
 		else
@@ -27,24 +29,19 @@ class ImportsController < ApplicationController
 		end
 	end
 	
-	def edit
-logger.debug "Running import/edit"
-	end
-	
 	def update
 		@import = Import.find(params[:id])
 		@first_row = params[:first_row]
 		@row_count = params[:row_count]
 		@field_choices = params[:field_choices]
+		@field_choices.each_with_index do |name, col_num|						
+			update_field_names(@import.id, col_num, name)
+			if name.slice!("_id") == "_id" 
+				update_id_fields(@import.id, col_num, name.pluralize)
+			end			
+		end	
 		@import.first_row = @first_row
 		@import.row_count = @row_count
-		@import.cells.each do |cell|
-			if cell.column <= @field_choices.length && cell.row >= params[:import][:first_row].to_i
-				if @field_choices[cell.column-1] != 'Do not import'
-					cell.field_name = @field_choices[cell.column-1]
-				end
-			end		
-		end
 		if @import.update_attributes(params[:import])
 			if save_import
 				flash[:success] = "Import completed successfully."

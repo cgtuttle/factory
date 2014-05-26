@@ -11,7 +11,7 @@
 			<td><%= link_to item_spec.item.code, item_specs_path(:list_for => "item", :item_spec => {:item_id => item_spec.item.id})	%></td>
 			<td><%= item_spec.item.name	%></td>
 		<% end %>		
-		<td><%= item_spec.string_value %></td>
+		<td><%= item_spec.text_value %></td>
 		
 		<td><%= item_spec.numeric_value %></td>
 		<td><%= item_spec.usl %></td>

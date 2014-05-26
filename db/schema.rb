@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110191006) do
+ActiveRecord::Schema.define(:version => 20140511221440) do
 
   create_table "analyses", :force => true do |t|
     t.string   "code",         :limit => 64,                     :null => false
@@ -40,16 +40,14 @@ ActiveRecord::Schema.define(:version => 20131110191006) do
   add_index "categories", ["tenant_id"], :name => "index_categories_on_tenant_id"
 
   create_table "cells", :force => true do |t|
-    t.integer  "import_id"
-    t.integer  "row"
-    t.integer  "column"
-    t.string   "cell_value"
-    t.string   "field_name"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.datetime "saved_at"
-    t.boolean  "had_save_error"
-    t.string   "save_error_text"
+    t.integer "import_id"
+    t.integer "row_num"
+    t.integer "col_num"
+    t.text    "cell_value"
+    t.string  "field_name"
+    t.boolean "had_save_error"
+    t.string  "save_error_text"
+    t.boolean "id_match"
   end
 
   create_table "imports", :force => true do |t|

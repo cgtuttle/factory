@@ -3,7 +3,9 @@ class Import < ActiveRecord::Base
 	
 	accepts_nested_attributes_for :cells
 
-	attr_accessible :model, :cells_attributes
+	attr_accessible :model, :first_row, :row_count, :id_column, :cells_attributes
+
+	default_scope { where(tenant_id: Tenant.current_id) }
 	
 	require 'csv'
 	

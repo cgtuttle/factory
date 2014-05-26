@@ -48,15 +48,15 @@
         </tr>
           
             <%= f.fields_for :cells do |ff| %>
-              <% if ff.object.row < 4 %>
-                <% if ff.object.column == 1 %>
+              <% if ff.object.row_num < 4 %>
+                <% if ff.object.col_num == 0 %>
                   <tr>
-                  <td style="text-align:center;"><%= ff.object.row %></td>
+                  <td style="text-align:center;"><%= ff.object.row_num %></td>
                 <% end %>
                     <td style="text-align:center;color:blue;">
                       <%= ff.object.cell_value %>
                     </td>
-                <% if ff.object.column == @column_count %>
+                <% if ff.object.col_num == @column_count %>
                   </tr>
                 <% end %>
               <% end %>

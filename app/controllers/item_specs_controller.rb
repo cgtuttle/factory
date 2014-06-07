@@ -108,7 +108,8 @@ class ItemSpecsController < ApplicationController
 				@new_item_spec = ItemSpec.new
 				@item_specs = ItemSpec.visible_by_trait(@trait.id, @visibility).paginate(:page => params[:page], :per_page => 15) #main ItemSpec retrieval
 				@index = @item_specs
-				@traits = Trait.order(:code)				
+				@current_traits = ItemSpec.where(:item_id => @item.id).pluck(:trait_id)
+				@traits = Trait.where('id IN (?)', @current_traits).order(:code)				
 			end
 		end
   end

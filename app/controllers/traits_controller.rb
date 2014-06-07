@@ -5,7 +5,6 @@ class TraitsController < ApplicationController
 	before_filter :find_categories
 	
   def index
-  	@traits = Trait.order("display_order")
   	@sortable_url = sort_traits_url
   	@layout_type = "fluid"
 		@trait = Trait.new()

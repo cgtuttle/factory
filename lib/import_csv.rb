@@ -61,7 +61,8 @@ module ImportCSV
 			cell_hash[field_name] = row_cell.cell_value
 			#--------Full row loaded, save it
 			if row_cell.col_num == columns
-				save_object = @obj.new(cell_hash)				
+				save_object = @obj.where('code = (?)', cell_hash[code]) || @obj.new(cell_hash)
+#				save_object = @obj.new(cell_hash)				
 				save_object.save!
 				cell_hash = {}				
 			end

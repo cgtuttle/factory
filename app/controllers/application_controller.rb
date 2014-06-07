@@ -79,7 +79,7 @@ private
   end
 
   def set_per_page
-    height = cookies[:height].blank? ? '800' : cookies[:height]
+    height = cookies[:height].blank? ? '801' : cookies[:height]
     logger.debug "height = #{height}"
     @per_page = 5
     @per_page = 10 if height > '700'

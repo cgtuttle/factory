@@ -14,6 +14,15 @@ class ItemSpec < ActiveRecord::Base
 
 	scope :active, where(:canceled => false, :deleted => false)
 
+	def self.to_csv(options = {})
+		CSV.generate(options) do |csv|
+			csv << column_names
+			all.each do |item_spec|
+				csv << item_spec.attributes.values_at(*column_name)
+			end
+		end
+	end
+
 	def self.visible_by_item(item, visibility)
 		stats = self.includes(:trait => :category).where(:item_id => item)
 			.order("categories.display_order, traits.display_order, eff_date DESC, version DESC")

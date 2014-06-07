@@ -57,20 +57,26 @@ module ImportCSV
 		save_array = []		
 																						start = Time.now
 		@import_array.each do |row_cell|
-			field_name = row_cell.field_name.to_sym
-			cell_hash[field_name] = row_cell.cell_value
-			#--------Full row loaded, save it
-			if row_cell.col_num == columns
-				save_object = @obj.where('code = (?)', cell_hash[code]) || @obj.new(cell_hash)
-#				save_object = @obj.new(cell_hash)				
-				save_object.save!
-				cell_hash = {}				
-			end
-			#---------------------------------
+			if row_cell.row_num > @first_row.to_i			
+				field_name = row_cell.field_name.to_sym
+				cell_hash[field_name] = row_cell.id_match ? row_cell.cell_value : nil
+				#--------Full row loaded, save it
+				if row_cell.col_num == columns
+					# save_object = @obj.where('code = (?)', cell_hash[code]) || @obj.new(cell_hash) ----working towards update vs new if existing record is edited
+					save_object = @obj.new(cell_hash)
+					save_object.save!
+					cell_hash = {}				
+				end
+				#---------------------------------
+			end			
 		end
-																						logger.debug "save_array =  #{save_array.join ", "}"
-																						et = Time.now - start
-																						logger.debug "Start = #{start}, End = #{Time.now}, ET = #{et}"
+
+		#-------------------------------------------------------------------------------------------------------#
+																						logger.debug "save_array =  #{save_array.join ", "}"						#
+																						et = Time.now - start                                           #
+																						logger.debug "Start = #{start}, End = #{Time.now}, ET = #{et}"  #
+		#-------------------------------------------------------------------------------------------------------#
+		
 	end
 
 #=======================================================
@@ -119,17 +125,25 @@ module ImportCSV
 #=======================================================
 
 	def update_id_fields(import_id, col_num, table_name) # Convert code to id in cells for a given column
-		sql = "UPDATE cells SET id_match = false
-			WHERE cells.col_num = #{col_num} 
-			AND cells.import_id = #{import_id}"
+		sql = "UPDATE cells SET id_match = true
+			WHERE cells.import_id = #{import_id}"
 		ActiveRecord::Base.connection.execute(sql)	
-		sql = "UPDATE cells SET cell_value = #{table_name}.id, 
-			id_match = true  
+		sql = "UPDATE cells SET cell_value = #{table_name}.id
 			FROM #{table_name} 
 			WHERE cells.col_num = #{col_num} 
 			AND cells.import_id = #{import_id} 
 			AND cells.cell_value = #{table_name}.code"
-		ActiveRecord::Base.connection.execute(sql)			
+		ActiveRecord::Base.connection.execute(sql)
+		sql = "UPDATE cells SET id_match = false  
+			FROM #{table_name} 
+			WHERE cells.col_num = #{col_num} 
+			AND cells.import_id = #{import_id} 
+			AND cells.cell_value NOT IN 
+				(SELECT #{table_name}.code 
+					FROM #{table_name} 
+					WHERE cells.col_num = #{col_num} 
+					AND cells.import_id = #{import_id})"
+		ActiveRecord::Base.connection.execute(sql)		
 	end
 	
 #=======================================================

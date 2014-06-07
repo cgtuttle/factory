@@ -6,6 +6,7 @@ class Trait  < ActiveRecord::Base
 	attr_accessible :code, :name, :display_order, :usl, :lsl, :label, :category_id
 	accepts_nested_attributes_for :category
 	default_scope { where(tenant_id: Tenant.current_id) }
+
 	
 end
 

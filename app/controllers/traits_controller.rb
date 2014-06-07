@@ -3,14 +3,8 @@ class TraitsController < ApplicationController
 	load_and_authorize_resource
 	before_filter :find_traits
 	before_filter :find_categories
-	
-  def index
-  	@sortable_url = sort_traits_url
-  	@layout_type = "fluid"
-		@trait = Trait.new()
-		@is_table = true
-		@span = 8
-	end
+
+	######CRUD#######
 	
 	def new
 		@trait = Trait.new()
@@ -27,6 +21,18 @@ class TraitsController < ApplicationController
 			flash[:error] = "Trait could not be added"
 			redirect_to traits_path
 		end
+	end
+
+  def index
+  logger.debug "@traits = #{@traits.inspect}"
+  	@sortable_url = sort_traits_url
+  	@layout_type = "fluid"
+		@trait = Trait.new()
+		@is_table = true
+		@span = 8
+	end
+
+	def show
 	end
 
   def edit
@@ -50,6 +56,8 @@ class TraitsController < ApplicationController
 			redirect_to traits_path
 		end
 	end
+
+	######end of CRUD#######
 
 	def sort
 		params[:trait].each_with_index do |id, index|

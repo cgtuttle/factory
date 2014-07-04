@@ -41,8 +41,8 @@ class ItemsController < ApplicationController
 			flash[:success] = "Item added"
 			cookies[:item_id] = @item.id
 			if params[:include_specs]
-				@item.copy_item_specs(params[:copy_item_id])
-				redirect_to item_specs_path
+				@item.copy_specifications(params[:copy_item_id])
+				redirect_to specifications_path
 			else
 				redirect_to items_path
 			end

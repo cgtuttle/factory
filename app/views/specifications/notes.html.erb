@@ -1,8 +1,8 @@
-<% set_title "#{@item_spec.item.code}:#{@item_spec.trait.code}", prefix: "Notes for " %>
+<% set_title "#{@specification.item.code}:#{@specification.trait.code}", prefix: "Notes for " %>
 
 <% set_width(6, 10) %>
 
-<%= form_for(@item_spec) do |f| %>
+<%= form_for(@specification) do |f| %>
 	<div class="form-group">		
 		<%= f.label "Notes" %>
 		<%= f.text_area :notes, :class => "form-control" %>
@@ -10,6 +10,6 @@
 	
 	<div class="actions">
 		<%= f.submit "Update Notes", :class => "btn btn-primary" %>
-		<%= link_to 'Cancel', item_specs_path(@item_spec.item_id), :class => "btn btn-default" %>
+		<%= link_to 'Cancel', specifications_path(@specification.item_id), :class => "btn btn-default" %>
 	</div>
 <% end %>	

@@ -1,9 +1,9 @@
-<% set_title "#{@item_spec.item.code}:#{@item_spec.trait.code}", prefix: "Edit ", suffix: " Specification" %>
+<% set_title "#{@specification.item.code}:#{@specification.trait.code}", prefix: "Edit ", suffix: " Specification" %>
 	
 <% set_width(6, 10) %>
 
-<%= form_for(@new_item_spec) do |f| %>
-	<%= render 'layouts/body/errors', :index => @new_item_spec %>				
+<%= form_for(@new_specification) do |f| %>
+	<%= render 'layouts/body/errors', :index => @new_specification %>				
 	<%= f.hidden_field :item_id %>
 	<%= f.hidden_field :trait_id %>
 	<%= f.hidden_field :version %>
@@ -37,7 +37,7 @@
 	</div>
 	<div class="form-group">
 		<%= f.submit "Update Item Spec", :class => "btn btn-primary" %>
-		<%= link_to 'Cancel', item_specs_path(@new_item_spec.item_id), :class => "btn btn-default" %>
+		<%= link_to 'Cancel', specifications_path(@new_specification.item_id), :class => "btn btn-default" %>
 	</div>
 <% end %>	
 

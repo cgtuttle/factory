@@ -5,7 +5,7 @@ Category
 Cell
 Import
 Item
-Item_Spec
+specification
 Spec
 
 Controllers
@@ -15,7 +15,7 @@ Category
 Cell
 Import
 Item
-Item_Spec
+specification
 Spec
 
 Merge ApplicationController
@@ -34,7 +34,7 @@ Category
 Cell
 Import
 Items
-Item_Spec
+specification
 Spec
 
 Merge Layouts

@@ -1,6 +1,6 @@
-﻿SELECT a.item_id, trait_id, a.eff_date, version FROM item_specs AS a
-WHERE eff_date = (SELECT MAX(ed.eff_date) FROM item_specs AS ed WHERE a.item_id = ed.item_id
+﻿SELECT a.item_id, trait_id, a.eff_date, version FROM specifications AS a
+WHERE eff_date = (SELECT MAX(ed.eff_date) FROM specifications AS ed WHERE a.item_id = ed.item_id
 		AND a.trait_id = ed.trait_id and ed.eff_date <= current_date)
-AND version = (SELECT MAX(ev.version) FROM item_specs AS ev WHERE a.item_id = ev.item_id
+AND version = (SELECT MAX(ev.version) FROM specifications AS ev WHERE a.item_id = ev.item_id
 		AND a.trait_id = ev.trait_id and ev.eff_date <= current_date)
 ORDER BY a.item_id, a.trait_id

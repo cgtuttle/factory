@@ -1,0 +1,40 @@
+	
+	<tr class="<%= specification.eff_status %>">
+		<% if @list_for_an_item %>
+			<% if specification.trait.category %>
+				<td><%= specification.trait.category.code %></td>
+			<% else %>
+				<td></td>
+			<% end %>
+			<td><%= specification.trait.code %></td>
+		<% else %>
+			<td><%= link_to specification.item.code, specifications_path(:list_for => "item", :specification => {:item_id => specification.item.id})	%></td>
+			<td><%= specification.item.name	%></td>
+		<% end %>		
+		<td><%= specification.text_value %></td>
+		
+		<td><%= specification.numeric_value %></td>
+		<td><%= specification.usl %></td>
+		<td><%= specification.lsl %></td>
+		<td><%= specification.unit_of_measure %></td>
+		
+		<td class="hidden-md"><%= specification.analysis.code if specification.analysis %></td>
+		<td><%= specification.eff_date %></td>
+		
+		<td class="hidden-md"><%= specification.eff_status %></td>
+		<td class="hidden-md"><%= specification.changed_by %></td>
+		<td class="centered">
+			<% if specification.eff_status == 'current' %>
+				<%= link_to "Edit", edit_specification_path(specification) %>
+				<%= link_to "Delete",  specification, :method => :delete, :confirm => "Delete #{specification.trait.code} specification for #{specification.item.code}" %>
+				<%= link_to "Copy", copy_specification_path(specification), :action => :copy %>
+
+			<% elsif specification.eff_status == 'pending' %>
+				<%= link_to "Delete", cancel_specification_path(specification), :confirm => "Delete pending update of #{specification.trait.code} specification for #{specification.item.code} " %>
+				<%= link_to "Copy", copy_specification_path(specification), :action => :copy %>				
+			<% end %>
+			
+			<%= link_to "Notes", notes_path(specification) %>
+		</td>
+	</tr>	
+

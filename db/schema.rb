@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140615161642) do
+ActiveRecord::Schema.define(:version => 20140704181746) do
 
   create_table "analyses", :force => true do |t|
     t.string   "code",         :limit => 64,                     :null => false
@@ -69,30 +69,6 @@ ActiveRecord::Schema.define(:version => 20140615161642) do
     t.integer "tenant_id"
   end
 
-  create_table "item_specs", :force => true do |t|
-    t.integer  "item_id"
-    t.integer  "trait_id"
-    t.integer  "version",                        :default => 1
-    t.date     "eff_date"
-    t.string   "tag"
-    t.integer  "analysis_id"
-    t.string   "changed_by"
-    t.decimal  "numeric_value"
-    t.string   "string_value"
-    t.text     "text_value"
-    t.string   "document_title"
-    t.string   "document_url"
-    t.string   "document_version", :limit => 32
-    t.decimal  "lsl"
-    t.decimal  "usl"
-    t.string   "unit_of_measure",  :limit => 64
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "deleted",                        :default => false
-    t.boolean  "canceled",                       :default => false
-    t.text     "notes"
-  end
-
   create_table "items", :force => true do |t|
     t.string   "code",       :limit => 64,                     :null => false
     t.string   "name",       :limit => 128
@@ -122,6 +98,30 @@ ActiveRecord::Schema.define(:version => 20140615161642) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.boolean  "viewable"
+  end
+
+  create_table "specifications", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "trait_id"
+    t.integer  "version",                        :default => 1
+    t.date     "eff_date"
+    t.string   "tag"
+    t.integer  "analysis_id"
+    t.string   "changed_by"
+    t.decimal  "numeric_value"
+    t.string   "string_value"
+    t.text     "text_value"
+    t.string   "document_title"
+    t.string   "document_url"
+    t.string   "document_version", :limit => 32
+    t.decimal  "lsl"
+    t.decimal  "usl"
+    t.string   "unit_of_measure",  :limit => 64
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "deleted",                        :default => false
+    t.boolean  "canceled",                       :default => false
+    t.text     "notes"
   end
 
   create_table "tenants", :force => true do |t|

@@ -3,7 +3,7 @@
 <% content_for :controls do %>
 
 	<div class="bottom-space">
-		<%= form_tag(item_specs_path, :method => :get, :class => "form-inline") do %>
+		<%= form_tag(specifications_path, :method => :get, :class => "form-inline") do %>
 			<div class="form-group">
 				<div class="btn-group">
 					<%= radio_button_tag :list_for, "item", @list_for_an_item,  {:onchange => "this.form.submit();"} %>
@@ -13,9 +13,9 @@
 				</div>
 
 				<% if @list_for_an_item %>					
-					<%= collection_select :item_spec, :item_id, @items, :id, :code, {:selected => @item.id }, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>					
+					<%= collection_select :specification, :item_id, @items, :id, :code, {:selected => @item.id }, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>					
 				<% else %>
-					<%= collection_select :item_spec, :trait_id, @traits, :id, :code, {:selected => @trait.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
+					<%= collection_select :specification, :trait_id, @traits, :id, :code, {:selected => @trait.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
 				<% end %>
 				
 				<%= label_tag 'show_pending', :class => "checkbox" do %>
@@ -64,16 +64,16 @@
 <% if @item %>
 	<!-- pass index the collection for the loop -->		
 	<% content_for :table do %>
-		<%= render "item_specs/body/new" %>
-		<%= render :partial => "item_specs/body/index", :collection => @item_specs, :as => :item_spec %>
+		<%= render "specifications/body/new" %>
+		<%= render :partial => "specifications/body/index", :collection => @specifications, :as => :specification %>
 	<% end %>
 
 	<!-- pass multi_view the collection for the loop -->
 	<% content_for :multi_view do %>
 		<div class="bottom-space">	
-			<%= link_to "Add New Specification", new_item_spec_path, :class => "btn btn-default" %>	
+			<%= link_to "Add New Specification", new_specification_path, :class => "btn btn-default" %>	
 		</div>
-		<%= render :partial => "item_specs/body/multi_view", :collection => @item_specs, :as => :item_spec %>	
+		<%= render :partial => "specifications/body/multi_view", :collection => @specifications, :as => :specification %>	
 	<% end %>
 <% end %>
 

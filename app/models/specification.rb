@@ -1,4 +1,4 @@
-class ItemSpec < ActiveRecord::Base
+class Specification < ActiveRecord::Base
 	belongs_to :item
 	belongs_to :trait
 	belongs_to :analysis
@@ -17,8 +17,8 @@ class ItemSpec < ActiveRecord::Base
 	def self.to_csv(options = {})
 		CSV.generate(options) do |csv|
 			csv << column_names
-			all.each do |item_spec|
-				csv << item_spec.attributes.values_at(*column_name)
+			all.each do |specification|
+				csv << specification.attributes.values_at(*column_name)
 			end
 		end
 	end
@@ -36,7 +36,7 @@ class ItemSpec < ActiveRecord::Base
 	end
 
 	def status
-		current_spec = ItemSpec
+		current_spec = Specification
 			.where(["item_id = ? AND trait_id = ? AND eff_date <= ? ", self.item_id, self.trait_id, Date.today] )
 			.order('eff_date DESC, version DESC').first
 		status = ((self.deleted || self.canceled) ? 8 : 16)
@@ -61,8 +61,8 @@ class ItemSpec < ActiveRecord::Base
 	end
 	
 	def last_version
-		unless ItemSpec.where(:item_id => self.item_id, :trait_id => self.trait_id).empty?
-			ItemSpec.where(:item_id => self.item_id, :trait_id => self.trait_id).order('version DESC').first.version
+		unless Specification.where(:item_id => self.item_id, :trait_id => self.trait_id).empty?
+			Specification.where(:item_id => self.item_id, :trait_id => self.trait_id).order('version DESC').first.version
 		end
 	end
 	

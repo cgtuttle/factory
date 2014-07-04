@@ -37,10 +37,10 @@ Factory::Application.routes.draw do
 
   resources :items do
     post 'bulk_delete', :on => :collection
-    resources :item_specs
+    resources :specifications
   end
 
-  resources :item_specs do
+  resources :specifications do
     get 'display', :on => :collection
   end
   
@@ -49,10 +49,10 @@ Factory::Application.routes.draw do
     get 'set', :on => :member
   end
 
-  match 'item_specs/:id/cancel' => 'item_specs#cancel', :as => :cancel_item_spec
-  match 'item_specs/:id/copy' => 'item_specs#copy', :as => :copy_item_spec
-  match 'item_specs/:id/paste' => 'item_specs#paste', :as => :paste_item_spec
-  match 'item_specs/:id/notes' => 'item_specs#notes', :as => :notes
+  match 'specifications/:id/cancel' => 'specifications#cancel', :as => :cancel_specification
+  match 'specifications/:id/copy' => 'specifications#copy', :as => :copy_specification
+  match 'specifications/:id/paste' => 'specifications#paste', :as => :paste_specification
+  match 'specifications/:id/notes' => 'specifications#notes', :as => :notes
   match 'items/:id/copy' => 'items#copy', :as => :copy_item
   match 'analyses/:id/instructions' => 'analyses#instructions'
   match 'imports/help' => 'imports#help', :as => :import_help

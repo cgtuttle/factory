@@ -19,7 +19,7 @@
 	<%= form_tag bulk_delete_items_path, :method => :bulk_delete, :class => "bulk_delete" do %>
 		<% @items.each do |i| %>
 			<tr>
-				<td><%= link_to i.code, item_item_specs_path(i) %></td>
+				<td><%= link_to i.code, specifications_path(i) %></td>
 				<td><%= i.name %></td>
 				<td><%= link_to "Edit", edit_item_path(i), :class => "pull-left" %></td>
 				<td><%= link_to "Copy", copy_item_path(i), :method => :copy, :class => "pull-right" %></td>

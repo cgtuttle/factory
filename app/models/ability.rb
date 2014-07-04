@@ -18,9 +18,9 @@ class Ability
       cannot [:update, :create, :destroy], Tenant
     when "manager"
       can :view, :all
-      can :manage, [Analysis, Category, Import, Item, ItemSpec, Trait]
+      can :manage, [Analysis, Category, Import, Item, Specification, Trait]
     else
-      can :display, [ItemSpec]
+      can :display, [Specification]
       can :view, [Tenant]
       can :set, [Tenant]
     end

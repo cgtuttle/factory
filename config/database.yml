@@ -9,7 +9,7 @@ production:
 development:
   adapter: postgresql
   encoding: unicode
-  database: factory_development
+  database: factory_v2_development
   pool: 5
   username: cgtuttle
   password: cgtuttle

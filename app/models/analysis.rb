@@ -1,6 +1,6 @@
 class Analysis < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id}
-	has_many :item_specs
+	has_many :specifications
 
 	attr_accessible :code, :name, :instructions
 

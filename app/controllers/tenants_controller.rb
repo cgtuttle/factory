@@ -42,7 +42,7 @@ class TenantsController < ApplicationController
 		if can? :manage, :all
 			redirect_to tenants_path
 		else
-			redirect_to display_item_specs_path
+			redirect_to display_specifications_path
 		end
 	end
 
@@ -55,10 +55,10 @@ class TenantsController < ApplicationController
 	  if can? :manage, @current_tenant
 			redirect_to tenants_path
 		else
-			if can? :manage, ItemSpec
-				redirect_to item_specs_path
+			if can? :manage, Specification
+				redirect_to specifications_path
 			else
-				redirect_to display_item_specs_path
+				redirect_to display_specifications_path
 			end
 		end
   end

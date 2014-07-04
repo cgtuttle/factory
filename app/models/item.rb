@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id} # validates uniqueness within an account
-	has_many :item_specs, dependent: :destroy
-	has_many :traits, :through => :item_specs
+	has_many :specifications, dependent: :destroy
+	has_many :traits, :through => :specifications
 	attr_accessible :code, :name
 	default_scope { where(tenant_id: Tenant.current_id) }
 
@@ -12,13 +12,13 @@ class Item < ActiveRecord::Base
 			FROM
 				((
 				SELECT trait_id, MAX(version) as ver
-				FROM item_specs
+				FROM specifications
 				WHERE item_id = #{self.id}					
 				GROUP BY trait_id) AS y
 			INNER JOIN
 				(
 				SELECT *
-				FROM item_specs
+				FROM specifications
 				WHERE item_id = #{self.id}
 				AND deleted = false) AS z
 			ON y.trait_id = z.trait_id
@@ -38,11 +38,11 @@ class Item < ActiveRecord::Base
 		end
 	end
 
-	def copy_item_specs(copy_item_id)
+	def copy_specifications(copy_item_id)
 		item = Item.find(copy_item_id)
-		specs = item.item_specs
+		specs = item.specifications
 		specs.each do |s|
-			spec = ItemSpec.new(s.attributes.select{ |key, _| ItemSpec.accessible_attributes.include? key})
+			spec = Specification.new(s.attributes.select{ |key, _| Specification.accessible_attributes.include? key})
 			spec.item_id = self.id
 			spec.version = 1
 			spec.eff_date = Date.today	

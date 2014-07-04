@@ -2,7 +2,7 @@
 
 <% set_width(10, 12, false) %>
 
-<%= form_tag({:action => 'paste'}, {:id => @item_spec.id}) do %>
+<%= form_tag({:action => 'paste'}, {:id => @specification.id}) do %>
 	<%= submit_tag "Copy Item Spec", :class => "btn btn-primary" %>
     <label>
       <%= check_box "eff_date", "copy" %>

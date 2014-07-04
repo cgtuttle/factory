@@ -8,8 +8,8 @@
 	<% end %>
 	<div class="top-space"></div>
 
-	<%= form_for (@new_item_spec), :role => "form" do |f| %>
-		<%= render 'layouts/body/errors', :index => @new_item_spec %>
+	<%= form_for (@new_specification), :role => "form" do |f| %>
+		<%= render 'layouts/body/errors', :index => @new_specification %>
 
 		<% if !@list_by_trait %>
 			<%= f.hidden_field :item_id, :value => @item_id %>

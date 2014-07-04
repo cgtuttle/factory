@@ -1,52 +1,52 @@
-class ItemSpecsController < ApplicationController
+class SpecificationsController < ApplicationController
 	include ApplicationHelper
 	require 'will_paginate/array'
 	before_filter :initialize_status_checkboxes, :find_items, :find_traits
 	load_and_authorize_resource 
 
 	def cancel
-		@item_spec = ItemSpec.find(params[:id])
-		@item_spec.canceled = true
-		@item_spec.set_eff_date
-		@item_spec.set_version
-		if @item_spec.save
+		@specification = Specification.find(params[:id])
+		@specification.canceled = true
+		@specification.set_eff_date
+		@specification.set_version
+		if @specification.save
 			flash[:success] = "Future Item Trait canceled"
-			redirect_to item_specs_path :item_id => @item_spec.item_id
+			redirect_to specifications_path :item_id => @specification.item_id
 		else
-			redirect_to item_specs_path :item_id => @item_spec.item_id
+			redirect_to specifications_path :item_id => @specification.item_id
 		end
 	end
 
 	def copy
-		@item_spec = ItemSpec.find(params[:id])		
-		@items = Item.where("id NOT IN (?)", @item_spec.item_id).order(:code)
+		@specification = Specification.find(params[:id])		
+		@items = Item.where("id NOT IN (?)", @specification.item_id).order(:code)
 	end
 	
 	def create
-		@new_item_spec = ItemSpec.new(params[:item_spec])
-		@new_item_spec.set_eff_date
-		@new_item_spec.set_version
-		@new_item_spec.set_editor(current_user.email)
-		if @new_item_spec.save!
+		@new_specification = Specification.new(params[:specification])
+		@new_specification.set_eff_date
+		@new_specification.set_version
+		@new_specification.set_editor(current_user.email)
+		if @new_specification.save!
 			flash[:success] = "Item Trait added/changed"
-			redirect_to item_specs_path :item_id => params[:item_spec][:item_id]
+			redirect_to specifications_path :item_id => params[:specification][:item_id]
 		else
 			render :new
 		end
 	end
 
 	def destroy
-		@delete_item_spec = @item_spec.dup
-		@delete_item_spec.deleted = true
-		@delete_item_spec.eff_date = Date.today
-		@delete_item_spec.set_version
-		@delete_item_spec.set_editor(current_user.email)
-		if @delete_item_spec.save!
+		@delete_specification = @specification.dup
+		@delete_specification.deleted = true
+		@delete_specification.eff_date = Date.today
+		@delete_specification.set_version
+		@delete_specification.set_editor(current_user.email)
+		if @delete_specification.save!
 			flash[:success] = "Item Trait deleted"
-			redirect_to item_specs_path :item_id => @item_spec.item_id
+			redirect_to specifications_path :item_id => @specification.item_id
 		else
 			flash[:alert] = "Could not delete Item Trait"
-			redirect_to item_specs_path :item_id => @item_spec.item_id
+			redirect_to specifications_path :item_id => @specification.item_id
 		end
 	end
 
@@ -62,14 +62,14 @@ class ItemSpecsController < ApplicationController
 		set_current_item
 		if @item
 			cookies[:item_id] = @item.id
-			@item_specs = ItemSpec.includes(:trait => :category).where(:item_id => @item).order("categories.display_order")
-			@categories = @item_specs.group_by{|is| is.trait.category}		
+			@specifications = Specification.includes(:trait => :category).where(:item_id => @item).order("categories.display_order")
+			@categories = @specifications.group_by{|is| is.trait.category}		
 		end
 	end
 
 	def edit
-		@new_item_spec = @item_spec.dup
-		@new_item_spec.eff_date = Date.today
+		@new_specification = @specification.dup
+		@new_specification.eff_date = Date.today
 		@is_edit_form = true
 	end
 
@@ -84,31 +84,31 @@ class ItemSpecsController < ApplicationController
 		@available_items = Item.all
 
 		if @list_for_an_item
-			if params.has_key?(:item_spec)
-				@item_id = params[:item_spec][:item_id]
+			if params.has_key?(:specification)
+				@item_id = params[:specification][:item_id]
 				@item = Item.exists?(@item_id) ? Item.find(@item_id) : nil
 			end
 			set_current_item
 	  	if @item
-		  	@new_item_spec = ItemSpec.new
-				@item_specs = ItemSpec.visible_by_item(@item.id, @visibility).paginate(:page => params[:page], :per_page => 15) #main ItemSpec retrieval
-				@index = @item_specs
+		  	@new_specification = Specification.new
+				@specifications = Specification.visible_by_item(@item.id, @visibility).paginate(:page => params[:page], :per_page => 15) #main Specification retrieval
+				@index = @specifications
 				@items = Item.order(:code)				
 			else
 				flash[:alert] = "No items exist. Please add at least one."
 				redirect_to items_path
 			end
 		else # @list_for_a_trait
-			if params.has_key?(:item_spec)
-				@trait_id = params[:item_spec][:trait_id]
+			if params.has_key?(:specification)
+				@trait_id = params[:specification][:trait_id]
 				@trait = Trait.exists?(@trait_id) ? Trait.find(@trait_id) : nil
 			end
 			set_current_trait
 			if @trait
-				@new_item_spec = ItemSpec.new
-				@item_specs = ItemSpec.visible_by_trait(@trait.id, @visibility).paginate(:page => params[:page], :per_page => 15) #main ItemSpec retrieval
-				@index = @item_specs
-				@current_traits = ItemSpec.where(:item_id => @item.id).pluck(:trait_id)
+				@new_specification = Specification.new
+				@specifications = Specification.visible_by_trait(@trait.id, @visibility).paginate(:page => params[:page], :per_page => 15) #main Specification retrieval
+				@index = @specifications
+				@current_traits = Specification.where(:item_id => @item.id).pluck(:trait_id)
 				@traits = Trait.where('id IN (?)', @current_traits).order(:code)				
 			end
 		end
@@ -117,43 +117,43 @@ class ItemSpecsController < ApplicationController
   def new
   	set_item_scope
   	if @item
-	  	@current_traits = ItemSpec.where(:item_id => @item.id).pluck(:trait_id)
+	  	@current_traits = Specification.where(:item_id => @item.id).pluck(:trait_id)
 	  	@available_traits = Trait.where('id not in (?)', @current_traits )
-	  	@new_item_spec = ItemSpec.new
+	  	@new_specification = Specification.new
 	  end
   end
 
 	def notes
-		@item_spec = ItemSpec.find(params[:id])
+		@specification = Specification.find(params[:id])
 		@is_edit_form = true
 	end
 
   def paste
-		@item_spec = ItemSpec.find(params[:id])
+		@specification = Specification.find(params[:id])
 		@item_list = params[:copy_to][:items]
 		@set_eff_date = params[:eff_date][:copy] != '1'
 		ttl = 0
 		success = 0
 		@item_list.each do |i|
-			@new_item_spec = @item_spec.dup
+			@new_specification = @specification.dup
 			@item = Item.where("code = ?", i).first
-			@new_item_spec.item_id = @item.id
-			@new_item_spec.eff_date = Date.today if @set_eff_date
-			if @new_item_spec.save
+			@new_specification.item_id = @item.id
+			@new_specification.eff_date = Date.today if @set_eff_date
+			if @new_specification.save
 				ttl += 1
 				success += 1
 			else
 				ttl += 1
 			end
 		end		
-		flash[:success] = "#{@item_spec.trait.code} copied to #{success} of #{ttl} items"
-		redirect_to item_specs_path :item_id => @item_spec.item_id
+		flash[:success] = "#{@specification.trait.code} copied to #{success} of #{ttl} items"
+		redirect_to specifications_path :item_id => @specification.item_id
 	end
 
 	def update
-		if @item_spec.update_attributes(params[:item_spec])
+		if @specification.update_attributes(params[:specification])
 			flash[:success] = "Notes updated"
-			redirect_to item_specs_path :item_id => @item_spec.item_id
+			redirect_to specifications_path :item_id => @specification.item_id
 		else
 			render :notes
 		end
@@ -180,8 +180,8 @@ class ItemSpecsController < ApplicationController
 	def set_item_scope
 		if params[:item] && !params[:item].blank?
 			@item_id = params[:item]	
-		elsif params.has_key?(:item_spec)
-			@item_id = params[:item_spec][:item_id]
+		elsif params.has_key?(:specification)
+			@item_id = params[:specification][:item_id]
 		elsif params.has_key?(:item_id)
 			@item_id = params[:item_id]
 		else
@@ -207,12 +207,12 @@ class ItemSpecsController < ApplicationController
 	end
 
 	def set_trait_scope
-		@trait_id = params[:item_spec][:trait_id]
+		@trait_id = params[:specification][:trait_id]
 		@trait = Trait.exists?(@trait_id) ? Trait.find(@trait_id) : nil
 	end
 
 	def set_visibility
-		if !params.has_key?(:item_spec)
+		if !params.has_key?(:specification)
   		# cookies & params are "1" or "0", @variables are true or false
 			params[:show_history] = cookies[:history] == "1" ? "1" : "0" #nil
 	  	params[:show_pending] = cookies[:pending] == "1" ? "1" : "0" #nil

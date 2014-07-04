@@ -14,9 +14,9 @@
 		</thead>
 		<% if @categories %>
 			<tbody>
-				<% @categories.each do |category, item_specs| %>										
+				<% @categories.each do |category, specifications| %>										
 					<% first_row = true %>										
-					<% for s in item_specs %>	
+					<% for s in specifications %>	
 						<% if s.eff_status == "current" %>
 							<tr class="display-row">
 								<% if first_row %>
@@ -43,7 +43,7 @@
 			</tbody>
 		<% else %>
 			<tbody>
-				<% for s in @item_specs %>	
+				<% for s in @specifications %>	
 					<% if s.eff_status == "current" %>
 						<tr class="display-row">
 							<td class="display"></td>

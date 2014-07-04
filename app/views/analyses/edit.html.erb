@@ -1,7 +1,7 @@
 
 <% set_title "#{@analysis.code}", prefix: "Edit ", suffix: " Analysis" %>
 
-<% set_width(6, 10) %>
+<% set_width(6, 10, false) %>
 	
 <%= form_for @analysis do |f| %>
 	<%= render 'layouts/body/errors', :index => @analysis %>

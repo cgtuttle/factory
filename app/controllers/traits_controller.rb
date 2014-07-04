@@ -13,7 +13,7 @@ class TraitsController < ApplicationController
 	def create
 		@trait = Trait.new(params[:trait])
 		order = (params[:trait][:display_order]).to_i
-		@trait.reorder(order)
+		# @trait.reorder(order)
 		if @trait.save
 			flash[:success] = "Trait added"
 			redirect_to traits_path
@@ -24,7 +24,6 @@ class TraitsController < ApplicationController
 	end
 
   def index
-  logger.debug "@traits = #{@traits.inspect}"
   	@sortable_url = sort_traits_url
   	@layout_type = "fluid"
 		@trait = Trait.new()
@@ -58,6 +57,11 @@ class TraitsController < ApplicationController
 	end
 
 	######end of CRUD#######
+
+	def bulk_delete
+		Trait.destroy(params[:traits])
+		redirect_to traits_path
+	end
 
 	def sort
 		params[:trait].each_with_index do |id, index|

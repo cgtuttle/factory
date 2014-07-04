@@ -40,6 +40,14 @@ load_and_authorize_resource
 			redirect_to analyses_path
 		end
 	end
+
+		######end of CRUD#######
+
+	def bulk_delete
+		Analysis.destroy(params[:analyses])
+		redirect_to analyses_path
+	end
+
 	
 	def instructions
 		@analysis = Analysis.find(params[:id])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140511221440) do
+ActiveRecord::Schema.define(:version => 20140615161642) do
 
   create_table "analyses", :force => true do |t|
     t.string   "code",         :limit => 64,                     :null => false
@@ -43,11 +43,22 @@ ActiveRecord::Schema.define(:version => 20140511221440) do
     t.integer "import_id"
     t.integer "row_num"
     t.integer "col_num"
-    t.text    "cell_value"
+    t.text    "field_value"
     t.string  "field_name"
     t.boolean "had_save_error"
     t.string  "save_error_text"
     t.boolean "id_match"
+    t.string  "import_value"
+    t.integer "id_value"
+    t.integer "import_row_id"
+    t.integer "tenant_id"
+  end
+
+  create_table "import_rows", :force => true do |t|
+    t.integer "import_id"
+    t.boolean "import_error"
+    t.integer "row_id"
+    t.integer "tenant_id"
   end
 
   create_table "imports", :force => true do |t|

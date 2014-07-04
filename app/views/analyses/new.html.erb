@@ -1,6 +1,6 @@
 <% set_title "Analysis", prefix: "New " %>
 
-<% set_width(6, 10) %>
+<% set_width(6, 10, false) %>
 
 <%= form_for @analysis, :role => "form" do |f| %>
 	<%= render 'layouts/body/errors', :index => @analysis %>

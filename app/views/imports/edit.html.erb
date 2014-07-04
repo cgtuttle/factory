@@ -1,6 +1,6 @@
 <% set_title "Import Data" %>
 
-<% set_width 12, 12 %> 
+<% set_width 12, 12, true %> 
 
 <div>
   <h5>Row count: <%=@row_count%></h5>
@@ -54,7 +54,7 @@
                   <td style="text-align:center;"><%= ff.object.row_num %></td>
                 <% end %>
                     <td style="text-align:center;color:blue;">
-                      <%= ff.object.cell_value %>
+                      <%= ff.object.import_value %>
                     </td>
                 <% if ff.object.col_num == @column_count %>
                   </tr>

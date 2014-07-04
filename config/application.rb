@@ -15,6 +15,8 @@ module Factory
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    
+    config.assets.paths << Rails.root.join("vendor", "assets", "fonts")
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
@@ -59,7 +61,6 @@ module Factory
     config.assets.enabled = true
     config.assets.precompile += ['admin_data.css', 'admin_data.js', 'display.css']
     config.assets.initialize_on_precompile = false
-
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

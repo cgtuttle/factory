@@ -1,6 +1,6 @@
 <% set_title "Traits"%>
 
-<% set_width(10, 12) %>
+<% set_width(12, 12) %>
 
 <% content_for :thead do %>
 	
@@ -8,8 +8,11 @@
 			<th class="col-md-2">Category</th>
 			<th class="col-md-2">Trait Code</th>
 			<th class="col-md-3">Trait Name</th>
-			<th class="col-md-2">Label</th>
-			<th class="col-md-2"></th>
+			<th class="col-md-3">Label</th>
+			<th class="col-md-1"></th>
+			<th class="col-md-1 center-block">						
+				<%= link_to raw('<div class="glyphicon glyphicon-trash"></div>'), "#", :onclick => "$('.bulk_delete').submit()" %>				
+			</th>
 		</tr>
 	
 <% end %>
@@ -19,17 +22,19 @@
 	<tr>
 		<%= render 'new' %>
 	</tr>
+
+	<%= form_tag bulk_delete_traits_path, :method => :bulk_delete, :class => "bulk_delete" do %>
 		<% @traits.each do |t| %>
 			<%= content_tag_for(:tr, t, class: "sortable") do %>
 				<td><%= t.category_id  ? t.category.code : nil %></td>
 				<td><%= t.code %></td>
 				<td><%= t.name %></td>
 				<td><%= t.label %></td>
-				<td><%= link_to "Edit", edit_trait_path(t) %>
-						<%= link_to "Delete", trait_path(t), :method => :delete, :confirm => "Delete #{t.code}" %>
-				</td>
+				<td><div class="center-block"><%= link_to "Edit", edit_trait_path(t) %></div></td>
+				<td><div class="center-block"><%= check_box_tag "traits[]", t.id %></div></td>
 			<% end %>
 		<% end %>
+	<% end %>
 	
 <% end %>
 

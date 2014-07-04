@@ -4,8 +4,8 @@
 
 <!-- for larger formats... -->
 <div class="<%= @hidden_sm %>">
-	<% unless index.blank? %>
-		<%= will_paginate index, :renderer => BootstrapPagination::Rails %>
+	<% unless index.blank? %>		
+		<%= will_paginate index, :renderer => BootstrapPagination::Rails %>		
 	<% end %>
 
 	<!-- yield to index:thead, index:table -->

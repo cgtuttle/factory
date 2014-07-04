@@ -1,9 +1,10 @@
 class Import < ActiveRecord::Base
-	has_many :cells
+	has_many :import_rows, :dependent => :destroy
+	has_many :cells, :through => :import_rows
 	
-	accepts_nested_attributes_for :cells
+	accepts_nested_attributes_for :import_rows, :cells
 
-	attr_accessible :model, :first_row, :row_count, :id_column, :cells_attributes
+	attr_accessible :model, :first_row, :row_count, :id_column, :import_rows_attributes, :cells_attributes
 
 	default_scope { where(tenant_id: Tenant.current_id) }
 	

@@ -27,6 +27,10 @@
           <%= render 'devise/menu/registration_items' %>        
         </ul>
       </li>
+      <% if tenant_set? %>
+        <li><%= link_to current_tenant.name, tenants_path %></li>
+      <% end %>
+
     </ul>
             
     <ul class="nav navbar-nav navbar-right">

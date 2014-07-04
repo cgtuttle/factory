@@ -1,6 +1,6 @@
 <% set_title "Analyses" %>
 
-<% set_width(10, 12) %>
+<% set_width(10, 12, false) %>
 
 <% content_for :thead do %>
 	<tr>
@@ -8,23 +8,26 @@
 		<th>Name</th>
 		<th>Instructions</th>
 		<th></th>
+		<th class="col-md-1 center-block">						
+			<%= link_to raw('<div class="glyphicon glyphicon-trash"></div>'), "#", :onclick => "$('.bulk_delete').submit()" %>				
+		</th>
 	</tr>
 <% end %>
 
 <% content_for :table do %>
 	<tr>
 		<%=  render 'new' %>
-	</tr>			
-	<% @analyses.each do |t| %>
-		<tr>
-			<td><%= t.code %></td>
-			<td><%= t.name %></td>
-			<td><%= link_to "Instructions", :controller => 'analyses', :action => 'instructions', :id => t.id %></td>
-			<td>
-				<%= link_to "Edit", edit_analysis_path(t), :class => "pull-left" %>
-				<%= link_to "Delete", t, :method => :delete, :confirm => "Delete Analysis #{t.code}", :class => "pull-right" %>
-			</td>
-		</tr>
+	</tr>	
+	<%= form_tag bulk_delete_analyses_path, :method => :bulk_delete, :class => "bulk_delete" do %>			
+		<% @analyses.each do |t| %>
+			<tr>
+				<td><%= t.code %></td>
+				<td><%= t.name %></td>
+				<td><%= link_to "Instructions", :controller => 'analyses', :action => 'instructions', :id => t.id %></td>
+				<td><%= link_to "Edit", edit_analysis_path(t), :class => "pull-left" %></td>
+				<td><div class="center-block"><%= check_box_tag "analyses[]", t.id %></div></td>
+			</tr>
+		<% end %>
 	<% end %>
 <% end %>
 

@@ -1,6 +1,8 @@
 General:
  ✔ Upgrade Bootstrap to 3.0 @done (13-11-24 17:08)
  ☐ Add application admin user view
+ ☐ Set up bulk_delete for categories, items
+ ☐ Abstract bulk_delete
  ✔ Sort users by role, starting with owner *** @done (13-11-09 08:35)
  ✔ Change color of blue arrow on Admin dropdown @done (13-11-09 09:14)
  ✔ Add 'forgot password' functionality @done (13-11-02 15:09)
@@ -18,12 +20,12 @@ General:
  ✔ Remove row class from edit forms @done (14-01-03 20:46)
  ✔ Change _new partials to form-control class @done (14-01-05 14:51)
  ✔ Limit lists to height of screen @done (14-01-04 15:38)
- ☐ Make https in production and staging environments
+ ✔ Make https in production and staging environments @done (14-06-29 15:47)
  ✔ Create "Copy To" at item_spec level @done (14-02-16 12:44)
  ☐ Create "Copy To" at item level for item_specs
  ☐ Create "Sync to/from" at item_spec level
  ☐ Create Bulk Edit at item_spec level
- ☐ Add item_spec index by item for a trait
+ ✔ Add item_spec index by item for a trait @done (14-06-29 15:48)
  Usability:
  ✔ Add batch edit capability or copy record capability @done (13-11-16 15:51)
  ☐ Add search to items/index
@@ -97,5 +99,4 @@ Cleanup:
    ✔ Remove display order @done (13-12-31 09:07)
 
 Database:
- ☐ Remove multi-line text from ItemSpecs
  ☐ Remove label from traits, etc.

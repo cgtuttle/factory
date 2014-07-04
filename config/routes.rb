@@ -19,19 +19,24 @@ Factory::Application.routes.draw do
 	
 	resources :users
   resources :imports
-  resources :analyses
   resources :memberships
 
+  resources :analyses do   
+    post 'bulk_delete', :on => :collection    
+  end
 
   resources :categories do
     collection { post :sort}
+    post 'bulk_delete', :on => :collection
   end
 
   resources :traits do
-    collection { post :sort}
+    collection { post :sort}    
+    post 'bulk_delete', :on => :collection    
   end
 
   resources :items do
+    post 'bulk_delete', :on => :collection
     resources :item_specs
   end
 

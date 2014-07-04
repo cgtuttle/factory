@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   force_ssl
-  around_filter :scope_current_tenant
+  around_filter :scope_current_tenant # Run for each request...., return here at end of request (creates a wrapper around the request)
   before_filter :set_per_page
   before_filter :initialize_item, :initialize_trait
 
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :tenant_set?
 
-  def current_tenant
+  def current_tenant # Called frequently - helper method, available anywhere
     @current_tenant ||= session[:current_tenant_id] && Tenant.find_by_id(session[:current_tenant_id])
   end
   helper_method :current_tenant
@@ -71,10 +71,12 @@ private
     end    
   end
 
-	def scope_current_tenant
-    Tenant.current_id = current_tenant.id
-    yield
-  ensure
+	def scope_current_tenant # Runs once for each request 
+    # .....do this next.......
+    logger.debug "@@@@@@@@ Running scope_current_tenant @@@@@@@@"
+    Tenant.current_id = current_tenant.id # Applies 'id' to the object returned by current_tenant
+    yield # .....allow the rest of the application to do stuff.......
+  ensure # .....then finish with this to clean up at end of request
     Tenant.current_id = nil
   end
 

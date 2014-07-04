@@ -77,18 +77,17 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def set_width(lg, md)
-    @liquid = lg == 12
-    @container = @liquid ? "container-liquid" : "container"
+  def set_width(lg, md, liquid = false)
+    @container = liquid ? "container-liquid" : "container"
     offset_lg = ((12 - lg) / 2 ).floor
     offset_md = ((12 - md) / 2 ).floor
     full_class = "col-md-#{md} col-lg-#{lg} col-md-offset-#{offset_md} col-lg-offset-#{offset_lg}"       
     @width = @liquid ? "full-fluid" : full_class
-    @hidden_lg = "hidden-md hidden-lg" if @liquid
-    @hidden_sm = "hidden-xs hidden-sm" if @liquid
+    @hidden_lg = "hidden-md hidden-lg" if liquid
+    @hidden_sm = "hidden-xs hidden-sm" if liquid
     @menu = true
     @title = true
-    logger.debug "@liquid = #{@liquid}, @container = #{@container}, @width = #{@width}" 
+    logger.debug "liquid = #{liquid}, @container = #{@container}, @width = #{@width}" 
     logger.debug "@hidden_lg = #{@hidden_lg}, @hidden_sm = #{@hidden_sm}"
   end
 

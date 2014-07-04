@@ -1,6 +1,6 @@
 <% set_title "Copy Specification to" %>
 
-<% set_width(10, 12) %>
+<% set_width(10, 12, false) %>
 
 <%= form_tag({:action => 'paste'}, {:id => @item_spec.id}) do %>
 	<%= submit_tag "Copy Item Spec", :class => "btn btn-primary" %>

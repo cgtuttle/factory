@@ -80,8 +80,25 @@ button.close {
   padding-left: 50px;
 }
 
+.pagination {
+  margin: 0;
+}
+
+.icon-control {
+  padding-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .pad {
   padding: 0 30px;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .jumbotron.hero-block {

@@ -6,20 +6,26 @@
 		<tr>
 			<th>Item Code</th>
 			<th>Name</th>
-			<th colspan="3"></th>
+			<th colspan="2"></th>
+			<th class="col-md-1 center-block">						
+				<%= link_to raw('<div class="glyphicon glyphicon-trash"></div>'), "#", :onclick => "$('.bulk_delete').submit()" %>				
+			</th>
 		</tr>
 <% end %>
 
 <% content_for :table do %>
 	<%= render 'new' %>
-	<% @items.each do |i| %>
-		<tr>
-			<td><%= link_to i.code, item_item_specs_path(i) %></td>
-			<td><%= i.name %></td>
-			<td><%= link_to "Edit", edit_item_path(i), :class => "pull-left" %></td>
-			<td><%= link_to "Delete", item_path(i), :method => :delete, :confirm => "Delete Item #{i.code}" %></td>
-			<td><%= link_to "Copy", copy_item_path(i), :method => :copy, :class => "pull-right" %></td>
-		</tr>
+
+	<%= form_tag bulk_delete_items_path, :method => :bulk_delete, :class => "bulk_delete" do %>
+		<% @items.each do |i| %>
+			<tr>
+				<td><%= link_to i.code, item_item_specs_path(i) %></td>
+				<td><%= i.name %></td>
+				<td><%= link_to "Edit", edit_item_path(i), :class => "pull-left" %></td>
+				<td><%= link_to "Copy", copy_item_path(i), :method => :copy, :class => "pull-right" %></td>
+				<td><div class="center-block"><%= check_box_tag "deletions[]", i.id %></div></td>				
+			</tr>
+		<% end %>
 	<% end %>
 <% end %>
 

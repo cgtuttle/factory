@@ -31,7 +31,7 @@
 				<td><%= t.name %></td>
 				<td><%= t.label %></td>
 				<td><div class="center-block"><%= link_to "Edit", edit_trait_path(t) %></div></td>
-				<td><div class="center-block"><%= check_box_tag "traits[]", t.id %></div></td>
+				<td><div class="center-block"><%= check_box_tag "deletions[]", t.id %></div></td>
 			<% end %>
 		<% end %>
 	<% end %>

@@ -4,7 +4,7 @@ class TraitsController < ApplicationController
 	before_filter :find_traits
 	before_filter :find_categories
 
-	######CRUD#######
+	###### CRUD #######
 	
 	def new
 		@trait = Trait.new()
@@ -56,10 +56,10 @@ class TraitsController < ApplicationController
 		end
 	end
 
-	######end of CRUD#######
+	###### end of CRUD #######
 
 	def bulk_delete
-		Trait.destroy(params[:traits])
+		Trait.destroy(params[:deletions])
 		redirect_to traits_path
 	end
 

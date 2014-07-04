@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
 	before_filter :set_fluid
 	load_and_authorize_resource 
 
+	###### CRUD #######
+
   def index
   	logger.debug "running items.index: @current_tenant = #{@current_tenant.inspect}"
 		@new_item = Item.new	
@@ -50,6 +52,19 @@ class ItemsController < ApplicationController
 		end
 	end
 
+  def destroy
+		Item.find(params[:id]).destroy
+		flash[:success] = "Item deleted"
+		redirect_to items_path
+  end
+
+	###### end of CRUD #######
+
+	def bulk_delete
+		Item.destroy(params[:deletions])
+		redirect_to items_path
+	end
+
 	def copy
 		@copy_item = Item.find(params[:id])
 		@new_item = Item.new()
@@ -58,15 +73,8 @@ class ItemsController < ApplicationController
 		@new_item.tenant_id = @copy_item.tenant_id
 		@is_edit_form = true
 	end
-
-  def destroy
-		Item.find(params[:id]).destroy
-		flash[:success] = "Item deleted"
-		redirect_to items_path
-  end
 	
 	def find_items
-logger.debug "@per_page = #{@per_Page}"
 		@items = Item.where(:deleted => false).order('code').paginate(:page => params[:page], :per_page => @per_page)
 		@index = @items
 	end

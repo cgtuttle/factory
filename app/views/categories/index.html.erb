@@ -6,6 +6,9 @@
 		<th>Code</th>
 		<th>Name</th>
 		<th></th>
+		<th class="col-md-1 center-block">						
+			<%= link_to raw('<div class="glyphicon glyphicon-trash"></div>'), "#", :onclick => "$('.bulk_delete').submit()" %>				
+		</th>
 	</tr>
 <% end %>
 
@@ -15,19 +18,16 @@
 		<%= render 'new' %>
 	</tr>	
 
-	<% @categories.each do |c| %>
-		<%= content_tag_for(:tr, c, class: "sortable") do %>
-			<td><%= c.code %></td>
-			<td><%= c.name %></td>
-			
-			<td class="centered">
-					<%= link_to "Edit", edit_category_path(c) %>
-					<%= link_to "Delete",  c, :method => :delete, :confirm => "Delete Category #{c.code}" %>
-			</td>
-			
+	<%= form_tag bulk_delete_categories_path, :method => :bulk_delete, :class => "bulk_delete" do %>
+		<% @categories.each do |c| %>
+			<%= content_tag_for(:tr, c, class: "sortable") do %>
+				<td><%= c.code %></td>
+				<td><%= c.name %></td>				
+				<td><div class="center-block"><%= link_to "Edit", edit_category_path(c) %></div></td>
+				<td><div class="center-block"><%= check_box_tag "deletions[]", c.id %></div></td>				
+			<% end %>
 		<% end %>
-	<% end %>	
-		
+	<% end %>		
 <% end %>	
 
 <% content_for :multi_view do %>

@@ -1,7 +1,7 @@
 General:
  ✔ Upgrade Bootstrap to 3.0 @done (13-11-24 17:08)
  ☐ Add application admin user view
- ☐ Set up bulk_delete for categories, items
+ ✔ Set up bulk_delete for categories, items @done (14-07-04 11:53)
  ☐ Abstract bulk_delete
  ✔ Sort users by role, starting with owner *** @done (13-11-09 08:35)
  ✔ Change color of blue arrow on Admin dropdown @done (13-11-09 09:14)

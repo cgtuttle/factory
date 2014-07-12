@@ -1,12 +1,12 @@
 	
 	<tr class="<%= specification.eff_status %>">
 		<% if @list_for_an_item %>
-			<% if specification.trait.category %>
-				<td><%= specification.trait.category.code %></td>
+			<% if specification.property.category %>
+				<td><%= specification.property.category.code %></td>
 			<% else %>
 				<td></td>
 			<% end %>
-			<td><%= specification.trait.code %></td>
+			<td><%= specification.property.code %></td>
 		<% else %>
 			<td><%= link_to specification.item.code, specifications_path(:list_for => "item", :specification => {:item_id => specification.item.id})	%></td>
 			<td><%= specification.item.name	%></td>
@@ -26,11 +26,11 @@
 		<td class="centered">
 			<% if specification.eff_status == 'current' %>
 				<%= link_to "Edit", edit_specification_path(specification) %>
-				<%= link_to "Delete",  specification, :method => :delete, :confirm => "Delete #{specification.trait.code} specification for #{specification.item.code}" %>
+				<%= link_to "Delete",  specification, :method => :delete, :confirm => "Delete #{specification.property.code} specification for #{specification.item.code}" %>
 				<%= link_to "Copy", copy_specification_path(specification), :action => :copy %>
 
 			<% elsif specification.eff_status == 'pending' %>
-				<%= link_to "Delete", cancel_specification_path(specification), :confirm => "Delete pending update of #{specification.trait.code} specification for #{specification.item.code} " %>
+				<%= link_to "Delete", cancel_specification_path(specification), :confirm => "Delete pending update of #{specification.property.code} specification for #{specification.item.code} " %>
 				<%= link_to "Copy", copy_specification_path(specification), :action => :copy %>				
 			<% end %>
 			

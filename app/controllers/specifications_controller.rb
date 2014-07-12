@@ -1,7 +1,7 @@
 class SpecificationsController < ApplicationController
 	include ApplicationHelper
 	require 'will_paginate/array'
-	before_filter :initialize_status_checkboxes, :find_items, :find_traits
+	before_filter :initialize_status_checkboxes, :find_items, :find_properties
 	load_and_authorize_resource 
 
 	def cancel
@@ -10,7 +10,7 @@ class SpecificationsController < ApplicationController
 		@specification.set_eff_date
 		@specification.set_version
 		if @specification.save
-			flash[:success] = "Future Item Trait canceled"
+			flash[:success] = "Future Item Property canceled"
 			redirect_to specifications_path :item_id => @specification.item_id
 		else
 			redirect_to specifications_path :item_id => @specification.item_id
@@ -28,7 +28,7 @@ class SpecificationsController < ApplicationController
 		@new_specification.set_version
 		@new_specification.set_editor(current_user.email)
 		if @new_specification.save!
-			flash[:success] = "Item Trait added/changed"
+			flash[:success] = "Item Property added/changed"
 			redirect_to specifications_path :item_id => params[:specification][:item_id]
 		else
 			render :new
@@ -42,10 +42,10 @@ class SpecificationsController < ApplicationController
 		@delete_specification.set_version
 		@delete_specification.set_editor(current_user.email)
 		if @delete_specification.save!
-			flash[:success] = "Item Trait deleted"
+			flash[:success] = "Item Property deleted"
 			redirect_to specifications_path :item_id => @specification.item_id
 		else
-			flash[:alert] = "Could not delete Item Trait"
+			flash[:alert] = "Could not delete Item Property"
 			redirect_to specifications_path :item_id => @specification.item_id
 		end
 	end
@@ -62,8 +62,8 @@ class SpecificationsController < ApplicationController
 		set_current_item
 		if @item
 			cookies[:item_id] = @item.id
-			@specifications = Specification.includes(:trait => :category).where(:item_id => @item).order("categories.display_order")
-			@categories = @specifications.group_by{|is| is.trait.category}		
+			@specifications = Specification.includes(:property => :category).where(:item_id => @item).order("categories.display_order")
+			@categories = @specifications.group_by{|is| is.property.category}		
 		end
 	end
 
@@ -79,8 +79,8 @@ class SpecificationsController < ApplicationController
   	set_list_view
   	set_visibility
   	
-		@traits = Trait.order(:display_order)
-		@available_traits = Trait.all
+		@properties = Property.order(:display_order)
+		@available_properties = Property.all
 		@available_items = Item.all
 
 		if @list_for_an_item
@@ -98,18 +98,18 @@ class SpecificationsController < ApplicationController
 				flash[:alert] = "No items exist. Please add at least one."
 				redirect_to items_path
 			end
-		else # @list_for_a_trait
+		else # @list_for_a_property
 			if params.has_key?(:specification)
-				@trait_id = params[:specification][:trait_id]
-				@trait = Trait.exists?(@trait_id) ? Trait.find(@trait_id) : nil
+				@property_id = params[:specification][:property_id]
+				@property = Property.exists?(@property_id) ? Property.find(@property_id) : nil
 			end
-			set_current_trait
-			if @trait
+			set_current_property
+			if @property
 				@new_specification = Specification.new
-				@specifications = Specification.visible_by_trait(@trait.id, @visibility).paginate(:page => params[:page], :per_page => 15) #main Specification retrieval
+				@specifications = Specification.visible_by_property(@property.id, @visibility).paginate(:page => params[:page], :per_page => 15) #main Specification retrieval
 				@index = @specifications
-				@current_traits = Specification.where(:item_id => @item.id).pluck(:trait_id)
-				@traits = Trait.where('id IN (?)', @current_traits).order(:code)				
+				@current_properties = Specification.where(:item_id => @item.id).pluck(:property_id)
+				@properties = Property.where('id IN (?)', @current_properties).order(:code)				
 			end
 		end
   end
@@ -117,8 +117,8 @@ class SpecificationsController < ApplicationController
   def new
   	set_item_scope
   	if @item
-	  	@current_traits = Specification.where(:item_id => @item.id).pluck(:trait_id)
-	  	@available_traits = Trait.where('id not in (?)', @current_traits )
+	  	@current_properties = Specification.where(:item_id => @item.id).pluck(:property_id)
+	  	@available_properties = Property.where('id not in (?)', @current_properties )
 	  	@new_specification = Specification.new
 	  end
   end
@@ -146,7 +146,7 @@ class SpecificationsController < ApplicationController
 				ttl += 1
 			end
 		end		
-		flash[:success] = "#{@specification.trait.code} copied to #{success} of #{ttl} items"
+		flash[:success] = "#{@specification.property.code} copied to #{success} of #{ttl} items"
 		redirect_to specifications_path :item_id => @specification.item_id
 	end
 
@@ -166,9 +166,9 @@ class SpecificationsController < ApplicationController
 		@index = @items
 	end
 
-	def find_traits
-		@traits = Trait.where(:deleted => false).order('code')
-		@index = @traits
+	def find_properties
+		@properties = Property.where(:deleted => false).order('code')
+		@index = @properties
 	end
 
 	def initialize_status_checkboxes
@@ -202,13 +202,13 @@ class SpecificationsController < ApplicationController
 	  else
 	  	@list_for_an_item = true
 	  end
-	  @list_for_a_trait = !@list_for_an_item
+	  @list_for_a_property = !@list_for_an_item
 	  cookies[:list_for_item] = @list_for_an_item ? "1" : "0"
 	end
 
-	def set_trait_scope
-		@trait_id = params[:specification][:trait_id]
-		@trait = Trait.exists?(@trait_id) ? Trait.find(@trait_id) : nil
+	def set_property_scope
+		@property_id = params[:specification][:property_id]
+		@property = Property.exists?(@property_id) ? Property.find(@property_id) : nil
 	end
 
 	def set_visibility

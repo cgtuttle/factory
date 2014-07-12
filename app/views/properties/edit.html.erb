@@ -1,9 +1,9 @@
-<% set_title "#{@trait.code}", prefix: "Edit ", suffix: " Trait"%>
+<% set_title "#{@property.code}", prefix: "Edit ", suffix: " Property"%>
 
 <% set_width(6, 10) %>
 
-<%= form_for(@trait) do |f| %>
-	<%= render 'layouts/body/errors', :index => @trait %>
+<%= form_for(@property) do |f| %>
+	<%= render 'layouts/body/errors', :index => @property %>
 
 	<div class="form-group">
 		<%=f.label :code %>
@@ -24,7 +24,7 @@
 
 	<div class="form-group">
 		<%= f.submit :class => "btn btn-primary" %>
-		<%= link_to 'Cancel', traits_path, :class => "btn btn-default" %>
+		<%= link_to 'Cancel', properties_path, :class => "btn btn-default" %>
 	</div>
 		
 <% end %>

@@ -1,4 +1,4 @@
-class Trait  < ActiveRecord::Base
+class Property  < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id}
 	validate :category_id_has_match
 	has_many :specifications

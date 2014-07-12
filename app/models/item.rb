@@ -1,40 +1,40 @@
 class Item < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id} # validates uniqueness within an account
 	has_many :specifications, dependent: :destroy
-	has_many :traits, :through => :specifications
+	has_many :properties, :through => :specifications
 	attr_accessible :code, :name
 	default_scope { where(tenant_id: Tenant.current_id) }
 
 
-	def available_traits
-		sql_string_used_traits = "
+	def available_properties
+		sql_string_used_properties = "
 			SELECT a.*
 			FROM
 				((
-				SELECT trait_id, MAX(version) as ver
+				SELECT property_id, MAX(version) as ver
 				FROM specifications
 				WHERE item_id = #{self.id}					
-				GROUP BY trait_id) AS y
+				GROUP BY property_id) AS y
 			INNER JOIN
 				(
 				SELECT *
 				FROM specifications
 				WHERE item_id = #{self.id}
 				AND deleted = false) AS z
-			ON y.trait_id = z.trait_id
+			ON y.property_id = z.property_id
 			AND y.ver = z.version)
 			INNER JOIN
 				(
 				SELECT *
-				FROM traits) AS a
-			ON a.id = z.trait_id
+				FROM properties) AS a
+			ON a.id = z.property_id
 			"
 
-		@used_traits = Trait.find_by_sql(sql_string_used_traits)
-		if @used_traits.empty?
-			Trait.all
+		@used_properties = Property.find_by_sql(sql_string_used_properties)
+		if @used_properties.empty?
+			Property.all
 		else
-			Trait.where('id NOT IN (?)', @used_traits)
+			Property.where('id NOT IN (?)', @used_properties)
 		end
 	end
 

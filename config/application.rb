@@ -69,11 +69,11 @@ module Factory
 
     config.to_prepare do
       Devise::SessionsController.skip_around_filter :scope_current_tenant
-      Devise::SessionsController.skip_before_filter :initialize_item, :initialize_trait
+      Devise::SessionsController.skip_before_filter :initialize_item, :initialize_property
       Devise::RegistrationsController.skip_around_filter :scope_current_tenant
       Devise::RegistrationsController.skip_before_filter :require_no_authentication, :only => [:new, :create]
       Devise::PasswordsController.skip_around_filter :scope_current_tenant
-      Devise::PasswordsController.skip_before_filter :initialize_item, :initialize_trait
+      Devise::PasswordsController.skip_before_filter :initialize_item, :initialize_property
     end
     
   end

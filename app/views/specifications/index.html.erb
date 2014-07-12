@@ -1,5 +1,5 @@
 <% set_title "Item Specifications" %>
-<% set_width 12, 12 %>
+<% set_width 12, 12, true %>
 <% content_for :controls do %>
 
 	<div class="bottom-space">
@@ -8,14 +8,14 @@
 				<div class="btn-group">
 					<%= radio_button_tag :list_for, "item", @list_for_an_item,  {:onchange => "this.form.submit();"} %>
 					<%= label_tag :list_for_item, "For an Item" %>
-					<%= radio_button_tag :list_for, "trait", @list_for_a_trait, {:onchange => "this.form.submit();"} %>
-					<%= label_tag :list_for_trait, "For a Trait"  %>
+					<%= radio_button_tag :list_for, "property", @list_for_a_property, {:onchange => "this.form.submit();"} %>
+					<%= label_tag :list_for_property, "For a Property"  %>
 				</div>
 
 				<% if @list_for_an_item %>					
 					<%= collection_select :specification, :item_id, @items, :id, :code, {:selected => @item.id }, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>					
 				<% else %>
-					<%= collection_select :specification, :trait_id, @traits, :id, :code, {:selected => @trait.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
+					<%= collection_select :specification, :property_id, @properties, :id, :code, {:selected => @property.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
 				<% end %>
 				
 				<%= label_tag 'show_pending', :class => "checkbox" do %>
@@ -40,9 +40,9 @@
 
 <% content_for :thead do %>
 	<div>
-		<% if !@list_for_a_trait %>				
+		<% if !@list_for_a_property %>				
 			<th>Category</th>
-			<th class="col-md-2"> Trait</th>
+			<th class="col-md-2"> Property</th>
 		<% else %>
 			<th>Item Code</th>
 			<th class="col-xs-2">Name</th>

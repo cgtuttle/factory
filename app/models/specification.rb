@@ -1,12 +1,12 @@
 class Specification < ActiveRecord::Base
 	belongs_to :item
-	belongs_to :trait
+	belongs_to :property
 	belongs_to :analysis
-	delegate :category, :to => :trait
+	delegate :category, :to => :property
 
-	validates :item_id, :trait_id, :presence => true
+	validates :item_id, :property_id, :presence => true
 	validate :valid_eff_date?
-	attr_accessible :trait_id, :string_value, :text_value, :numeric_value, :usl, \
+	attr_accessible :property_id, :string_value, :text_value, :numeric_value, :usl, \
 		:lsl, :unit_of_measure, :analysis_id, :eff_date, :item_id, :version, :tag, \
 		:document_title, :document_url, :document_version, :deleted, :canceled, :notes
 
@@ -24,20 +24,20 @@ class Specification < ActiveRecord::Base
 	end
 
 	def self.visible_by_item(item, visibility)
-		stats = self.includes(:trait => :category).where(:item_id => item)
-			.order("categories.display_order, traits.display_order, eff_date DESC, version DESC")
+		stats = self.includes(:property => :category).where(:item_id => item)
+			.order("categories.display_order, properties.display_order, eff_date DESC, version DESC")
 		stats.select{|s| s if s.status == (visibility & s.status)}
 	end
 
-	def self.visible_by_trait(trait, visibility)
-		stats = self.includes(:item).where(:trait_id => trait)
+	def self.visible_by_property(property, visibility)
+		stats = self.includes(:item).where(:property_id => property)
 			.order("items.code, eff_date DESC, version DESC")
 		stats.select{|s| s if s.status == (visibility & s.status)}
 	end
 
 	def status
 		current_spec = Specification
-			.where(["item_id = ? AND trait_id = ? AND eff_date <= ? ", self.item_id, self.trait_id, Date.today] )
+			.where(["item_id = ? AND property_id = ? AND eff_date <= ? ", self.item_id, self.property_id, Date.today] )
 			.order('eff_date DESC, version DESC').first
 		status = ((self.deleted || self.canceled) ? 8 : 16)
 		
@@ -61,8 +61,8 @@ class Specification < ActiveRecord::Base
 	end
 	
 	def last_version
-		unless Specification.where(:item_id => self.item_id, :trait_id => self.trait_id).empty?
-			Specification.where(:item_id => self.item_id, :trait_id => self.trait_id).order('version DESC').first.version
+		unless Specification.where(:item_id => self.item_id, :property_id => self.property_id).empty?
+			Specification.where(:item_id => self.item_id, :property_id => self.property_id).order('version DESC').first.version
 		end
 	end
 	

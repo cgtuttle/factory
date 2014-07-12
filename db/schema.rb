@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140704181746) do
+ActiveRecord::Schema.define(:version => 20140712151233) do
 
   create_table "analyses", :force => true do |t|
     t.string   "code",         :limit => 64,                     :null => false
@@ -92,6 +92,26 @@ ActiveRecord::Schema.define(:version => 20140704181746) do
 
   add_index "memberships", ["user_id", "tenant_id"], :name => "index_memberships_on_user_id_and_tenant_id", :unique => true
 
+  create_table "properties", :force => true do |t|
+    t.string   "code",          :limit => 64,                     :null => false
+    t.string   "name",          :limit => 128
+    t.integer  "usl"
+    t.integer  "lsl"
+    t.string   "label",         :limit => 64
+    t.integer  "display_order",                :default => 0
+    t.string   "created_by"
+    t.string   "changed_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "category_id"
+    t.boolean  "deleted",                      :default => false
+    t.datetime "deleted_at"
+    t.integer  "tenant_id"
+  end
+
+  add_index "properties", ["tenant_id", "code"], :name => "trait_by_code", :unique => true
+  add_index "properties", ["tenant_id"], :name => "index_traits_on_tenant_id"
+
   create_table "roles", :force => true do |t|
     t.string   "role_name"
     t.integer  "display_order"
@@ -102,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20140704181746) do
 
   create_table "specifications", :force => true do |t|
     t.integer  "item_id"
-    t.integer  "trait_id"
+    t.integer  "property_id"
     t.integer  "version",                        :default => 1
     t.date     "eff_date"
     t.string   "tag"
@@ -129,26 +149,6 @@ ActiveRecord::Schema.define(:version => 20140704181746) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "traits", :force => true do |t|
-    t.string   "code",          :limit => 64,                     :null => false
-    t.string   "name",          :limit => 128
-    t.integer  "usl"
-    t.integer  "lsl"
-    t.string   "label",         :limit => 64
-    t.integer  "display_order",                :default => 0
-    t.string   "created_by"
-    t.string   "changed_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "category_id"
-    t.boolean  "deleted",                      :default => false
-    t.datetime "deleted_at"
-    t.integer  "tenant_id"
-  end
-
-  add_index "traits", ["tenant_id", "code"], :name => "trait_by_code", :unique => true
-  add_index "traits", ["tenant_id"], :name => "index_traits_on_tenant_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false

@@ -30,7 +30,7 @@ Factory::Application.routes.draw do
     post 'bulk_delete', :on => :collection
   end
 
-  resources :traits do
+  resources :properties do
     collection { post :sort}    
     post 'bulk_delete', :on => :collection    
   end

@@ -1,11 +1,11 @@
 <tr>
-	<%= form_for(@trait) do |f| %>
+	<%= form_for(@property) do |f| %>
 <!--		<div class="form-group"> -->		
 			<td><%= f.collection_select :category_id, @categories, :id, :code, {:prompt => :true}, :class => "form-control input-sm" %></td>
 			<td><%= f.text_field :code, :class => "form-control input-sm"  %></td>
 			<td><%= f.text_field :name, :class => "form-control input-sm" %></td>
 			<td><%= f.text_field :label, :class => "form-control input-sm" %></td>
-			<td><%= f.submit "Add Trait", :class => "btn btn-primary btn-sm" %></td>
+			<td><%= f.submit "Add Property", :class => "btn btn-primary btn-sm" %></td>
 			<td></td>
 <!--		</div> -->			
 	<% end %>		

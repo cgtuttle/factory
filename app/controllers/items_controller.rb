@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   def index
   	logger.debug "running items.index: @current_tenant = #{@current_tenant.inspect}"
 		@new_item = Item.new	
-		@traits = Trait.all
+		@properties = Property.all
 		@is_table = true
   end
 

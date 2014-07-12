@@ -1,4 +1,4 @@
-module TraitsHelper
+module PropertiesHelper
 
 	def active_categories
 		Category.where(:deleted => false)

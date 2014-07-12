@@ -3,12 +3,12 @@
 		<div class="form-group">
 			<% if @list_for_an_item %>
 				<td></td>
-				<td><%= f.collection_select :trait_id, @available_traits, :id, :code, {:prompt => "Select"}, :class => "form-control input-sm" %></td>
+				<td><%= f.collection_select :property_id, @available_properties, :id, :code, {:prompt => "Select"}, :class => "form-control input-sm" %></td>
 				<%= f.hidden_field :item_id, :value => @item.id %>
 			<% else %>
 				<td><%= f.collection_select :item_id, @items, :id, :code, {:prompt => "Select"}, :class => "form-control input-sm" %></td>
 				<td></td>
-				<%= f.hidden_field :trait_id, :value => @trait.id %>
+				<%= f.hidden_field :property_id, :value => @property.id %>
 			<% end %>
 			<td><%= f.text_field :string_value, :class => "form-control input-sm" %></td>			
 			<td><%= f.text_field :numeric_value, :class => "form-control input-sm" %></td>

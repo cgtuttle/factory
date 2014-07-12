@@ -1,2 +1,2 @@
 
-RESOURCE_NAMES = ['item', 'trait']
+RESOURCE_NAMES = ['item', 'property']

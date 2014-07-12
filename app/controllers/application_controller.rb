@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   force_ssl
   around_filter :scope_current_tenant # Run for each request...., return here at end of request (creates a wrapper around the request)
   before_filter :set_per_page
-  before_filter :initialize_item, :initialize_trait
+  before_filter :initialize_item, :initialize_property
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to tenants_path, :alert => exception.message
@@ -24,10 +24,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :set_current_item
 
-  def set_current_trait
-    initialize_trait
+  def set_current_property
+    initialize_property
   end
-  helper_method :set_current_trait
+  helper_method :set_current_property
 
 
 private
@@ -44,30 +44,30 @@ private
     initialize_resources("item")
   end
 
-  def initialize_trait
-    initialize_resources("trait")
+  def initialize_property
+    initialize_resources("property")
   end
 
   def initialize_resources(resource_name)
-    logger.debug "Running initialize_resources(#{resource_name}"
-    resource = resource_name.capitalize.constantize
-    current_object = instance_variable_get("@#{resource_name}")
-    logger.debug "current_object = #{current_object.inspect}"
-    cookie_name = "#{current_tenant.id}_#{resource_name}".to_sym
-    if current_object.blank?
-      current_id = cookies[cookie_name]
-      if !current_id.blank? && resource.exists?(current_id)
-        current_object = resource.find(current_id)
-      else
-        current_object = resource.first
+    if !current_tenant.blank?
+      resource = resource_name.capitalize.constantize
+      current_object = instance_variable_get("@#{resource_name}")
+      cookie_name = "#{current_tenant.id}_#{resource_name}".to_sym
+      if current_object.blank?
+        current_id = cookies[cookie_name]
+        if !current_id.blank? && resource.exists?(current_id)
+          current_object = resource.find(current_id)
+        else
+          current_object = resource.first
+        end
       end
-    end
-    exists = !current_object.blank?
-    cookies.delete cookie_name
-    instance_variable_set("@#{resource_name}s_exist", exists)
-    if exists
-      cookies[cookie_name] = current_object.id
-      instance_variable_set("@#{resource_name}", current_object)
+      exists = !current_object.blank?
+      cookies.delete cookie_name
+      instance_variable_set("@#{resource_name}s_exist", exists)
+      if exists
+        cookies[cookie_name] = current_object.id
+        instance_variable_set("@#{resource_name}", current_object)
+      end
     end    
   end
 

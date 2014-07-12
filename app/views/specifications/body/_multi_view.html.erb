@@ -4,7 +4,7 @@
 	<div class="panel-heading">				
 		<strong class="panel-title text-muted">
 			<div class="row">
-				<div class="<%= specification.eff_status %> col-xs-4"><%= specification.trait.code %></div>
+				<div class="<%= specification.eff_status %> col-xs-4"><%= specification.property.code %></div>
 				<div class="<%= specification.eff_status %> col-xs-4"><%= specification.eff_status %></div>
 				<div class="<%= specification.eff_status %> col-xs-4 text-right"><%= specification.eff_date %></div>
 			</div>
@@ -41,10 +41,10 @@
 			
 				<% if specification.eff_status == 'current' %>
 					<%= link_to "Edit", edit_specification_path(specification), :class=>"btn btn-default" %>
-					<%= link_to "Delete",  specification, :class=>"btn btn-default", :method => :delete, :confirm => "Delete #{specification.trait.code} specification for #{specification.item.code}" %>
+					<%= link_to "Delete",  specification, :class=>"btn btn-default", :method => :delete, :confirm => "Delete #{specification.property.code} specification for #{specification.item.code}" %>
 					
 				<% elsif specification.eff_status == 'pending' %>
-					<%= link_to "Delete", cancel_specification_path(specification), :class=>"btn btn-default", :confirm => "Delete pending update of #{specification.trait.code} specification for #{specification.item.code}" %>				
+					<%= link_to "Delete", cancel_specification_path(specification), :class=>"btn btn-default", :confirm => "Delete pending update of #{specification.property.code} specification for #{specification.item.code}" %>				
 				<% end %>
 				
 				<%= link_to "Notes", notes_path(specification), :class=>"btn btn-default" %>

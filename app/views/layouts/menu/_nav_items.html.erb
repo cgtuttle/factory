@@ -9,7 +9,7 @@
 		<li>
 			<%= link_to 'Setup <b class="caret caret-header"></b>'.html_safe, root_path, :id => 'dLeftLabel', :'data-toggle' => 'dropdown', :class => 'dropdown-toggle' %> 
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dleftLabel"> 
-				<li><%= link_to_unless_current( "Traits", { controller: "/traits"}) { } %></li>
+				<li><%= link_to_unless_current( "Properties", { controller: "/properties"}) { } %></li>
 				<li><%= link_to_unless_current( "Items", {controller: "/items"}) { } %></li>
 				<li><%= link_to_unless_current( "Categories", { controller: "/categories"}) { } %></li>
 				<li><%= link_to_unless_current( "Analysis", { controller: "/analyses"}) { } %></li>

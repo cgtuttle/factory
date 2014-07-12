@@ -1,4 +1,4 @@
-<% set_title "Traits"%>
+<% set_title "Properties"%>
 
 <% set_width(12, 12) %>
 
@@ -6,8 +6,8 @@
 	
 		<tr>
 			<th class="col-md-2">Category</th>
-			<th class="col-md-2">Trait Code</th>
-			<th class="col-md-3">Trait Name</th>
+			<th class="col-md-2">Property Code</th>
+			<th class="col-md-3">Property Name</th>
 			<th class="col-md-3">Label</th>
 			<th class="col-md-1"></th>
 			<th class="col-md-1 center-block">						
@@ -23,14 +23,14 @@
 		<%= render 'new' %>
 	</tr>
 
-	<%= form_tag bulk_delete_traits_path, :method => :bulk_delete, :class => "bulk_delete" do %>
-		<% @traits.each do |t| %>
+	<%= form_tag bulk_delete_properties_path, :method => :bulk_delete, :class => "bulk_delete" do %>
+		<% @properties.each do |t| %>
 			<%= content_tag_for(:tr, t, class: "sortable") do %>
 				<td><%= t.category_id  ? t.category.code : nil %></td>
 				<td><%= t.code %></td>
 				<td><%= t.name %></td>
 				<td><%= t.label %></td>
-				<td><div class="center-block"><%= link_to "Edit", edit_trait_path(t) %></div></td>
+				<td><div class="center-block"><%= link_to "Edit", edit_property_path(t) %></div></td>
 				<td><div class="center-block"><%= check_box_tag "deletions[]", t.id %></div></td>
 			<% end %>
 		<% end %>
@@ -39,7 +39,7 @@
 <% end %>
 
 <% content_for :multi_view do %>
-	<% @traits.each do |t| %>
+	<% @properties.each do |t| %>
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">				

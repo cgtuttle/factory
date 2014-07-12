@@ -1,6 +1,7 @@
 General:
- ☐ Change item_specs to specifications
- ☐ Change traits to properties
+ ✔ Change item_specs to specifications @done (14-07-04 19:24)
+ ☐ Fix views/specifications/body/_index if specification.trait is nil
+ ✔ Change traits to properties @done (14-07-12 11:00)
  ✔ Upgrade Bootstrap to 3.0 @done (13-11-24 17:08)
  ☐ Add application admin user view
  ✔ Set up bulk_delete for categories, items @done (14-07-04 11:53)

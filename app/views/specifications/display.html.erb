@@ -27,7 +27,7 @@
 								<% else %>
 									<td class="display"></td>
 								<% end %>
-								<td class="trait-name bold display"><%= s.trait.name %></td>
+								<td class="property-name bold display"><%= s.property.name %></td>
 								<td class="display"><%= s.lsl ||= nil %></td>
 								<td class="align_center bold display">										
 									<%= "#{s.numeric_value} #{s.unit_of_measure}" if s.numeric_value %>
@@ -47,7 +47,7 @@
 					<% if s.eff_status == "current" %>
 						<tr class="display-row">
 							<td class="display"></td>
-							<td class="trait-name bold display"><%= s.trait.name %></td>
+							<td class="property-name bold display"><%= s.property.name %></td>
 							<td class="display"><%= s.lsl ||= nil %></td>
 							<td class="align_center bold display">										
 								<%= "#{s.numeric_value} #{s.unit_of_measure}" if s.numeric_value %>

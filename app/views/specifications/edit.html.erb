@@ -1,11 +1,11 @@
-<% set_title "#{@specification.item.code}:#{@specification.trait.code}", prefix: "Edit ", suffix: " Specification" %>
+<% set_title "#{@specification.item.code}:#{@specification.property.code}", prefix: "Edit ", suffix: " Specification" %>
 	
 <% set_width(6, 10) %>
 
 <%= form_for(@new_specification) do |f| %>
 	<%= render 'layouts/body/errors', :index => @new_specification %>				
 	<%= f.hidden_field :item_id %>
-	<%= f.hidden_field :trait_id %>
+	<%= f.hidden_field :property_id %>
 	<%= f.hidden_field :version %>
 	<div class="form-group">
 		<%= f.label "Text" %>

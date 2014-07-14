@@ -5,7 +5,7 @@ General:
  ☐ Create "Copy To" at item level for specifications
  ☐ Create "Sync to/from" at specification level
  ☐ Create Bulk Edit at specification level
- ☐ Fix opening show history/pending/deleted checkboxes in specifications/index (always checked)
+ ✔ Fix opening show history/pending/deleted checkboxes in specifications/index (always checked) @done (14-07-13 19:34)
  Usability:
  ☐ Add batch edit capability or copy record capability
  ✔ Change alignment of Display target, usl, lsl @done (14-07-13 10:09)

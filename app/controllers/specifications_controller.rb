@@ -78,7 +78,6 @@ class SpecificationsController < ApplicationController
 		@is_table = true
   	set_list_view
   	set_visibility
-  	
 		@properties = Property.order(:display_order)
 		@available_properties = Property.all
 		@available_items = Item.all

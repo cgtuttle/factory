@@ -5,9 +5,9 @@
 		<thead class="display-header">
 			<tr>
 				<th class="category-name display">Category</th>
-				<th class="display">Specification</th>
-				<th class="display">Lower Limit</th>
+				<th class="display col-md-2">Specification</th>
 				<th class="align_center display">Target</th>
+				<th class="display">Lower Limit</th>
 				<th class="align_right display">Upper Limit</th>
 				<th class="align_center display">Notes</th>
 			</tr>
@@ -28,13 +28,13 @@
 									<td class="display"></td>
 								<% end %>
 								<td class="property-name bold display"><%= s.property.name %></td>
-								<td class="display"><%= s.lsl ||= nil %></td>
-								<td class="align_center bold display">										
+								<td class="bold display">										
 									<%= "#{s.numeric_value} #{s.unit_of_measure}" if s.numeric_value %>
 									<%= s.string_value if !s.string_value.empty? %>
 									<%= s.text_value if !s.text_value.empty? %>								
 								</td>
-								<td class="align_right display"><%= s.usl ||= nil %></td>								
+								<td class="display"><%= s.lsl ||= nil %></td>
+								<td class="display"><%= s.usl ||= nil %></td>								
 								<td class="right-margin display"><%= simple_format(s.notes ||= "") %></td>								
 							</tr>										
 						<% end %>	

@@ -1,7 +1,7 @@
 class Property  < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id}
 	validate :category_id_has_match
-	has_many :specifications
+	has_many :specifications, :dependent => :destroy
 	has_many :items, :through => :specifications
 	belongs_to :category
 	attr_accessible :code, :name, :display_order, :usl, :lsl, :label, :category_id

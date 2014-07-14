@@ -1,7 +1,7 @@
 	
 	<tr class="<%= specification.eff_status %>">
 		<% if @list_for_an_item %>
-			<% if specification.property.category %>
+			<% if specification.property %>
 				<td><%= specification.property.category.code %></td>
 			<% else %>
 				<td></td>

@@ -62,13 +62,13 @@
 
 
 <% if @item %>
-	<!-- pass index the collection for the loop -->		
+	<!-- pass to index the collection for the loop -->		
 	<% content_for :table do %>
 		<%= render "specifications/body/new" %>
 		<%= render :partial => "specifications/body/index", :collection => @specifications, :as => :specification %>
 	<% end %>
 
-	<!-- pass multi_view the collection for the loop -->
+	<!-- pass to multi_view the collection for the loop -->
 	<% content_for :multi_view do %>
 		<div class="bottom-space">	
 			<%= link_to "Add New Specification", new_specification_path, :class => "btn btn-default" %>	

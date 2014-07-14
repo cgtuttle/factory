@@ -49,26 +49,24 @@ private
   end
 
   def initialize_resources(resource_name)
-    if !current_tenant.blank?
-      resource = resource_name.capitalize.constantize
-      current_object = instance_variable_get("@#{resource_name}")
-      cookie_name = "#{current_tenant.id}_#{resource_name}".to_sym
-      if current_object.blank?
-        current_id = cookies[cookie_name]
-        if !current_id.blank? && resource.exists?(current_id)
-          current_object = resource.find(current_id)
-        else
-          current_object = resource.first
-        end
+    resource = resource_name.capitalize.constantize
+    current_object = instance_variable_get("@#{resource_name}")
+    cookie_name = "#{current_tenant.id}_#{resource_name}".to_sym
+    if current_object.blank?
+      current_id = cookies[cookie_name]
+      if !current_id.blank? && resource.exists?(current_id)
+        current_object = resource.find(current_id)
+      else
+        current_object = resource.first
       end
-      exists = !current_object.blank?
-      cookies.delete cookie_name
-      instance_variable_set("@#{resource_name}s_exist", exists)
-      if exists
-        cookies[cookie_name] = current_object.id
-        instance_variable_set("@#{resource_name}", current_object)
-      end
-    end    
+    end
+    exists = !current_object.blank?
+    cookies.delete cookie_name
+    instance_variable_set("@#{resource_name}s_exist", exists)
+    if exists
+      cookies[cookie_name] = current_object.id
+      instance_variable_set("@#{resource_name}", current_object)
+    end 
   end
 
 	def scope_current_tenant # Runs once for each request 

@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
 	validates :code, :presence => true, :uniqueness => {:scope => :tenant_id} # validates uniqueness within an account
-	has_many :specifications, dependent: :destroy
+	has_many :specifications, :dependent => :destroy
 	has_many :properties, :through => :specifications
 	attr_accessible :code, :name
 	default_scope { where(tenant_id: Tenant.current_id) }

@@ -1,6 +1,6 @@
 class SchemaRebuild < ActiveRecord::Migration
   def up
-  	
+
 	  create_table "analyses", :force => true do |t|
 	    t.string   "code",         :limit => 64,                     :null => false
 	    t.string   "name",         :limit => 128
@@ -12,7 +12,7 @@ class SchemaRebuild < ActiveRecord::Migration
 	    t.integer  "tenant_id"
 	  end
 
-	  add_index "analyses", ["tenant_id", "code"], :name => "test_by_code", :unique => true
+	  add_index "analyses", ["tenant_id", "code"], :name => "analysis_by_code", :unique => true
 	  add_index "analyses", ["tenant_id"], :name => "index_analyses_on_tenant_id"
 
 	  create_table "categories", :force => true do |t|
@@ -97,8 +97,8 @@ class SchemaRebuild < ActiveRecord::Migration
 	    t.integer  "tenant_id"
 	  end
 
-	  add_index "properties", ["tenant_id", "code"], :name => "trait_by_code", :unique => true
-	  add_index "properties", ["tenant_id"], :name => "index_traits_on_tenant_id"
+	  add_index "properties", ["tenant_id", "code"], :name => "property_by_code", :unique => true
+	  add_index "properties", ["tenant_id"], :name => "index_properties_on_tenant_id"
 
 	  create_table "roles", :force => true do |t|
 	    t.string   "role_name"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140712151233) do
+ActiveRecord::Schema.define(:version => 20140802145329) do
 
   create_table "analyses", :force => true do |t|
     t.string   "code",         :limit => 64,                     :null => false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20140712151233) do
     t.integer  "tenant_id"
   end
 
-  add_index "analyses", ["tenant_id", "code"], :name => "test_by_code", :unique => true
+  add_index "analyses", ["tenant_id", "code"], :name => "analysis_by_code", :unique => true
   add_index "analyses", ["tenant_id"], :name => "index_analyses_on_tenant_id"
 
   create_table "categories", :force => true do |t|
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(:version => 20140712151233) do
     t.integer "tenant_id"
   end
 
+  add_index "cells", ["import_id"], :name => "index_cells_on_import_id"
+  add_index "cells", ["import_row_id"], :name => "index_cells_on_import_row_id"
+  add_index "cells", ["row_num"], :name => "index_cells_on_row_num"
+  add_index "cells", ["tenant_id"], :name => "index_cells_on_tenant_id"
+
   create_table "import_rows", :force => true do |t|
     t.integer "import_id"
     t.boolean "import_error"
@@ -61,12 +66,17 @@ ActiveRecord::Schema.define(:version => 20140712151233) do
     t.integer "tenant_id"
   end
 
+  add_index "import_rows", ["import_id"], :name => "index_import_rows_on_import_id"
+  add_index "import_rows", ["row_id"], :name => "index_import_rows_on_row_id", :unique => true
+  add_index "import_rows", ["tenant_id"], :name => "index_import_rows_on_tenant_id"
+
   create_table "imports", :force => true do |t|
     t.integer "user_id"
     t.string  "model"
     t.integer "first_row"
     t.integer "row_count"
     t.integer "tenant_id"
+    t.integer "col_count"
   end
 
   create_table "items", :force => true do |t|
@@ -109,8 +119,8 @@ ActiveRecord::Schema.define(:version => 20140712151233) do
     t.integer  "tenant_id"
   end
 
-  add_index "properties", ["tenant_id", "code"], :name => "trait_by_code", :unique => true
-  add_index "properties", ["tenant_id"], :name => "index_traits_on_tenant_id"
+  add_index "properties", ["tenant_id", "code"], :name => "property_by_code", :unique => true
+  add_index "properties", ["tenant_id"], :name => "index_properties_on_tenant_id"
 
   create_table "roles", :force => true do |t|
     t.string   "role_name"

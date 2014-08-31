@@ -1,4 +1,5 @@
 General:
+ ☐ Fix user registration edit when attempted prior to choosing tenant
  ☐ Add application admin user view
  ☐ Add role administration
  ☐ Set user role as one of defaults
@@ -8,6 +9,7 @@ General:
  ✔ Fix opening show history/pending/deleted checkboxes in specifications/index (always checked) @done (14-07-13 19:34)
  Usability:
  ☐ Add batch edit capability or copy record capability
+ ☐ Improve performance of import edit
  ✔ Change alignment of Display target, usl, lsl @done (14-07-13 10:09)
  ☐ Add search to items/index
  ☐ Add list .pdf output to models
@@ -37,7 +39,7 @@ Database:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
- ✔ Change specifications to specifications @done (14-07-04 19:24) @project(General)
+ ✔ Change Item Specs to specifications @done (14-07-04 19:24) @project(General)
  ✔ Fix views/specifications/body/_index if specification.trait is nil @done (14-07-12 20:30) @project(General)
  ✔ Change traits to properties @done (14-07-12 11:00) @project(General)
  ✔ Upgrade Bootstrap to 3.0 @done (13-11-24 17:08) @project(General)

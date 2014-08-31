@@ -1,4 +1,5 @@
 class ImportsController < ApplicationController
+	require 'benchmark'
 	include ApplicationHelper
 	include ImportsHelper
 	include ImportCSV
@@ -15,43 +16,47 @@ class ImportsController < ApplicationController
 	end
 	
 	def create # choose import file and load it into @csv_file
-		if params[:file]
+		if params[:file]					
 			Cell.delete_all
-			ImportRow.delete_all
-			Import.delete_all			
 			@import = Import.new(params[:import])
 			@import.user_id = 0 # current_user.id
-			@model = @import.model # selected model
+			@model = @import.model # selected model			
 			@import.save
-			import_file(params[:file]) # import the CSV file into @csv_file, @row_count, and @column_count
-			store_csv_rows
-			store_csv_cells
-			update_cells_import_row_id
+			@import.file = params[:file]
+			@import.read
+			@import.fill_cells_array
+			@col_count = @import.col_count
+			@row_count = @import.row_count
 			field_choices
 			render 'edit'
 		else
 			redirect_to new_import_path
 		end
 	end
+
+
 	
 	def update
 		@import = Import.find(params[:id])
 		@first_row = params[:first_row]
 		@row_count = params[:row_count]
 		@field_choices = params[:field_choices]
-		@field_choices.each_with_index do |name, col_num|		
-			@col_num = col_num				
-			update_field_names(name)
+		count = 0
+		@field_choices.each_with_index do |name, col_num|				
+			count += 1 unless name == ""
+			@file_col_count = col_num				
+			@import.update_field_names(name)
 			if name.slice!("_id") == "_id" 
-				update_id_fields(name.pluralize)
-				set_row_match_error
+				@import.update_id_fields(name.pluralize, col_num)
 			end		
 		end
-		update_field_values	
+		@import.update_field_values	
 		@import.first_row = @first_row
+		@import.col_count = count
 		@import.row_count = @row_count
+		@import.save
 		if @import.update_attributes(params[:import])
-			if save_import
+			if @import.save_import
 				flash[:success] = "Import completed successfully."
 			else
 				flash[:error] = "Import not completed"
@@ -62,5 +67,6 @@ class ImportsController < ApplicationController
 
 	def help
 	end
-	
+
+
 end

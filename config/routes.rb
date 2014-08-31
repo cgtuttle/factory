@@ -16,6 +16,7 @@ Factory::Application.routes.draw do
   end
 
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :delete_user
+  match 'imports/:id/test' => 'imports#test', :as => :import_test
 	
 	resources :users
   resources :imports

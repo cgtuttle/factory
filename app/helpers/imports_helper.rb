@@ -5,9 +5,9 @@ module ImportsHelper
 		@field_choices = Array.new
 		@obj.columns.each do |c|
 			unless Import::NO_IMPORT.include?(c.name)
-				@field_choices << [c.name.humanize, c.name]
+				@field_choices << [c.name.humanize.pluralize, c.name]
 			end
 		end
 	end
-	
+
 end

@@ -15,14 +15,14 @@
         
         <tr>
         <td></td>
-          <% (1..@column_count).each do |col| %>    
+          <% (1..@col_count).each do |col| %>    
             <td>Column <%= col %></td>
           <% end %>
         </tr>
 
         <tr>
         <td></td>  
-          <% (1..@column_count).each do %>                
+          <% (1..@col_count).each do %>                
             <td>
               <%= select_tag "field_choices[]", options_for_select(@field_choices), :prompt => '--Select--', :class => "form-control" %>
             </td>        
@@ -31,7 +31,7 @@
       
         <tr>
         <td></td>
-          <% (1..@column_count).each do %>      
+          <% (1..@col_count).each do %>      
             <td style="text-align: center;"><%= image_tag "Black_Up_Arrow.png", :alt=>"^", :id=>"arrow-up", :size=>"15x25" %></td>      
           <% end %>
         </tr>
@@ -42,36 +42,30 @@
 
         <tr>
         <td class="column-label">Row</td>
-          <% (1..@column_count).each do |col| %>    
+          <% (1..@col_count).each do |col| %>    
             <td class="column-label">Column <%= col %></td>
           <% end %>
         </tr>
-          
-            <%= f.fields_for :cells do |ff| %>
-              <% if ff.object.row_num < 4 %>
-                <% if ff.object.col_num == 0 %>
-                  <tr>
-                  <td style="text-align:center;"><%= ff.object.row_num %></td>
-                <% end %>
-                    <td style="text-align:center;color:blue;">
-                      <%= ff.object.import_value %>
-                    </td>
-                <% if ff.object.col_num == @column_count %>
-                  </tr>
-                <% end %>
-              <% end %>
-            <% end %>
-
-          <% if @row_count > 3 %>
+        <% @import.cells.where("row_num < 4").order(:row_num, :col_num).each do |first_cells| %>
+          <% if first_cells.col_num == 0 %>
             <tr>
-              <td><%= @row_count - 3 %> more rows...</td>
+            <td style="text-align:center;"><%= first_cells.row_num %></td>
+          <% end %>
+          <td style="text-align:center;color:blue;">
+            <%= first_cells.import_value %>
+          </td>
+          <% if first_cells.col_num == @col_count %>
             </tr>
           <% end %>
+        <% end %>
 
-          
-        </table>
+        <% if @row_count > 4 %>
+          <tr>
+            <td><%= @row_count - 4 %> more rows...</td>
+          </tr>
+        <% end %>
 
-      
+      </table>
     	
     	<%= hidden_field_tag :row_count, @row_count  %>
       

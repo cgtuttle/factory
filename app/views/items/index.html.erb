@@ -16,7 +16,7 @@
 <% content_for :table do %>
 	<%= render 'new' %>
 
-	<%= form_tag bulk_delete_items_path, :method => :bulk_delete, :class => "bulk_delete" do %>
+	<%= form_tag bulk_delete_items_path, :method => :bulk_delete do %>
 		<% @items.each do |i| %>
 			<tr>
 				<td><%= link_to i.code, specifications_path(i) %></td>
@@ -27,6 +27,17 @@
 			</tr>
 		<% end %>
 	<% end %>
+<% end %>
+
+<% content_for :import do %>	
+		<%= form_tag import_items_path, :multipart => true, :class => "form-horizontal top-space" do %>
+			<div class="form-group">
+				<label for="file" class="col-sm-3" >Import CSV File</label> 
+				<%= file_field_tag :file, :class => "col-sm-6" %>
+			
+				<%= submit_tag "Import", :class => "btn btn-default col-sm-3" %>
+			</div>
+		<% end %>	
 <% end %>
 
 <% content_for :multi_view do %>

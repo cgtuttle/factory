@@ -3,7 +3,7 @@
 <% set_width(10, 12, false) %>
 
        
-<%= form_for @import, :html=>{:multipart=>true} do |f| %>
+<%= form_for @import, :html=>{:multipart=>true}, :remote => true do |f| %>
 
   <ul class="list-unstyled list-inline">
     <li><div class="badge">1</div></li>
@@ -12,7 +12,7 @@
     
   <div class="form-group">       
     <%= f.label 'import into' do %>
-      Import into <%= f.select :model, Import::MODELS.sort, {:selected => @model}, :include_blank => '--- Select Table ---', :class => "form-control"  %>
+      Import into <%= f.select :model, Import::MODELS.sort, {:selected => @model }, { :class => "form-control"}  %>
     <% end %>
   </div>
 
@@ -32,11 +32,11 @@
 
   <ul class="list-unstyled list-inline">
     <li><div class="badge">3</div></li>
-    <li><h4><small> Load Content for Mapping</small></h4></li>
+    <li><h4><small> Import Data</small></h4></li>
   </ul>
 
   <div class="form-group">        	
-    <%= submit_tag 'Continue', :name => 'import_file', :class => "btn btn-primary" %>	    
+    <%= submit_tag 'Import', :name => 'import_file', :class => "btn btn-primary" %>	    
   </div>
 
 <% end %>

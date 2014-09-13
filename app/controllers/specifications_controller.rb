@@ -158,6 +158,17 @@ class SpecificationsController < ApplicationController
 		end
   end
 
+  def new_import
+		logger.info "Running new_import"
+  end
+
+	def save_import
+		if params[:commit] == "Import"
+			Specification.import(params[:file])
+		end
+		redirect_to specifications_path
+	end
+
 # Utilities
 	
 	def find_items

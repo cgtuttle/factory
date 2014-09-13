@@ -21,7 +21,8 @@
           <%= render 'layouts/body/title_layout' if @title %>
           <%= render :partial => 'layouts/body/table_layout', :object => @index, :as => :index if @is_table %>
           <!--! rendered table_layout -->  
-          <%= yield %>      
+          <%= yield %>
+          <%= yield(:import) %>      
         
           <footer class="row">
             <%= yield(:footer) %>

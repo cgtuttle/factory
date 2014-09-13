@@ -38,6 +38,17 @@
 	
 <% end %>
 
+<% content_for :import do %>	
+		<%= form_tag import_properties_path, :multipart => true, :class => "form-horizontal top-space" do %>
+			<div class="form-group">
+				<label for="file" class="col-sm-3" >Import CSV File</label> 
+				<%= file_field_tag :file, :class => "col-sm-6" %>
+			
+				<%= submit_tag "Import", :class => "btn btn-default col-sm-3" %>
+			</div>
+		<% end %>	
+<% end %>
+
 <% content_for :multi_view do %>
 	<% @properties.each do |t| %>
 		<div class="row">

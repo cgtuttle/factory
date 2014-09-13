@@ -3,7 +3,7 @@ Factory::Application.routes.draw do
   devise_for :users, :skip => [:registrations, :sessions], :controllers => {:invitations => 'users/invitations', :registrations => 'users/registrations'}
   
   get "pages/enter"
-
+  
   as :user do
     get "/login" => "devise/sessions#new", :as => :new_user_session
     post "/login" => "devise/sessions#create", :as => :user_session
@@ -16,7 +16,6 @@ Factory::Application.routes.draw do
   end
 
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :delete_user
-  match 'imports/:id/test' => 'imports#test', :as => :import_test
 	
 	resources :users
   resources :imports
@@ -33,21 +32,29 @@ Factory::Application.routes.draw do
 
   resources :properties do
     collection { post :sort}    
-    post 'bulk_delete', :on => :collection    
+    post 'bulk_delete', :on => :collection
+    collection {post :import}    
   end
 
   resources :items do
     post 'bulk_delete', :on => :collection
     resources :specifications
+    collection {post :import}
   end
 
   resources :specifications do
     get 'display', :on => :collection
+    get 'new_import', :on => :collection
+    collection {post :save_import}
   end
   
   resources :tenants do
     get 'count', :on => :collection
     get 'set', :on => :member
+  end
+
+  resources :imports do
+    collection {get :import}
   end
 
   match 'specifications/:id/cancel' => 'specifications#cancel', :as => :cancel_specification

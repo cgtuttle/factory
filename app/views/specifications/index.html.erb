@@ -17,22 +17,37 @@
 				<% else %>
 					<%= collection_select :specification, :property_id, @properties, :id, :code, {:selected => @property.id}, {:onchange => "this.form.submit();", :class => "form-control inline-select"} %>
 				<% end %>
+
+				<strong class="form-group left-space strong">
+					Show:
+				</strong>
 				
-				<%= label_tag 'show_pending', :class => "checkbox" do %>
-					<%= check_box_tag name = "show_pending", value = "1", checked = @pending, {:type => "checkbox", :onchange => "this.form.submit();"} %>
-					Show pending
-				<% end %>
+				<div class="form-group left-space">
+					<%= label_tag 'show_pending', :class => "checkbox" do %>
+						<%= check_box_tag name = "show_pending", value = "1", checked = @pending, {:type => "checkbox", :onchange => "this.form.submit();"} %>
+						Pending
+					<% end %>
+				</div>
 
-				<%= label_tag 'show_history', :class => "checkbox" do %>				
-					<%= check_box_tag name = "show_history", value = "1", checked = @history, {:type => "checkbox", :onchange => "this.form.submit();"} %>
-					Show history
-				<% end %>
+				<div class="form-group left-space">
+					<%= label_tag 'show_history', :class => "checkbox" do %>				
+						<%= check_box_tag name = "show_history", value = "1", checked = @history, {:type => "checkbox", :onchange => "this.form.submit();"} %>
+						History
+					<% end %>
+				</div>
 
-				<%= label_tag 'show_deleted', :class => "checkbox" do %>				
-					<%= check_box_tag name = "show_deleted", value = "1", checked = @deleted, {:type => "checkbox", :onchange => "this.form.submit();"} %>
-					Show deleted
-				<% end %>			
+				<div class="form-group left-space">
+					<%= label_tag 'show_deleted', :class => "checkbox" do %>				
+						<%= check_box_tag name = "show_deleted", value = "1", checked = @deleted, {:type => "checkbox", :onchange => "this.form.submit();"} %>
+						Deleted
+					<% end %>
+				</div>
 
+				<div class="form-group left-space">						
+					<%= link_to new_import_specifications_path, :title => 'Import CSV', :rel => 'tooltip', "data-placement" => "top" do  %>
+						<i class="glyphicon glyphicon-upload"></i>
+					<% end %>		
+				</div>				
 			</div>
 		<% end %>
 	</div>

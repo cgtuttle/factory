@@ -8,6 +8,13 @@ class Property  < ActiveRecord::Base
 	accepts_nested_attributes_for :category
 	default_scope { where(tenant_id: Tenant.current_id) }
 
+	def self.import(file)
+		CSV.foreach(file.path, headers: true) do |row|
+			row['category_id'] = Category.where('code = (?)', row['category_id']).pluck(:id).first
+			Property.create! row.to_hash
+		end
+	end
+
 	private
 
 	def category_id_has_match

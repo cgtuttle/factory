@@ -79,4 +79,9 @@ class PropertiesController < ApplicationController
 		@categories = Category.order(:display_order)
 	end
 
+	def import
+		Property.import(params[:file])
+		redirect_to properties_path
+	end
+
 end

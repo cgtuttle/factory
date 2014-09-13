@@ -79,6 +79,11 @@ class ItemsController < ApplicationController
 		@index = @items
 	end
 
+	def import
+		Item.import(params[:file])
+		redirect_to items_path
+	end
+
 	def set_fluid
 		@fixed = false
 	end

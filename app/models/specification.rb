@@ -14,11 +14,14 @@ class Specification < ActiveRecord::Base
 
 	scope :active, where(:canceled => false, :deleted => false)
 
-	def self.to_csv(options = {})
-		CSV.generate(options) do |csv|
-			csv << column_names
-			all.each do |specification|
-				csv << specification.attributes.values_at(*column_name)
+	def self.import(file)
+		CSV.foreach(file.path, headers: true) do |row|
+			item_code = row['item_id']
+			row['item_id'] = Item.where('code = (?)', item_code).pluck(:id).first			
+			property_code = row['property_id']
+			row['property_id'] = Property.where('code = (?)', property_code).pluck(:id).first
+			if !Specification.create row.to_hash
+				logger.info "Error creating row #{row.inspect}"
 			end
 		end
 	end
